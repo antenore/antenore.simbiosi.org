@@ -4,43 +4,34 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Italian, Switzerland' guest, IBMers, FLOSS enthusiast, father and husband.
+I've a quite strong background in Middleware administration, testing, automation
+and system administraion (mainly Unix/Linux).
+</p>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>
+In the late half of 2014, with <a href="https://github.com/giox069">Giovanni Panozzo</a>,
+I'm the maintainer of <a href="https://www.remmna.org">Remmina</a>, a full featured
+Gtk+ remote desktop client.
+Today, as far as <a href="https://remmina.org/stats/stats.html">we know</a>, it's
+used by more than 30000 people.
+</p>
 
 <h2>Skills</h2>
 
 <ul class="skill-list">
-	<li>HTML - Jade - Haml - Erb</li>
-	<li>Responsive (Mobile First)</li>
-	<li>CSS (Stylus, Sass, Less)</li>
-	<li>Css Frameworks (Bootstrap, Foundation)</li>
-	<li>Javascript (Design Patterns, Testes)</li>
-	<li>NodeJS</li>
-	<li>AngularJS - ReactJS</li>
-	<li>Grunt - Gulp - Yeoman</li>
-	<li>Git</li>
-	<li>PHP</li>
-	<li>Python</li>
-	<li>MySQL - MongoDB</li>
-	<li>Scrum and Kanban</li>
-	<li>TDD e Continuous Integration</li>
+	<li>J2EE application server administration</li>
+        <li>System/application Automation (bash, ksh, puppet)</li>
+	<li>Application testing automation (rational, watir/selenium)</li>
+	<li>System Administration (Linux, Solaris, AIX, FreeBSD, Windows</li>
+        <li>Software development in C, ruby and some Java</li>
+	<li>MySQL - PostgreSQL</li>
+	<li>Continuous Integration</li>
 </ul>
 
 <h2>Projects</h2>
 
 <ul>
-	<li><a href="https://github.com/">Lorem Lorem</a></li>
-	<li><a href="https://github.com/">Ipsum Dolor</a></li>
-	<li><a href="https://github.com/">Dolor Lorem</a></li>
+	<li><a href="https://gitlab.com/DAGUniverse/Remmina">Remmina</a></li>
+	<li><a href="https://www.simbiosi.org">Simbiosi.org</a></li>
 </ul>
