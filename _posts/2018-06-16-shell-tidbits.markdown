@@ -43,15 +43,8 @@ function that take a string as input and output its ROT13 permutation.
 
 {% highlight sh %}
 rot13 () {
-	[[ $# -eq 0 ]] && return
-	# TODO: Add input validation and sanitizing ([:alnum:] [:space:])
-	local _input_text
-	local _rot13_text
-
-	_input_text="$*"
-	_rot13_text="$(tr a-zA-Z n-za-mN-ZA-M <<<"$_input_text")"
-
-	printf "%s" "$_rot13_text"
+        [[ $# -eq 0 ]] && return
+        tr a-zA-Z n-za-mN-ZA-M
 }	# ----------  end of function rot13  ----------
 {% endhighlight %}
 
