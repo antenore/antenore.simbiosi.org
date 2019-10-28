@@ -1,5 +1,5 @@
 ---
-title: "Remmina - The Gtk+ remote desktop client"
+title: "Remmina - The Gtk remote desktop client"
 layout: post
 date: 2018-06-14 11:22
 tag: remmina
