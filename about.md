@@ -11,7 +11,7 @@ and system administraion (mainly Unix/Linux).
 
 <p>
 In the late half of 2014, with <a href="https://github.com/giox069">Giovanni Panozzo</a>,
-I became the maintainer of <a href="https://remmna.org">Remmina</a>, a full featured
+I became the maintainer of <a href="https://remmina.org">Remmina</a>, a full featured
 Gtk remote desktop client.
 Today, as far as <a href="https://remmina.org/stats/stats.html">we know</a>, it's
 used by more than 100000 people.
