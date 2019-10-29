@@ -1,7 +1,7 @@
 ---
 title: "Shell tidbits"
 layout: post
-date: 2016-02-24 22:48
+date: 2018-06-16 22:48
 image: /assets/images/markdown.jpg
 image: /assets/images/shell-symbolic.svg
 headerImage: true
