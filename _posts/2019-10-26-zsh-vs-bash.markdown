@@ -83,6 +83,96 @@ In the following terminal recording (made with [termtosvg](https://nbedos.github
 
 While with additional plugins and scripts you can obtain almost the same functionalities with bash, Zsh provides these out-of-the-box.
 
+#### Some examples
+
+* Recursive globbing
+
+{% highlight sh %}
+$ echo **/*\.sass
+_sass/base/general.sass _sass/base/helpers.sass _sass/base/syntax.sass _sass/base/variables.sass _sass/components/author.sass _sass/components/disqus.sass _sass/components/footer.sass _sass/components/header.sass _sass/components/nav.sass _sass/components/others.sass _sass/components/pagination.sass _sass/components/related.sass _sass/components/share.sass _sass/components/side-by-side.sass _sass/components/social-links.sass _sass/components/spoiler.sass _sass/pages/home-blog-projects.sass _sass/pages/page.sass _sass/pages/post.sass _sass/pages/tags.sass
+{% endhighlight %}
+
+* Suffix aliases
+
+{% highlight sh %}
+$ alias -s markdown=vim
+$ ./_posts/2018-06-14-vim-safe.markdown
+{% endhighlight %}
+
+When "executing" a .markdown file, it will be opened directly with vim.
+
+
+### Programming
+
+|                                            | Zsh                                | Bash                   |
+| ------------------------                   | ---                                | ----                   |
+| Functions                                  | Yes                                | Yes                    |
+| Exception handling                         | Yes                                | Yes (via trap)         |
+| Search & replace on variable substitutions | Yes (via ${:s//} and ${//} syntax) | Yes (via ${//} syntax) |
+| Arithmetic                                 | Yes                                | Yes                    |
+| Floating point                             | Yes                                | No                     |
+| Math function library                      | Yes (zsh/mathfunc module)          | No                     |
+| Linear arrays or lists                     | Yes                                | Yes                    |
+| Associative arrays                         | Yes                                | Yes                    |
+| eval function                              | Yes                                | Yes                    |
+| Pseudo­random number generation            | Yes ($RANDOM)                      | Yes ($RANDOM)          |
+| Bytecode                                   | Yes (built-in zcompile command)    | No                     |
+
+As said, from a programming point of view, Bash and Zsh are quite the same, the most interesting difference are the math functions and the floating point support in Zsh.
+
+{% highlight sh %}
+# Zsh
+$ echo $((0.5 / 0.2))
+2.5
+{% endhighlight %}
+
+{% highlight sh %}
+# Zsh
+bash-5.0$ echo $((0.5 / 0.2))
+bash: 0.5 / 0.2: syntax error: invalid arithmetic operator (error token is ".5 / 0.2")
+bash-5.0$ echo $((5 / 2))
+2
+{% endhighlight %}
+
+{% highlight sh %}
+$ zcalc -e "sqrt(2)"
+1.41421
+{% endhighlight %}
+
+{% highlight sh %}
+$ print $(( [#_] sqrt(1e7) ))
+3_162.277_660_168_379_5
+{% endhighlight %}
+
+## Setting up Zsh
+
+
+
 ## Disclaimer
 
 Some of the content has been taken form [Wikipedia](https://en.wikipedia.org).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
