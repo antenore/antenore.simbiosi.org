@@ -70,4 +70,8 @@ As highlighted in the below table, with an additional plugin, Zsh has mouse supp
 | Menu/options prompt                          | Yes                                  | Yes          |
 | Context sensitive help                       | Yes                                  | No           |
 
-[![](/assets/images/zsh-auto-suggestion.svg)
+In the following terminal recording (made with [termtosvg](https://nbedos.github.io/termtosvg/) you can see some of the main advantages of the Zsh completions and auto-corrections functionalities.
+
+![](/assets/images/zsh-auto-suggestion.svg)
+
+While with additional plugins and scripts you can obtain almost the same functionalities with bash, Zsh provides these out of the box.
