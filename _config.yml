@@ -55,18 +55,16 @@ reddit: antenore
 email: antenore@simbiosi.org
 
 authors:
-    johndoe:
-        name: John Doe
-        bio: A Man who travels the world eating noodles
-        external-image: false
-        picture: assets/images/profile.jpg
-        twitter: johndoe
-    jamesfoster:
-        name: James Foster
-        bio: A Man who develops software with coffee
-        external-image: false
-        picture: assets/images/james.jpg
-        twitter: jamesfoster
+  antenore:
+    name: Antenore Gatta
+    bio: A proud and busy Hacker, Father and IBMer
+    external-image: false
+    picture: assets/images/Antenore_Gatta_profile.jpg
+    twitter: agatta
+    github: antenore
+    gitlab: antenore
+    reddit: antenore
+    email: antenore@simbiosi.org
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
