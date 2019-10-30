@@ -101,6 +101,24 @@ $ ./_posts/2018-06-14-vim-safe.markdown
 
 When "executing" a .markdown file, it will be opened directly with vim.
 
+* Print files modified some days ago
+
+{% highlight sh %}
+$ ls -tld *(m+100)
+-rw-rw-r-- 1 antenore antenore   117 Jun 16  2018 _config-dev.yml
+-rw-rw-r-- 1 antenore antenore   212 Jun 16  2018 Rakefile
+drwxrwxr-x 5 antenore antenore  4096 Jun 16  2018 _sass
+drwxrwxr-x 2 antenore antenore  4096 Jun 12  2018 blog
+-rwxrwxr-x 1 antenore antenore    33 Jun 12  2018 index.html
+-rw-rw-r-- 1 antenore antenore   603 Jun 12  2018 projects.html
+-rw-rw-r-- 1 antenore antenore    24 Jun 12  2018 robots.txt
+-rw-rw-r-- 1 antenore antenore  1451 Jun 12  2018 tags.html
+-rw-rw-r-- 1 antenore antenore   144 Jun 12  2018 travis.sh
+drwxrwxr-x 3 antenore antenore  4096 Jun 12  2018 assets
+-rw-rw-r-- 1 antenore antenore 34466 Jun 12  2018 LICENSE
+-rwxrwxr-x 1 antenore antenore     1 Jun 12  2018 README.md
+-rw-rw-r-- 1 antenore antenore   722 Jun 12  2018 FAQ.md
+{% endhighlight %}
 
 ### Programming
 
@@ -146,7 +164,65 @@ $ print $(( [#_] sqrt(1e7) ))
 
 ## Setting up Zsh
 
+On Bash you are quite on your own to configure your environment, on the contrary, if not deactivated by the OS distributor, or by your system administrator, in Zsh there's a function that is called if you don't have the rc files in your home (i.e. .zshrc).
 
+The function, zsh-newuser-install, will interactively help you to setup most of the default behaviour.
+It can be called by hand if it has been disabled or if you wish to start from scratch:
+
+{% highlight sh %}
+$ autoload -Uz zsh-newuser-install
+$ zsh-newuser-install -f
+Please pick one of the following options:
+
+(1)  Configure settings for history, i.e. command lines remembered
+     and saved by the shell.  (Recommended.)
+
+(2)  Configure the new completion system.  (Recommended.)
+
+(3)  Configure how keys behave when editing command lines.  (Recommended.)
+
+(4)  Pick some of the more common shell options.  These are simple "on"
+     or "off" switches controlling the shell's features.
+
+(0)  Exit, leaving the existing ~/.zshrc alone.
+
+(a)  Abort all settings and start from scratch.  Note this will overwrite
+     any settings from zsh-newuser-install already in the startup file.
+     It will not alter any of your other settings, however.
+
+(q)  Quit and do nothing else.
+--- Type one of the keys in parentheses ---
+{% endhighlight %}
+
+This method is easier than setting everything by hand, but still a hurdle for those that do not know yet the basic Zsh builtin and functions.
+
+To alleviate the problem there are some different framework that hide all the difficulties and easy the setup.
+The one I use and know is [Oh My Zsh](https://ohmyz.sh), it features a quite huge quantity of plugins, themes and functions, and, most importantly, it's very easy to setup.
+
+Just follow the installation instructions on their site, but do not forgot, afterwards, to read `man zshall` ;-)
+
+## Resources
+
+* [ZSH-LOVERS](https://grml.org/zsh/zsh-lovers.html)
+* [Primary site](http://www.zsh.org/)
+* [Project-page](http://sourceforge.net/projects/zsh/)
+* [Z shell page at sunsite.dk](http://zsh.sunsite.dk/)
+* [From Bash to Z Shell: Conquering the Command Line - the book](http://www.bash2zsh.com/)
+* [Mailinglistarchive](http://www.zsh.org/mla/)
+* [ZSH-FAQ](http://zsh.dotsrc.org/FAQ/)
+* [Userguide](http://zsh.sunsite.dk/Guide/)
+* [ZSH-Wiki](http://zshwiki.org/home/)
+* [A short introduction from BYU](http://docs.cs.byu.edu/linux/advanced/zsh.html)
+* [Mouse-Support ;)](http://stchaz.free.fr/mouse.zsh)
+* [Curtains up: introducing the Z shell](http://www-128.ibm.com/developerworks/linux/library/l-z.html?dwzone=linux)
+* [ZSH Prompt introduction](http://aperiodic.net/phil/prompt/)
+* [ft’s zsh configuration](http://ft.bewatermyfriend.org/comp/zsh.html)
+* [Adam’s ZSH page](http://www.adamspiers.org/computing/zsh/)
+* [Zzappers Best of ZSH Tips](http://www.rayninfo.co.uk/tips/zshtips.html)
+* [Zsh Webpage by Christian Schneider](http://www.strcat.de/zsh/)
+* [The zsh-lovers webpage](http://grml.org/zsh/)
+* [IRC channel](#zsh at irc.freenode.org)
+* [The Z shell reference-card (included in the zsh-lovers debian-package)](http://www.bash2zsh.com/zsh_refcard/refcard.pdf)
 
 ## Disclaimer
 
