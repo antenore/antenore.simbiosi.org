@@ -9,7 +9,7 @@ hidden: true # don't count this post in blog pagination
 description: "A feature rich Remote Desktop Application for Linux and other Unixes"
 category: project
 author: antenore
-externalLink: false
+externalLink: /remmina-project/
 ---
 
 ![Screenshot](https://antenore.simbiosi.org/assets/images/remmina-project-ss.png)
