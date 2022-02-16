@@ -4,9 +4,9 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-<p>Italian, Switzerland' guest, IBMers, FLOSS enthusiast, father and husband.
+<p>Italian, Switzerland' guest, Kyndrol, FLOSS enthusiast, father and husband.
 I've a quite strong background in Middleware administration, testing, automation
-and system administraion (mainly Unix/Linux).
+and system administration (mainly Unix/Linux).
 </p>
 
 <p>

@@ -1,6 +1,6 @@
 # main text of home
 name: Antenore Gatta
-bio: A proud and busy Hacker, Father and IBMer.
+bio: A proud and busy Hacker, Father and Kyndrol.
 
 # twitter summary info
 description: A blog about technology and stuff related
@@ -57,7 +57,7 @@ email: antenore@simbiosi.org
 authors:
   antenore:
     name: Antenore Gatta
-    bio: A proud and busy Hacker, Father and IBMer
+    bio: A proud and busy Hacker, Father and Kyndrol
     external-image: false
     picture: assets/images/Antenore_Gatta_profile.jpg
     twitter: agatta
