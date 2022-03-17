@@ -4,34 +4,27 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-<p>Italian, Switzerland' guest, Kyndrol, FLOSS enthusiast, father and husband.
-I've a quite strong background in Middleware administration, testing, automation
-and system administration (mainly Unix/Linux).
-</p>
+Italian, Swiss, Kyndrol, FLOSS enthusiast, father and husband. I've a
+quite strong background in Middleware administration, testing,
+automation and system administration (mainly Unix/Linux), cloud administration (OpenShift, AWS)
 
-<p>
-In the late half of 2014, with <a href="https://github.com/giox069">Giovanni Panozzo</a>,
-I became the maintainer of <a href="https://remmina.org">Remmina</a>, a full featured
-Gtk remote desktop client.
-Today, as far as <a href="https://remmina.org/stats/stats.html">we know</a>, it's
-used by more than 100000 people.
-</p>
+In the late half of 2014, with [Giovanni Panozzo](https://github.com/giox069),
+I became the maintainer of [Remmina](https://remmina.org), a full featured Gtk remote desktop
+client. Today, as far as [we know](https://remmina.org/stats/stats.html), it's used by more than
+100000 people.
 
-<h2>Skills</h2>
+## Skills
 
-<ul class="skill-list">
-	<li>System Administration (Linux, Solaris, AIX, FreeBSD, Windows</li>
-	<li>J2EE application server administration</li>
-        <li>System/application Automation (bash, ksh, puppet)</li>
-	<li>Application testing automation (rational, watir/selenium)</li>
-        <li>Software development in C, ruby and some Java</li>
-	<li>MySQL - PostgreSQL</li>
-	<li>CI/CD</li>
-</ul>
+- OpenShift
+- System Administration (Linux, Solaris, AIX, FreeBSD, Windows
+- J2EE application server administration
+- System/application Automation (bash, ksh, puppet)
+- Application testing automation (rational, watir/selenium)
+- Software development in C, ruby and some Java
+- MySQL - PostgreSQL
+- CI/CD
 
-<h2>Projects</h2>
+## Projects
 
-<ul>
-	<li><a href="https://gitlab.com/Remmina/Remmina">Remmina</a></li>
-	<li><a href="https://www.simbiosi.org">Simbiosi.org</a></li>
-</ul>
+- [Remmina](https://gitlab.com/Remmina/Remmina)
+- [Simbiosi.org](https://www.simbiosi.org)
