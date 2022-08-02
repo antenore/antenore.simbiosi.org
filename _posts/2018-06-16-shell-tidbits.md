@@ -1,7 +1,6 @@
 ---
 title: "Shell tidbits"
 layout: post
-date: 2018-06-16 22:48
 image: /assets/images/markdown.jpg
 image: /assets/images/shell-symbolic.svg
 headerImage: true
@@ -11,7 +10,6 @@ tag:
 category: blog
 author: antenore
 description: "Less unknown shell tricks"
-externalLink: false
 ---
 
 ## Summary:

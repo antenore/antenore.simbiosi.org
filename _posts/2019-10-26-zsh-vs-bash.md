@@ -2,7 +2,6 @@
 title: "Z shell vs Bash"
 description: "A comparison between Z shell (Zsh) and Bash"
 layout: post
-date: 2019-10-26 16:00
 author: antenore
 permalink: /zsh-vs-bash/
 category: blog

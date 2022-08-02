@@ -9,7 +9,7 @@ tag:
 category: blog
 author: antenore
 description: "compose key sequences, which can be used to enter accented and other non-standard characters in Linux"
-permalink: linux-compose-key-sequences
+permalink: /linux-compose-key-sequences/
 ---
 # Linux Compose Key Sequences
 
