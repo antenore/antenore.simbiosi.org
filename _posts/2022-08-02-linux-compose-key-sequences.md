@@ -1,7 +1,6 @@
 ---
 title: "Linux Compose Key Sequences"
 layout: post
-date: 2022-08-02 11:00
 tag:
 - shell
 - unix
@@ -10,6 +9,7 @@ tag:
 category: blog
 author: antenore
 description: "compose key sequences, which can be used to enter accented and other non-standard characters in Linux"
+permalink: linux-compose-key-sequences
 externalLink: false
 ---
 # Linux Compose Key Sequences
