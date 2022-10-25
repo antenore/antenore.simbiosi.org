@@ -13,8 +13,11 @@ I became the maintainer of [Remmina](https://remmina.org), a full featured Gtk r
 client. Today, as far as [we know](https://remmina.org/stats/stats.html), it's used by more than
 100000 people.
 
+I'm slowly stepping down in my role as maintainer to work on other projects.
+
 ## Skills
 
+- AWS Certified Solutions Architect - Associate
 - OpenShift
 - System Administration (Linux, Solaris, AIX, FreeBSD, Windows
 - J2EE application server administration
