@@ -101,7 +101,6 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
-  - jekyll-admin
 
 compress_html:
   ignore:
