@@ -10,6 +10,10 @@ description: A blog about technology and stuff related
 external-image: false
 picture: assets/images/Antenore.png
 
+# your site color theme, true for dark theme, 
+# false to light theme, auto to switch with system.
+dark-theme: auto
+
 # If you want to include your resume, set to true
 # and specify source (external or local).
 resume: true
@@ -24,16 +28,12 @@ permalink: /:title/
 # To enable google analytics, supply your token below
 # analytics-google: 'UA-MYANALYTICS'
 
-# To enable piwik tracking, supply your url & site ID below
-# analytics-piwik-url: 'piwik.my-host.com'
-# analytics-piwik-id: 1
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
   shortname: mydisqus # enter this from your disqus account
-  categories: [] # only show disqus for posts that have these categories
-#categories: [blog, project] # only show disqus for posts that have these categories
-
+  categories: [] # [blog, project] only show disqus for posts that have these categories
+  
 # if you don't have any of social below, comment the line
 #facebook: myfacebook
 twitter: agatta
@@ -71,10 +71,6 @@ authors:
 # normal = 560px / large = 810px
 width: large
 
-# if you don't need pagination, comment the *paginate* configs below
-# paginate: 5
-# paginate_path: "blog/:num/"
-
 # if you don't need projects, comment the *projects* configs below
 projects: true
 
@@ -107,5 +103,17 @@ plugins:
   - jemoji
   - jekyll-admin
 
-jekyll-mentions:
-    base_url: https://github.com
+compress_html:
+  ignore:
+    envs:
+      - development
+      - stage
+
+exclude:
+  [
+    "README.md",
+    "Gemfile",
+    "Gemfile.lock",
+    "FAQ.md",
+    "vendor",
+  ]
