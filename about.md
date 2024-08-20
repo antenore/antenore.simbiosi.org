@@ -5,15 +5,14 @@ layout: page
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
 Italian, Swiss, Kyndrol, FLOSS enthusiast, father and husband. I've a
-quite strong background in Middleware administration, testing,
-automation and system administration (mainly Unix/Linux), cloud administration (OpenShift, AWS)
-
+quite strong background in Cloud Governance and Administration (OpenShift, AWS), Middleware administration, testing,
+automation and system administration (mainly Unix/Linux).
 In the late half of 2014, with [Giovanni Panozzo](https://github.com/giox069),
 I became the maintainer of [Remmina](https://remmina.org), a full featured Gtk remote desktop
 client. Today, as far as [we know](https://remmina.org/stats/stats.html), it's used by more than
 100000 people.
 
-I'm slowly stepping down in my role as maintainer to work on other projects.
+I'm stepped down in my role as maintainer to work on other projects.
 
 ## Skills
 
