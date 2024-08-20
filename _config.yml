@@ -10,7 +10,7 @@ description: A blog about technology and stuff related
 external-image: false
 picture: assets/images/Antenore.png
 
-# your site color theme, true for dark theme, 
+# your site color theme, true for dark theme,
 # false to light theme, auto to switch with system.
 dark-theme: auto
 
@@ -33,7 +33,7 @@ permalink: /:title/
 disqus:
   shortname: mydisqus # enter this from your disqus account
   categories: [] # [blog, project] only show disqus for posts that have these categories
-  
+
 # if you don't have any of social below, comment the line
 #facebook: myfacebook
 twitter: agatta
@@ -126,3 +126,5 @@ exclude:
     "FAQ.md",
     "vendor",
   ]
+sass:
+  style: compressed # You can use expanded for debugging
