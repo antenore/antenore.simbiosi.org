@@ -1,0 +1,181 @@
+import React, { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Activity, Apple, Dumbbell, Clock, Heart } from 'lucide-react';
+
+const DiabetesTrainingGuide = () => {
+  const [selectedActivity, setSelectedActivity] = useState('rest');
+  
+  const mealTemplates = {
+    rest: {
+      title: "Rest Day",
+      breakfast: ["40g oats", "200g skyr/quark", "15g seeds", "80g berries"],
+      lunch: ["150g protein", "Vegetables", "40g rice/100g sweet potatoes"],
+      dinner: ["180g protein", "Vegetables", "1 tbsp olive oil", "30g avocado"]
+    },
+    training: {
+      title: "Training Day",
+      breakfast: ["60g oats", "200g skyr/quark", "30g seeds", "110g berries"],
+      lunch: ["200g protein", "Vegetables", "70g rice/150g sweet potatoes"],
+      dinner: ["200g protein", "Vegetables", "1 tbsp olive oil", "30g avocado"]
+    }
+  };
+
+  const glucoseGuidelines = [
+    { range: ">8 mmol/L", action: "No carbs pre-workout" },
+    { range: "7-8 mmol/L", action: "Half portion carbs" },
+    { range: "<7 mmol/L", action: "Full meal plan" }
+  ];
+
+  return (
+    <Card className="w-full max-w-4xl">
+      <CardHeader className="bg-blue-50">
+        <CardTitle className="text-2xl text-center">
+          Diabetes & Training Management Guide
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6">
+        <Tabs defaultValue="meals">
+          <TabsList className="grid grid-cols-4 gap-4 bg-blue-50">
+            <TabsTrigger value="meals" className="flex items-center gap-2">
+              <Apple className="w-4 h-4" />
+              Meals
+            </TabsTrigger>
+            <TabsTrigger value="glucose" className="flex items-center gap-2">
+              <Heart className="w-4 h-4" />
+              Glucose
+            </TabsTrigger>
+            <TabsTrigger value="timing" className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              Timing
+            </TabsTrigger>
+            <TabsTrigger value="training" className="flex items-center gap-2">
+              <Dumbbell className="w-4 h-4" />
+              Training
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="meals" className="mt-4">
+            <div className="space-y-4">
+              <div className="flex gap-4 mb-4">
+                <button
+                  onClick={() => setSelectedActivity('rest')}
+                  className={`flex-1 p-4 rounded-lg ${
+                    selectedActivity === 'rest' ? 'bg-blue-100' : 'bg-gray-50'
+                  }`}
+                >
+                  Rest Day
+                </button>
+                <button
+                  onClick={() => setSelectedActivity('training')}
+                  className={`flex-1 p-4 rounded-lg ${
+                    selectedActivity === 'training' ? 'bg-blue-100' : 'bg-gray-50'
+                  }`}
+                >
+                  Training Day
+                </button>
+              </div>
+
+              <div className="grid gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Breakfast</h3>
+                  <ul className="list-disc pl-5">
+                    {mealTemplates[selectedActivity].breakfast.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Lunch</h3>
+                  <ul className="list-disc pl-5">
+                    {mealTemplates[selectedActivity].lunch.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Dinner</h3>
+                  <ul className="list-disc pl-5">
+                    {mealTemplates[selectedActivity].dinner.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="glucose" className="mt-4">
+            <div className="space-y-4">
+              <h3 className="font-bold text-lg">Morning Glucose Guidelines</h3>
+              <div className="grid gap-4">
+                {glucoseGuidelines.map((guide, i) => (
+                  <div key={i} className="p-4 bg-blue-50 rounded-lg flex justify-between">
+                    <span className="font-medium">{guide.range}</span>
+                    <span>{guide.action}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="timing" className="mt-4">
+            <div className="space-y-4">
+              <div className="grid gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Training Day Timeline</h3>
+                  <ul className="space-y-2">
+                    <li>5:30 - Pre-workout meal</li>
+                    <li>6:00-8:00 - Training</li>
+                    <li>8:45 - Post-workout meal</li>
+                    <li>12:30 - Lunch</li>
+                    <li>16:30 - Snack</li>
+                    <li>19:30 - Dinner</li>
+                  </ul>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Rest Day Timeline</h3>
+                  <ul className="space-y-2">
+                    <li>8:00 - Breakfast</li>
+                    <li>11:00 - Optional snack</li>
+                    <li>13:00 - Lunch</li>
+                    <li>16:00 - Optional snack</li>
+                    <li>19:30 - Dinner</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="training" className="mt-4">
+            <div className="space-y-4">
+              <div className="grid gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Training Guidelines</h3>
+                  <ul className="space-y-2">
+                    <li>• Monitor glucose before and after training</li>
+                    <li>• Adjust carbs based on morning glucose</li>
+                    <li>• Focus on compound movements</li>
+                    <li>• Progressive overload approach</li>
+                    <li>• 10,000 steps daily goal</li>
+                  </ul>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h3 className="font-bold mb-2">Recovery Focus</h3>
+                  <ul className="space-y-2">
+                    <li>• Sleep 7-8 hours</li>
+                    <li>• Post-workout nutrition within 45 min</li>
+                    <li>• Active recovery on rest days</li>
+                    <li>• Regular glucose monitoring</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default DiabetesTrainingGuide;
