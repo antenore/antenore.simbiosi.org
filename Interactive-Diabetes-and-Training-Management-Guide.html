@@ -1,4 +1,101 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Training Guide</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    
+    <!-- React and ReactDOM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel per JSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+
+    <style>
+        /* Stili base per i componenti UI */
+        .card {
+            @apply rounded-lg border bg-white shadow-sm;
+        }
+        .card-header {
+            @apply flex flex-col space-y-1.5 p-6;
+        }
+        .card-content {
+            @apply p-6 pt-0;
+        }
+        .tabs {
+            @apply w-full;
+        }
+        .tab-list {
+            @apply inline-flex h-10 items-center justify-center rounded-md bg-blue-50 p-1 text-slate-500;
+        }
+        .tab-trigger {
+            @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm;
+        }
+        .tab-content {
+            @apply mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Componenti UI semplificati
+        const Card = ({ children, className, ...props }) => (
+            <div className={`card ${className}`} {...props}>{children}</div>
+        );
+        
+        const CardHeader = ({ children }) => (
+            <div className="card-header">{children}</div>
+        );
+        
+        const CardTitle = ({ children }) => (
+            <h2 className="text-2xl font-semibold">{children}</h2>
+        );
+        
+        const CardContent = ({ children }) => (
+            <div className="card-content">{children}</div>
+        );
+        
+        const Tabs = ({ children, defaultValue }) => {
+            const [value, setValue] = React.useState(defaultValue);
+            return (
+                <div className="tabs" data-value={value}>
+                    {React.Children.map(children, child => 
+                        React.cloneElement(child, { value, onChange: setValue })
+                    )}
+                </div>
+            );
+        };
+        
+        const TabsList = ({ children }) => (
+            <div className="tab-list">{children}</div>
+        );
+        
+        const TabsTrigger = ({ value, children, onChange }) => (
+            <button 
+                className="tab-trigger" 
+                onClick={() => onChange(value)}
+            >
+                {children}
+            </button>
+        );
+        
+        const TabsContent = ({ value, activeValue, children }) => (
+            <div className={`tab-content ${value === activeValue ? 'block' : 'hidden'}`}>
+                {children}
+            </div>
+        );
+
+        const DiabetesTrainingGuide = () => {
+            import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Activity, Apple, Dumbbell, Clock, Heart } from 'lucide-react';
@@ -179,3 +276,13 @@ const DiabetesTrainingGuide = () => {
 };
 
 export default DiabetesTrainingGuide;
+        };
+
+        // Rendering
+        ReactDOM.render(
+            <DiabetesTrainingGuide />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
