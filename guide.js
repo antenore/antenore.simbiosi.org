@@ -2,7 +2,7 @@
 const TRAINING_INTENSITIES = {
   high: {
     name: "High Intensity",
-    description: "Heavy compound movements (e.g., Deadlift days)",
+    description: "Heavy compounds (Deadlift/Squat days)",
     mealSizes: {
       breakfast: 1.2, // Multiplier for base portions
       lunch: 1.3,
@@ -11,20 +11,20 @@ const TRAINING_INTENSITIES = {
     },
     baseMeals: {
       preWorkout: ["15g whey protein", "1 tsp honey (if glucose <7 mmol/L)"],
-      breakfast: ["60g oats", "30g protein", "30g seeds", "110g berries"],
-      lunch: ["200g lean protein", "70g complex carbs", "2 portions vegetables"],
-      dinner: ["200g protein", "Unlimited vegetables", "Healthy fats"],
-      snacks: ["30g protein", "1 piece fruit", "Small handful nuts"]
+      breakfast: ["60g oats", "200g skyr", "30g seeds", "110g berries"],
+      lunch: ["200g lean protein", "70g rice/150g sweet potato", "2 portions vegetables"],
+      dinner: ["200g protein", "Unlimited vegetables", "Healthy fats", "Optional: 200g skyr"],
+      snacks: ["150g cottage cheese", "1 apple", "30g nuts"]
     },
     timing: {
       preWorkout: "30-45 min before training",
       postWorkout: "Within 45 min after training",
-      mealSpacing: "2.5-3 hours between meals"
+      mealSpacing: "3-4 hours between meals"
     }
   },
   medium: {
     name: "Medium Intensity",
-    description: "Normal training days",
+    description: "Upper body training days",
     mealSizes: {
       breakfast: 1,
       lunch: 1,
@@ -33,10 +33,10 @@ const TRAINING_INTENSITIES = {
     },
     baseMeals: {
       preWorkout: ["15g whey protein", "Optional honey based on glucose"],
-      breakfast: ["50g oats", "25g protein", "20g seeds", "100g berries"],
-      lunch: ["180g lean protein", "60g complex carbs", "2 portions vegetables"],
+      breakfast: ["50g oats", "30g whey", "20g seeds", "100g berries"],
+      lunch: ["180g lean protein", "50g rice/130g sweet potato", "2 portions vegetables"],
       dinner: ["180g protein", "Unlimited vegetables", "Healthy fats"],
-      snacks: ["25g protein", "1 small fruit", "Small handful nuts"]
+      snacks: ["150g cottage cheese", "1 medium fruit", "20g nuts"]
     },
     timing: {
       preWorkout: "30 min before training",
@@ -54,10 +54,10 @@ const TRAINING_INTENSITIES = {
       snacks: 0.8
     },
     baseMeals: {
-      breakfast: ["40g oats", "20g protein", "15g seeds", "80g berries"],
-      lunch: ["150g lean protein", "40g complex carbs", "2 portions vegetables"],
+      breakfast: ["40g oats", "200g skyr", "15g seeds", "80g berries"],
+      lunch: ["150g lean protein", "40g rice/100g sweet potato", "2 portions vegetables"],
       dinner: ["180g protein", "Unlimited vegetables", "Healthy fats"],
-      snacks: ["20g protein", "1 small fruit OR handful nuts"]
+      snacks: ["150g skyr", "15g nuts", "Optional: 1 small fruit"]
     },
     timing: {
       firstMeal: "Within 1 hour of waking",
@@ -93,7 +93,7 @@ const MEAL_TIMING_PRINCIPLES = {
     "Plan largest meals around training"
   ],
   training: [
-    "Pre-workout meal: 30-60 minutes before",
+    "Pre-workout meal: 30-45 minutes before",
     "Post-workout nutrition within 45 minutes",
     "Larger meals on training days",
     "More carbs around workout times"
@@ -125,7 +125,7 @@ const TrainingDiabetesGuide = () => {
           ))}
         </div>
       </div>
-      
+
       <div className="info-card">
         <h3 className="section-title">Key Principles</h3>
         <ul className="space-y-2">
@@ -201,7 +201,7 @@ const TrainingDiabetesGuide = () => {
           </ul>
         </div>
       ))}
-      
+
       <div className="info-card">
         <h3 className="section-title">Intensity-Specific Timing</h3>
         <div className="space-y-4">
@@ -227,7 +227,7 @@ const TrainingDiabetesGuide = () => {
           Training & Diabetes Management Guide
         </h2>
       </div>
-      
+
       <div className="p-6">
         <div className="flex gap-4 mb-6">
           {[
@@ -256,7 +256,17 @@ const TrainingDiabetesGuide = () => {
 };
 
 // Render the app
-ReactDOM.render(
-  <TrainingDiabetesGuide />,
-  document.getElementById('root')
-);
+(function() {
+  function renderApp() {
+    ReactDOM.render(
+      React.createElement(TrainingDiabetesGuide),
+      document.getElementById('root')
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', renderApp);
+  } else {
+    renderApp();
+  }
+})();

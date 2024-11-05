@@ -7,28 +7,30 @@
     
     <!-- Core dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <style>
-        .card {
-            @apply rounded-lg border bg-white shadow-sm;
-        }
-        .tab-button {
-            @apply px-4 py-2 rounded-lg transition-colors;
-        }
-        .tab-button.active {
-            @apply bg-blue-100;
-        }
-        .tab-button:not(.active) {
-            @apply bg-gray-50 hover:bg-gray-100;
-        }
-        .info-card {
-            @apply p-4 bg-blue-50 rounded-lg;
-        }
-        .section-title {
-            @apply font-bold text-lg mb-3;
+    <style type="text/tailwindcss">
+        @layer components {
+            .card {
+                @apply rounded-lg border bg-white shadow-sm;
+            }
+            .tab-button {
+                @apply px-4 py-2 rounded-lg transition-colors;
+            }
+            .tab-button.active {
+                @apply bg-blue-100;
+            }
+            .tab-button:not(.active) {
+                @apply bg-gray-50 hover:bg-gray-100;
+            }
+            .info-card {
+                @apply p-4 bg-blue-50 rounded-lg;
+            }
+            .section-title {
+                @apply font-bold text-lg mb-3;
+            }
         }
     </style>
 </head>
