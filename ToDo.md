@@ -53,9 +53,9 @@
 ## TODO Priorità 2: Fix Tecnici Critici (Q3 2025)
 
 ### 2.1 Aggiornamento Dipendenze
-- [ ] Aggiornare Gemfile e versioni Jekyll
-- [ ] Testare compatibilità con GitLab CI/CD
-- [ ] Verificare funzionamento con pipeline attuale
+- [x] Aggiornare Gemfile e versioni Jekyll
+- [x] Testare compatibilità con GitLab CI/CD
+- [x] Verificare funzionamento con pipeline attuale
 
 ### 2.2 Ottimizzazione Assets
 - [ ] Implementare compressione immagini
