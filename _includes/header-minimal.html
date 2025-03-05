@@ -3,6 +3,9 @@
         <a href="{{ site.url }}" class="site-title">
             {{ site.name }}
         </a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fa-solid fa-moon"></i>
+        </button>
     </div>
 </header>
 
@@ -15,7 +18,12 @@
 
 .header-minimal .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: var(--content-width-large);
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
 .header-minimal .site-title {
@@ -28,5 +36,9 @@
 
 .header-minimal .site-title:hover {
     color: var(--accent);
+}
+
+.header-minimal .theme-toggle {
+    margin-left: 1rem;
 }
 </style>

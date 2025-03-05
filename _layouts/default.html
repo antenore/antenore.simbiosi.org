@@ -15,11 +15,11 @@ layout: compress
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
     <!-- FontAwesome with optimized loading -->
-    <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous" defer></script>
+    <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous"></script>
 
     <!-- Inline critical CSS -->
     <style>
-        {{ site.data.critical-css }}
+        {{ site.data.critical }}
     </style>
 
     <!-- Main stylesheet with prefers-color-scheme support -->
@@ -29,7 +29,7 @@ layout: compress
         {% include analytics-google.html %}
     {% endif %}
 </head>
-<body class="{% if site.dark-theme %}dark-theme{% endif %}">
+<body class="{% if site.dark-theme == true %}dark-theme{% endif %}">
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
         {% if page.title == "Home" %}
             {% include header.html %}

@@ -1,24 +1,23 @@
 /**
  * SolarBlog Theme Toggle
- * Gestisce il passaggio tra tema chiaro e scuro
+ * Manages switching between light and dark themes
  */
 
 (function() {
-  // Elementi DOM
+  // DOM elements
   const body = document.body;
-  const themeToggle = document.getElementById('theme-toggle');
   const DARK_THEME_CLASS = 'dark-theme';
   const THEME_STORAGE_KEY = 'solarblog-theme-preference';
 
-  // Verifica se il browser supporta prefers-color-scheme
+  // Check if browser supports prefers-color-scheme
   const supportsColorScheme = window.matchMedia('(prefers-color-scheme)').media !== 'not all';
 
   /**
-   * Imposta il tema in base alla preferenza
-   * @param {string} theme - 'dark', 'light' o 'auto'
+   * Sets the theme based on preference
+   * @param {string} theme - 'dark', 'light' or 'auto'
    */
   function setTheme(theme) {
-    // Rimuovi qualsiasi classe tema esistente
+    // Remove any existing theme class
     body.classList.remove(DARK_THEME_CLASS);
 
     if (theme === 'dark') {
@@ -27,40 +26,42 @@
     } else if (theme === 'light') {
       localStorage.setItem(THEME_STORAGE_KEY, 'light');
     } else {
-      // Auto: segue la preferenza del sistema
+      // Auto: follow system preference
       localStorage.removeItem(THEME_STORAGE_KEY);
       if (supportsColorScheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         body.classList.add(DARK_THEME_CLASS);
       }
     }
 
-    // Aggiorna l'icona del toggle se esiste
+    // Update toggle icon if it exists
     updateToggleIcon(theme);
   }
 
   /**
-   * Aggiorna l'icona del toggle in base al tema attuale
+   * Updates the toggle icon based on current theme
    */
   function updateToggleIcon(theme) {
+    const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
 
     const currentTheme = theme || getCurrentTheme();
 
-    // Aggiorna il testo/icona in base al tema
-    if (currentTheme === 'dark') {
+    // Update text/icon based on theme
+    if (currentTheme === 'dark' ||
+        (currentTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       themeToggle.innerHTML = '<i class="fa-solid fa-sun" aria-hidden="true"></i>';
-      themeToggle.setAttribute('title', 'Passa al tema chiaro');
-      themeToggle.setAttribute('aria-label', 'Passa al tema chiaro');
+      themeToggle.setAttribute('title', 'Switch to light theme');
+      themeToggle.setAttribute('aria-label', 'Switch to light theme');
     } else {
       themeToggle.innerHTML = '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
-      themeToggle.setAttribute('title', 'Passa al tema scuro');
-      themeToggle.setAttribute('aria-label', 'Passa al tema scuro');
+      themeToggle.setAttribute('title', 'Switch to dark theme');
+      themeToggle.setAttribute('aria-label', 'Switch to dark theme');
     }
   }
 
   /**
-   * Ottiene il tema corrente
-   * @returns {string} - 'dark', 'light' o 'auto'
+   * Gets the current theme
+   * @returns {string} - 'dark', 'light' or 'auto'
    */
   function getCurrentTheme() {
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
@@ -77,28 +78,66 @@
   }
 
   /**
-   * Alterna il tema tra chiaro e scuro
+   * Toggles theme between light and dark
    */
   function toggleTheme() {
-    document.body.classList.toggle(DARK_THEME_CLASS);
-    if (document.body.classList.contains(DARK_THEME_CLASS)) {
-      localStorage.setItem(THEME_STORAGE_KEY, 'dark');
-    } else {
+    const isDark = body.classList.contains(DARK_THEME_CLASS);
+
+    if (isDark) {
+      body.classList.remove(DARK_THEME_CLASS);
       localStorage.setItem(THEME_STORAGE_KEY, 'light');
+    } else {
+      body.classList.add(DARK_THEME_CLASS);
+      localStorage.setItem(THEME_STORAGE_KEY, 'dark');
+    }
+
+    updateToggleIcon(isDark ? 'light' : 'dark');
+  }
+
+  /**
+   * Creates theme toggle button if it doesn't exist
+   */
+  function createToggleButton() {
+    // Check if toggle already exists
+    if (document.getElementById('theme-toggle')) return;
+
+    const nav = document.querySelector('.nav ul') || document.querySelector('header .social-links');
+
+    if (nav) {
+      const toggleItem = document.createElement('div');
+      toggleItem.classList.add('theme-toggle-container');
+
+      const button = document.createElement('button');
+      button.id = 'theme-toggle';
+      button.classList.add('theme-toggle');
+      button.setAttribute('aria-label', 'Toggle theme');
+
+      toggleItem.appendChild(button);
+      nav.appendChild(toggleItem);
+
+      // Update icon
+      updateToggleIcon();
+
+      // Add listener
+      button.addEventListener('click', toggleTheme);
     }
   }
 
-  // Inizializzazione
+  // Initialization
   function init() {
-    // Imposta il tema iniziale
+    // Set initial theme
     setTheme(getCurrentTheme());
 
-    // Aggiungi listener per il toggle
-    if (themeToggle) {
-      themeToggle.addEventListener('click', toggleTheme);
+    // Create toggle button
+    createToggleButton();
+
+    // Add listener for existing toggle
+    const existingToggle = document.getElementById('theme-toggle');
+    if (existingToggle) {
+      existingToggle.addEventListener('click', toggleTheme);
     }
 
-    // Listener per i cambiamenti nella preferenza del sistema
+    // Listen for system preference changes
     if (supportsColorScheme) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem(THEME_STORAGE_KEY)) {
@@ -106,40 +145,9 @@
         }
       });
     }
-
-    // Crea il pulsante toggle se non esiste
-    if (!themeToggle) {
-      createToggleButton();
-    }
   }
 
-  /**
-   * Crea il pulsante di toggle del tema se non esiste
-   */
-  function createToggleButton() {
-    const nav = document.querySelector('.nav ul') || document.querySelector('nav ul');
-
-    if (nav) {
-      const li = document.createElement('li');
-      li.classList.add('theme-toggle-item');
-
-      const button = document.createElement('button');
-      button.id = 'theme-toggle';
-      button.classList.add('theme-toggle');
-      button.setAttribute('aria-label', 'Cambia tema');
-
-      li.appendChild(button);
-      nav.appendChild(li);
-
-      // Aggiorna l'icona
-      updateToggleIcon();
-
-      // Aggiungi listener
-      button.addEventListener('click', toggleTheme);
-    }
-  }
-
-  // Esegui l'inizializzazione quando il DOM è pronto
+  // Run initialization when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

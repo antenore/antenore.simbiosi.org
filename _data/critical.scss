@@ -1,33 +1,53 @@
 ---
 ---
-/* Critical CSS - caricato inline in head per migliorare la performance */
+/* Critical CSS - loaded inline in head for better performance */
 
-/* Variabili temi - versione minimale per il primo render */
+/* Theme variables - minimal version for first render */
 :root {
   --primary: #2B5B84;
+  --secondary: #B7410E;
+  --accent: #268BD2;
   --background: #FFFFFF;
+  --background-alt: #F8F8F8;
   --text-main: #2D2D2D;
+  --text-light: #585858;
   --border: #EDEDED;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Consolas", Liberation Mono, Menlo, Courier, monospace;
+  --font-weight-normal: 400;
+  --font-weight-light: 300;
+  --font-weight-bold: 700;
+  --content-width-normal: 560px;
+  --content-width-large: 810px;
 }
 
+/* Dark theme detection */
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #3D80B9;
+    --secondary: #E05A21;
+    --accent: #5DA8E0;
     --background: #121212;
+    --background-alt: #1E1E1E;
     --text-main: #DDDDDD;
+    --text-light: #AAAAAA;
     --border: #333333;
   }
 }
 
+/* Manual dark mode class for explicit toggling */
 .dark-theme {
   --primary: #3D80B9;
+  --secondary: #E05A21;
+  --accent: #5DA8E0;
   --background: #121212;
+  --background-alt: #1E1E1E;
   --text-main: #DDDDDD;
+  --text-light: #AAAAAA;
   --border: #333333;
 }
 
-/* Stili base per evitare flash of unstyled content */
+/* Basic styles to avoid flash of unstyled content */
 html, body {
   margin: 0;
   padding: 0;
@@ -49,12 +69,12 @@ body {
   padding: 0 1rem;
 }
 
-/* Stili minimi per intestazione */
+/* Minimal header styles */
 h1, h2, h3 {
   color: var(--primary);
 }
 
-/* Placeholder per immagini e contenuti in caricamento */
+/* Avatar placeholder */
 .selfie {
   width: 125px;
   height: 125px;
@@ -62,7 +82,7 @@ h1, h2, h3 {
   background-color: var(--border);
 }
 
-/* Transizioni di base */
+/* Basic animations */
 .animated {
   animation: fadeIn 0.8s ease forwards;
 }
@@ -76,4 +96,18 @@ h1, h2, h3 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Theme toggle minimal styles */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
