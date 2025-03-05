@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 3.10.0'
+gem 'jekyll', '~> 4.3.4'
 gem 'webrick'
 
 group :jekyll_plugins do
