@@ -1,17 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'jekyll', '~> 4.3.2'
-gem 'webrick', '~> 1.8.1'
+gem 'webrick'
 
 group :jekyll_plugins do
-  gem 'kramdown-parser-gfm', '~> 1.1.0'
-  gem 'jekyll-feed', '~> 0.17.0'
-  gem 'jekyll-gist', '~> 1.5.0'
-  gem 'jekyll-seo-tag', '~> 2.8.0'
-  gem 'jemoji', '~> 0.13.0'
+  gem 'kramdown-parser-gfm'
+  gem 'jekyll-feed'
+  gem 'jekyll-gist'
+  gem 'jekyll-seo-tag'
+  gem 'jemoji'
 end
 
-# Per testing locale
-group :development do
-  gem 'html-proofer', '~> 5.0.8'
-end
+# Per testing locale su Windows
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'tzinfo-data' if Gem.win_platform?
