@@ -1,0 +1,77 @@
+/* Critical CSS - caricato inline in head per migliorare la performance */
+
+/* Variabili temi - versione minimale per il primo render */
+:root {
+  --primary: #2B5B84;
+  --background: #FFFFFF;
+  --text-main: #2D2D2D;
+  --border: #EDEDED;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #3D80B9;
+    --background: #121212;
+    --text-main: #DDDDDD;
+    --border: #333333;
+  }
+}
+
+.dark-theme {
+  --primary: #3D80B9;
+  --background: #121212;
+  --text-main: #DDDDDD;
+  --border: #333333;
+}
+
+/* Stili base per evitare flash of unstyled content */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-main);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Stili minimi per intestazione */
+h1, h2, h3 {
+  color: var(--primary);
+}
+
+/* Placeholder per immagini e contenuti in caricamento */
+.selfie {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background-color: var(--border);
+}
+
+/* Transizioni di base */
+.animated {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
