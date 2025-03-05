@@ -4,34 +4,53 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-Hey there! I'm Antenore Gatta - an Italian-Swiss FLOSS enthusiast, father, husband, and self-proclaimed fitness fanatic.
+## Who I Am
 
-By day, I work as a cloud governance and administration wizard, middleware maestro, and automation aficionado - mostly tinkering with Unix/Linux systems. But in my free time, you can find me pounding the pavement for a good run or pumping iron at the gym. Gotta keep this bod in tip-top shape, you know?
+Hey there! I'm Antenore Gatta - an Italian-Swiss cloud governance specialist, AWS enthusiast, FLOSS contributor, and proud father of five.
 
-Back in 2014, my buddy Giovanni Panozzo and I took over as the maintainers of Remmina, a super handy remote desktop app. To our delight, over 100,000 people now use it worldwide - we must be doing something right! Although I've stepped down from that role, I'm always cooking up new projects to tinker with.
+With over 20 years in tech and the last 6+ years focused on cloud architecture, I currently work as a **Senior Lead Cloud Governance & Security Engineer** at Kyndryl, specializing in building and managing enterprise-scale AWS environments through robust governance frameworks.
 
-You see, I work for a company called Kyndryl. At Kyndrol, we're always on the lookout for innovative ways to leverage technology to tackle complex challenges. Whether it's cloud, coding, or fitness, I'm passionate about it all and love collaborating with like-minded individuals.
+## My Expertise
 
-When I'm not geeking out over the latest open-source tech, you'll probably catch me exploring the great outdoors or spending quality time with the fam. Life's too short not to have a little fun, right?
+I design and implement complex AWS Organizations structures with a focus on security, compliance, and cost optimization. My core strengths include:
 
-So if you ever want to chat about any of my interests, or maybe even swap a dad joke or two, don't hesitate to reach out. I'm always happy to connect!
+- **Multi-Account Architecture**: Implementing AWS Control Tower, designing account structures, and establishing landing zones for enterprise organizations
+- **Security & Governance**: Developing comprehensive Service Control Policies (SCPs), IAM Identity Center solutions, and security frameworks
+- **Cost Management**: Implementing CUR 2.0 solutions and creating QuickSight dashboards for cost analysis and optimization
+- **Infrastructure as Code**: Automating cloud infrastructure using CloudFormation and Terraform
 
-Catch you on the flip side,
-Antenore
+In addition to my cloud expertise, I maintain a strong foundation in Linux/UNIX systems, containerization (OpenShift), and CI/CD practices gained from my previous systems engineering roles.
 
-## Skills
+## Certifications
 
-- AWS Certified Solutions Architect - Associate
-- OpenShift
-- System Administration (Linux, Solaris, AIX, FreeBSD, Windows
-- J2EE application server administration
-- System/application Automation (bash, ksh, puppet)
-- Application testing automation (rational, watir/selenium)
-- Software development in C, ruby and some Java
-- MySQL - PostgreSQL
-- CI/CD
+- AWS Certified Solutions Architect - Associate (2022-2025)
+- AWS Certified Cloud Practitioner (2022-2025)
+- Red Hat OpenShift Administration (DO180/280, DO425)
+- IBM Professional Development (Strategic OSS Committer, Architecture)
 
-## Projects
+## Open Source Contributions
 
-- [Remmina](https://gitlab.com/Remmina/Remmina)
-- [Simbiosi.org](https://www.simbiosi.org)
+From 2014 to 2023, I served as lead maintainer of [Remmina](https://gitlab.com/Remmina/Remmina), an open-source remote desktop client serving over 150,000 users globally. Our team reviewed 8,000+ commits from 200+ contributors, implementing comprehensive CI/CD workflows and enhancing protocol support.
+
+I remain active in open source communities, focusing on system administration tools and infrastructure automation projects.
+
+## Beyond Technology
+
+When I'm not architecting cloud solutions or contributing to open source, I'm dedicated to fitness and powerlifting. This balance of technical problem-solving and physical discipline helps me maintain perspective and energy.
+
+I believe in continuously expanding my skills, and I'm currently focusing on integrating AI capabilities with cloud architecture to enhance governance and security models.
+
+Feel free to connect with me about AWS architecture, cloud governance, open source, or fitness!
+
+## Core Skills
+
+- AWS Organizations & Control Tower
+- Service Control Policies (SCPs)
+- IAM Identity Center implementation
+- Cost optimization (CUR 2.0, QuickSight)
+- Security Hub & compliance frameworks
+- Multi-account architecture
+- Infrastructure as Code (CloudFormation, Terraform)
+- Linux/UNIX administration
+- CI/CD pipelines & DevOps practices
+- OpenShift & container security
