@@ -1,0 +1,539 @@
+/*
+ * SolarBlog - A modern Jekyll theme inspired by SolarCV
+ * Based on the original Indigo theme with major updates
+ */
+
+// Import normalize first for consistent cross-browser rendering
+@use "normalize";
+
+// Core theme setup
+:root {
+  // Base colors from SolarCV
+  --primary: #2B5B84;       // Dark blue for headers and important text
+  --secondary: #B7410E;     // Orange for supplementary information
+  --accent: #268BD2;        // Bright blue for links and highlights
+  --text-main: #2D2D2D;     // Main text color
+  --text-light: #585858;    // Secondary text color
+  --background: #FFFFFF;    // Main background
+  --background-alt: #F8F8F8; // Secondary background
+  --border: #EDEDED;        // Border color
+
+  // Font related
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Consolas", Liberation Mono, Menlo, Courier, monospace;
+  --font-weight-normal: 400;
+  --font-weight-light: 300;
+  --font-weight-bold: 700;
+  --font-size-base: 1.6rem;
+  --line-height-base: 1.7;
+
+  // Responsive breakpoints
+  --breakpoint-mobile: 400px;
+  --breakpoint-tablet: 1050px;
+  --breakpoint-content: 780px;
+
+  // Layout dimensions
+  --content-width-normal: 560px;
+  --content-width-large: 810px;
+  --spacing-unit: 1rem;
+}
+
+// Dark theme variables
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #3D80B9;       // Lighter blue for headers in dark mode
+    --secondary: #E05A21;     // Brighter orange for dark mode
+    --accent: #5DA8E0;        // Lighter blue for links in dark mode
+    --text-main: #DDDDDD;     // Light text for dark background
+    --text-light: #AAAAAA;    // Secondary text color in dark mode
+    --background: #121212;    // Dark background
+    --background-alt: #1E1E1E; // Secondary dark background
+    --border: #333333;        // Dark border
+  }
+}
+
+// Manual dark mode class for explicit toggling
+.dark-theme {
+  --primary: #3D80B9;
+  --secondary: #E05A21;
+  --accent: #5DA8E0;
+  --text-main: #DDDDDD;
+  --text-light: #AAAAAA;
+  --background: #121212;
+  --background-alt: #1E1E1E;
+  --border: #333333;
+}
+
+// Base styles
+html {
+  font-size: 62.5%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-main);
+  background: var(--background);
+  transition: color 0.3s ease, background-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -1px;
+
+  @media (max-width: var(--breakpoint-mobile)) {
+    font-size: 2.6rem;
+  }
+}
+
+h2 {
+  font-size: 2.2rem;
+
+  @media (max-width: var(--breakpoint-mobile)) {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+
+  @media (max-width: var(--breakpoint-mobile)) {
+    font-size: 1.8rem;
+  }
+}
+
+h4 {
+  font-size: 1.6rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: darken(#268BD2, 10%);
+  }
+}
+
+p {
+  margin-bottom: 2rem;
+  letter-spacing: 0.4px;
+  font-weight: var(--font-weight-light);
+
+  @media (max-width: var(--breakpoint-mobile)) {
+    letter-spacing: 0.2px;
+  }
+}
+
+strong {
+  font-weight: var(--font-weight-bold);
+}
+
+ul, ol {
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Images and media
+img, pre, iframe {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+figure {
+  margin: 0 0 2rem;
+
+  figcaption {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
+
+// Code formatting
+code {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  padding: 0.2rem 0.4rem;
+  background-color: var(--background-alt);
+  border-radius: 3px;
+}
+
+pre {
+  margin: 0 0 2rem;
+  padding: 1rem;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  background: var(--background-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+
+  code {
+    padding: 0;
+    background: transparent;
+  }
+}
+
+// Layout containers
+.wrapper {
+  width: 90%;
+  max-width: var(--content-width-large);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  &.normal {
+    max-width: var(--content-width-normal);
+  }
+
+  @media (max-width: var(--breakpoint-mobile)) {
+    width: 95%;
+    padding: 0 1rem;
+  }
+}
+
+// Header
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5rem auto 3rem;
+
+  .selfie {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+  }
+
+  .title {
+    font-size: 3.2rem;
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin: 0 0 2rem;
+    text-align: center;
+    width: 80%;
+
+    @media (max-width: var(--breakpoint-mobile)) {
+      width: 100%;
+    }
+  }
+}
+
+// Navigation
+.nav {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 3rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      margin: 0 1.5rem;
+
+      @media (max-width: var(--breakpoint-mobile)) {
+        margin: 0 1rem;
+      }
+    }
+  }
+
+  a {
+    font-size: 1.6rem;
+    font-weight: var(--font-weight-normal);
+    padding: 0.5rem 0;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+// Posts lists
+.list-item {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    text-decoration: none;
+
+    &:hover .title {
+      color: var(--accent);
+    }
+  }
+
+  .title {
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0 0 1rem;
+    transition: color 0.2s ease;
+    flex: 1 0 100%;
+
+    @media (min-width: var(--breakpoint-content)) {
+      flex: 1;
+      margin: 0;
+    }
+  }
+
+  .date {
+    color: var(--text-light);
+    font-size: 1.4rem;
+
+    @media (min-width: var(--breakpoint-content)) {
+      text-align: right;
+    }
+  }
+}
+
+// Post content
+.post {
+  margin-top: 4rem;
+
+  .title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .date {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 0 3rem;
+
+    .tag {
+      background: var(--background-alt);
+      color: var(--text-main);
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      margin: 0 0.5rem 0.5rem 0;
+      font-size: 1.2rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--accent);
+        color: white;
+      }
+    }
+  }
+
+  .content {
+    img {
+      display: block;
+      margin: 0 auto 2rem;
+    }
+  }
+}
+
+// Social links
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 0.5rem;
+    background: var(--background-alt);
+    color: var(--text-main);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    i {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+// Footer
+.footer {
+  text-align: center;
+  padding: 3rem 0;
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: 1.3rem;
+
+  .copyright {
+    margin-bottom: 1rem;
+  }
+
+  .extra {
+    a {
+      color: var(--accent);
+    }
+  }
+}
+
+// Animations
+.animated {
+  animation: fadeIn 0.8s ease forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// Syntax highlighting (simplified)
+.highlight {
+  pre {
+    background: #272822;
+    color: #f8f8f2;
+  }
+
+  .k, .kd, .kc, .kn, .kr, .kt { color: #66d9ef; } // Keywords
+  .s, .sc, .s1, .s2, .sd { color: #e6db74; } // Strings
+  .c, .c1, .cm { color: #75715e; } // Comments
+  .na, .nc, .nf { color: #a6e22e; } // Names
+  .o, .p { color: #f8f8f2; } // Operators, punctuation
+  .mi, .m, .mf { color: #ae81ff; } // Numbers
+}
+
+// Responsive adjustments for dark mode syntax highlighting
+@media (prefers-color-scheme: dark) {
+  .highlight pre {
+    background: #1d1e19;
+  }
+}
+
+// Utility classes
+.text-center { text-align: center; }
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.hidden { display: none; }
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--background-alt);
+    transform: translateY(-2px);
+  }
+
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.theme-toggle-item {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Per dark mode */
+.dark-theme .theme-toggle {
+  color: var(--text-main);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Animazione per il cambio tema */
+.theme-toggle i {
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover i {
+  transform: rotate(30deg);
+}

@@ -1,0 +1,32 @@
+<header class="header-minimal">
+    <div class="container">
+        <a href="{{ site.url }}" class="site-title">
+            {{ site.name }}
+        </a>
+    </div>
+</header>
+
+<style>
+.header-minimal {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+}
+
+.header-minimal .container {
+    display: flex;
+    justify-content: center;
+}
+
+.header-minimal .site-title {
+    font-size: 2.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.header-minimal .site-title:hover {
+    color: var(--accent);
+}
+</style>
