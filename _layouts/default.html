@@ -31,10 +31,10 @@ layout: compress
 </head>
 <body class="{% if site.dark-theme %}dark-theme{% endif %}">
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
-        {% if page.title != "Home" %}
-            {% include header-minimal.html %}
-        {% else %}
+        {% if page.title == "Home" %}
             {% include header.html %}
+        {% else %}
+            {% include header-minimal.html %}
         {% endif %}
 
         {% include nav.html %}

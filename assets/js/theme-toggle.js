@@ -80,8 +80,12 @@
    * Alterna il tema tra chiaro e scuro
    */
   function toggleTheme() {
-    const currentTheme = getCurrentTheme();
-    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    document.body.classList.toggle(DARK_THEME_CLASS);
+    if (document.body.classList.contains(DARK_THEME_CLASS)) {
+      localStorage.setItem(THEME_STORAGE_KEY, 'dark');
+    } else {
+      localStorage.setItem(THEME_STORAGE_KEY, 'light');
+    }
   }
 
   // Inizializzazione
