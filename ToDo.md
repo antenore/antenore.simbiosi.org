@@ -56,6 +56,8 @@
 - [x] Aggiornare Gemfile e versioni Jekyll
 - [x] Testare compatibilità con GitLab CI/CD
 - [x] Verificare funzionamento con pipeline attuale
+- [x] Migrated to Jekyll 4.3.4 and SCSS instead of SASS
+- [ ] Fix Deprecation warning  [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0§
 
 ### 2.2 Ottimizzazione Assets
 - [ ] Implementare compressione immagini
