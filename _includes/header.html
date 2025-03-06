@@ -53,8 +53,17 @@
             <i class="fa-solid fa-rss"></i>
         </a>
 
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-            <i class="fa-solid fa-moon"></i>
-        </button>
+        <div class="theme-toggle-wrapper" data-js-appearance-toggle-wrapper>
+            <span class="theme-toggle-label visually-hidden" data-js-appearance-toggle-text>Light</span>
+            <input type="checkbox" id="theme-toggle" name="appearance-toggle" class="theme-toggle-input" data-js-appearance-toggle-switch aria-label="Toggle between light and dark mode">
+            <label for="theme-toggle" class="theme-toggle-button">
+                <span class="theme-icon theme-icon-light">
+                    <i class="fa-solid fa-sun"></i>
+                </span>
+                <span class="theme-icon theme-icon-dark">
+                    <i class="fa-solid fa-moon"></i>
+                </span>
+            </label>
+        </div>
     </div>
 </header>

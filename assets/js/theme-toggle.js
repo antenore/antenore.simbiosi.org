@@ -1,118 +1,125 @@
 /**
- * SolarBlog Theme Toggle - Improved version
- * Handles light/dark theme switching with proper system preference detection
+ * SolarBlog Theme Toggle - Complete rewrite based on working example
  */
 
 (function() {
-    // Theme constants
-    const THEMES = {
-        LIGHT: 'light',
-        DARK: 'dark',
-        AUTO: 'auto'
-    };
-
-    const STORAGE_KEY = 'solarblog-theme';
-    const DARK_CLASS = 'dark-theme';
+    // Constants
+    const DARK = 'Dark';
+    const LIGHT = 'Light';
+    const STORAGE_KEY = 'solarblog-color-scheme';
 
     // DOM Elements
-    const body = document.body;
+    const html = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
+    const toggleText = document.querySelector('[data-js-appearance-toggle-text]');
 
-    // Initialize theme
-    function initTheme() {
-        const savedTheme = localStorage.getItem(STORAGE_KEY) || THEMES.AUTO;
-        applyTheme(savedTheme);
+    // Initialize state
+    let currentTheme = null;
 
-        // Set up event listeners
+    // Setup theme based on storage or system preference
+    function initializeTheme() {
+        const storedTheme = localStorage.getItem(STORAGE_KEY);
+
+        if (storedTheme) {
+            currentTheme = storedTheme;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            currentTheme = DARK;
+            localStorage.setItem(STORAGE_KEY, DARK);
+        } else {
+            currentTheme = LIGHT;
+            localStorage.setItem(STORAGE_KEY, LIGHT);
+        }
+
+        applyTheme(currentTheme);
+
+        // Setup event listener
         if (themeToggle) {
-            themeToggle.addEventListener('click', cycleTheme);
+            themeToggle.addEventListener('click', toggleTheme);
         }
 
         // Watch for system preference changes
         const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-        // Use addEventListener if supported (modern browsers)
         if (darkModeMediaQuery.addEventListener) {
-            darkModeMediaQuery.addEventListener('change', (e) => {
-                if (getCurrentTheme() === THEMES.AUTO) {
-                    applyThemeClass(e.matches);
-                }
-            });
-        // Fallback for older browsers
+            darkModeMediaQuery.addEventListener('change', handleSystemThemeChange);
         } else if (darkModeMediaQuery.addListener) {
-            darkModeMediaQuery.addListener((e) => {
-                if (getCurrentTheme() === THEMES.AUTO) {
-                    applyThemeClass(e.matches);
-                }
-            });
+            // For older browsers
+            darkModeMediaQuery.addListener(handleSystemThemeChange);
         }
     }
 
-    // Get current theme setting
-    function getCurrentTheme() {
-        return localStorage.getItem(STORAGE_KEY) || THEMES.AUTO;
+    function handleSystemThemeChange(e) {
+        // Only change theme automatically if user hasn't explicitly set it
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            const newTheme = e.matches ? DARK : LIGHT;
+            applyTheme(newTheme);
+        }
     }
 
-    // Apply theme setting
+    // Apply theme to DOM
     function applyTheme(theme) {
-        const isDark = theme === THEMES.DARK ||
-                      (theme === THEMES.AUTO && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        // Clear existing theme classes
+        html.classList.remove(DARK.toLowerCase());
+        html.classList.remove(LIGHT.toLowerCase());
 
-        applyThemeClass(isDark);
-        updateToggleButton(isDark);
-        localStorage.setItem(STORAGE_KEY, theme);
+        // Add current theme class
+        html.classList.add(theme.toLowerCase());
+
+        // Update toggle button state
+        updateToggleButton(theme);
+
+        // Update meta theme color for mobile browsers
+        updateMetaThemeColor(theme);
+
+        // Store current theme
+        currentTheme = theme;
     }
 
-    // Apply or remove dark theme class
-    function applyThemeClass(isDark) {
-        if (isDark) {
-            body.classList.add(DARK_CLASS);
-        } else {
-            body.classList.remove(DARK_CLASS);
-        }
-    }
-
-    // Update toggle button appearance
-    function updateToggleButton(isDark) {
+    // Update theme toggle button appearance
+    function updateToggleButton(theme) {
         if (!themeToggle) return;
 
-        const icon = isDark ?
-            '<i class="fa-solid fa-sun" aria-hidden="true"></i>' :
-            '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
-
-        const label = isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme';
-
-        themeToggle.innerHTML = icon;
-        themeToggle.setAttribute('aria-label', label);
-        themeToggle.setAttribute('title', label);
-    }
-
-    // Cycle through themes (light -> dark -> auto)
-    function cycleTheme() {
-        const currentTheme = getCurrentTheme();
-        let newTheme;
-
-        switch (currentTheme) {
-            case THEMES.LIGHT:
-                newTheme = THEMES.DARK;
-                break;
-            case THEMES.DARK:
-                newTheme = THEMES.AUTO;
-                break;
-            default:
-                newTheme = THEMES.LIGHT;
+        // Update checkbox state
+        if (theme === DARK) {
+            themeToggle.checked = true;
+        } else {
+            themeToggle.checked = false;
         }
 
-        applyTheme(newTheme);
+        // Update label text if exists
+        if (toggleText) {
+            toggleText.textContent = theme;
+        }
 
-        // Log theme change (can be removed in production)
-        console.log('Theme changed to:', newTheme);
+        // Update icon (optional)
+        const icon = themeToggle.querySelector('i') || themeToggle.querySelector('svg');
+        if (icon) {
+            if (theme === DARK) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+    }
+
+    // Update meta theme color for mobile browsers
+    function updateMetaThemeColor(theme) {
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', theme === DARK ? '#121212' : '#ffffff');
+        }
+    }
+
+    // Toggle between light and dark themes
+    function toggleTheme() {
+        const newTheme = currentTheme === DARK ? LIGHT : DARK;
+        localStorage.setItem(STORAGE_KEY, newTheme);
+        applyTheme(newTheme);
     }
 
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTheme);
+        document.addEventListener('DOMContentLoaded', initializeTheme);
     } else {
-        initTheme();
+        initializeTheme();
     }
 })();

@@ -558,3 +558,145 @@ pre {
     }
   }
 }
+
+/* Theme Toggle Styling */
+.theme-toggle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.theme-toggle-input {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle-button {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 24px;
+  background-color: var(--background-alt);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+.theme-toggle-button:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--text-main);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-input:checked + .theme-toggle-button:before {
+  transform: translateX(24px);
+}
+
+.theme-toggle-input:focus + .theme-toggle-button {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Theme styles */
+.theme-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.theme-icon-light {
+  left: 6px;
+  opacity: 1;
+}
+
+.theme-icon-dark {
+  right: 6px;
+  opacity: 0.5;
+}
+
+.theme-toggle-input:checked + .theme-toggle-button .theme-icon-light {
+  opacity: 0.5;
+}
+
+.theme-toggle-input:checked + .theme-toggle-button .theme-icon-dark {
+  opacity: 1;
+}
+
+/* Update CSS variables for each theme */
+html.light {
+  --primary: #2B5B84;
+  --secondary: #B7410E;
+  --accent: #268BD2;
+  --background: #FFFFFF;
+  --background-alt: #F8F8F8;
+  --text-main: #2D2D2D;
+  --text-light: #585858;
+  --border: #EDEDED;
+}
+
+html.dark {
+  --primary: #3D80B9;
+  --secondary: #E05A21;
+  --accent: #5DA8E0;
+  --background: #121212;
+  --background-alt: #1E1E1E;
+  --text-main: #DDDDDD;
+  --text-light: #AAAAAA;
+  --border: #333333;
+}
+
+/* Default to light theme */
+:root {
+  --primary: #2B5B84;
+  --secondary: #B7410E;
+  --accent: #268BD2;
+  --background: #FFFFFF;
+  --background-alt: #F8F8F8;
+  --text-main: #2D2D2D;
+  --text-light: #585858;
+  --border: #EDEDED;
+}
+
+/* Dark theme via prefers-color-scheme if no theme class is set */
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not(.dark) {
+    --primary: #3D80B9;
+    --secondary: #E05A21;
+    --accent: #5DA8E0;
+    --background: #121212;
+    --background-alt: #1E1E1E;
+    --text-main: #DDDDDD;
+    --text-light: #AAAAAA;
+    --border: #333333;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
