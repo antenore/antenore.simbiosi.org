@@ -1,4 +1,4 @@
-[---](---.md)
+---
 title: "Remmina - The Gtk remote desktop client"
 layout: post
 tag: remmina
@@ -19,4 +19,4 @@ Remmina supports multiple network protocols in an integrated and consistent user
 
 Remmina is free and open-source software, released under GNU GPL license.
 
-[Check it out](http://www.remmina.org/) here.
+[Check it out](https://remmina.org/) here.
