@@ -111,7 +111,6 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
-  - jekyll-picture-tag
 
 compress_html:
   ignore:
