@@ -1,0 +1,11 @@
+- Write code and comments in english
+- Do not use these commands: git push, npm, bundle. Just use commands you need to search code
+- I push code to GitLab and GitHub by myslef
+# BEGIN ARIA POLICY
+# ARIA Policy: Default Policy
+# Default ARIA policy configuration
+
+1. AI assistants may make changes to improve code quality
+2. AI assistants should follow project conventions and standards
+3. AI assistants should document significant changes they make
+# END ARIA POLICY

@@ -1,0 +1,7 @@
+description: Default ARIA policy configuration
+model: partner
+name: Default Policy
+path_policies: []
+statements: []
+tags: []
+version: '1.0'

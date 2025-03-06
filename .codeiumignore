@@ -1,0 +1,67 @@
+# BEGIN ARIA POLICY
+# ARIA Policy: Default Policy
+# Default ARIA policy configuration
+#
+# DISCLAIMER: This is a basic implementation of ARIA policy enforcement.
+# Full enforcement requires IDE plugins that are currently in development.
+# This ignore file provides only basic protection by preventing AI access to sensitive files.
+
+# Protect ARIA policy files
+*.aria.yaml
+*.aria.yml
+aria_policy.yml
+.aria/
+
+# Protect sensitive configuration files
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*id_rsa*
+*id_dsa*
+*id_ecdsa*
+*id_ed25519*
+*.gpg
+*.pgp
+*.asc
+*.kbx
+
+# Protect secrets and credentials
+*secret*
+*password*
+*credential*
+*token*
+*apikey*
+*api-key*
+*api_key*
+*auth*
+*oauth*
+*jwt*
+
+# Protect CI/CD configuration
+.github/secrets/
+.gitlab/secrets/
+*deploy-key*
+*deploy_key*
+
+# Protect infrastructure as code
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfplan
+ansible/vault*
+*kubeconfig*
+
+# Protect database files
+*.db
+*.sqlite
+*.sqlite3
+*.rdb
+dump.rdb
+
+# END ARIA POLICY
