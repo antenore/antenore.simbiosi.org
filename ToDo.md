@@ -69,6 +69,15 @@
 - [ ] Aggiungere attributi alt mancanti
 - [ ] Sistemare gerarchia heading
 
+### 2.4 Pulizia Tema
+- [x] Rimuovere Disqus (non utilizzato)
+- [x] Rimuovere Google Analytics (non utilizzato)
+- [x] Semplificare blocco autore (rimossi pulsanti social sharing)
+- [x] Modernizzare implementazione favicon
+- [x] Migliorare theme switcher
+- [ ] Rimuovere CSS non utilizzato
+- [ ] Ottimizzare caricamento font
+
 ## TODO Priorità 3: UX/UI Improvements (Q3-Q4 2025)
 
 ### 3.1 Consolidamento CSS
