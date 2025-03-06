@@ -700,3 +700,92 @@ body {
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* Simple theme switch styling */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.theme-switch-wrapper em {
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+/* Basic dark theme styles */
+:root {
+  --primary: #2B5B84;
+  --secondary: #B7410E;
+  --accent: #268BD2;
+  --background: #FFFFFF;
+  --background-alt: #F8F8F8;
+  --text-main: #2D2D2D;
+  --text-light: #585858;
+  --border: #EDEDED;
+}
+
+.dark-theme {
+  --primary: #3D80B9;
+  --secondary: #E05A21;
+  --accent: #5DA8E0;
+  --background: #121212;
+  --background-alt: #1E1E1E;
+  --text-main: #DDDDDD;
+  --text-light: #AAAAAA;
+  --border: #333333;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
