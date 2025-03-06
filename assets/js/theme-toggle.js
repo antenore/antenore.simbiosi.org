@@ -1,13 +1,9 @@
 /**
- * SolarBlog Theme Toggle
- * Manages theme switching with explicit light/dark modes and system preference support
+ * SolarBlog Theme Toggle - Improved version
+ * Handles light/dark theme switching with proper system preference detection
  */
 
 (function() {
-    // DOM Elements
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
-
     // Theme constants
     const THEMES = {
         LIGHT: 'light',
@@ -15,112 +11,108 @@
         AUTO: 'auto'
     };
 
-    const STORAGE_KEY = 'solarblog-theme-preference';
-    const DARK_THEME_CLASS = 'dark-theme';
+    const STORAGE_KEY = 'solarblog-theme';
+    const DARK_CLASS = 'dark-theme';
 
-    /**
-     * Get the current theme preference
-     * @returns {string} Current theme preference
-     */
-    function getThemePreference() {
+    // DOM Elements
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Initialize theme
+    function initTheme() {
+        const savedTheme = localStorage.getItem(STORAGE_KEY) || THEMES.AUTO;
+        applyTheme(savedTheme);
+
+        // Set up event listeners
+        if (themeToggle) {
+            themeToggle.addEventListener('click', cycleTheme);
+        }
+
+        // Watch for system preference changes
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Use addEventListener if supported (modern browsers)
+        if (darkModeMediaQuery.addEventListener) {
+            darkModeMediaQuery.addEventListener('change', (e) => {
+                if (getCurrentTheme() === THEMES.AUTO) {
+                    applyThemeClass(e.matches);
+                }
+            });
+        // Fallback for older browsers
+        } else if (darkModeMediaQuery.addListener) {
+            darkModeMediaQuery.addListener((e) => {
+                if (getCurrentTheme() === THEMES.AUTO) {
+                    applyThemeClass(e.matches);
+                }
+            });
+        }
+    }
+
+    // Get current theme setting
+    function getCurrentTheme() {
         return localStorage.getItem(STORAGE_KEY) || THEMES.AUTO;
     }
 
-    /**
-     * Determine if dark mode is active based on system preference
-     * @returns {boolean} Whether dark mode is preferred by the system
-     */
-    function isSystemDarkMode() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Apply theme setting
+    function applyTheme(theme) {
+        const isDark = theme === THEMES.DARK ||
+                      (theme === THEMES.AUTO && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        applyThemeClass(isDark);
+        updateToggleButton(isDark);
+        localStorage.setItem(STORAGE_KEY, theme);
     }
 
-    /**
-     * Set the theme
-     * @param {string} theme - Theme to set (light/dark/auto)
-     */
-    function setTheme(theme) {
-        // Remove existing theme classes
-        body.classList.remove(DARK_THEME_CLASS);
-
-        switch(theme) {
-            case THEMES.DARK:
-                body.classList.add(DARK_THEME_CLASS);
-                localStorage.setItem(STORAGE_KEY, THEMES.DARK);
-                break;
-            case THEMES.LIGHT:
-                localStorage.setItem(STORAGE_KEY, THEMES.LIGHT);
-                break;
-            default: // AUTO
-                localStorage.removeItem(STORAGE_KEY);
-                if (isSystemDarkMode()) {
-                    body.classList.add(DARK_THEME_CLASS);
-                }
-                break;
+    // Apply or remove dark theme class
+    function applyThemeClass(isDark) {
+        if (isDark) {
+            body.classList.add(DARK_CLASS);
+        } else {
+            body.classList.remove(DARK_CLASS);
         }
-
-        updateThemeToggleIcon(theme);
     }
 
-    /**
-     * Update the theme toggle button icon
-     * @param {string} theme - Current theme
-     */
-    function updateThemeToggleIcon(theme) {
+    // Update toggle button appearance
+    function updateToggleButton(isDark) {
         if (!themeToggle) return;
 
-        const currentTheme = theme || getThemePreference();
+        const icon = isDark ?
+            '<i class="fa-solid fa-sun" aria-hidden="true"></i>' :
+            '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
 
-        const icon = currentTheme === THEMES.DARK
-            ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
-            : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
-
-        const label = currentTheme === THEMES.DARK
-            ? 'Switch to Light Theme'
-            : 'Switch to Dark Theme';
+        const label = isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme';
 
         themeToggle.innerHTML = icon;
         themeToggle.setAttribute('aria-label', label);
         themeToggle.setAttribute('title', label);
     }
 
-    /**
-     * Cycle through theme modes
-     */
+    // Cycle through themes (light -> dark -> auto)
     function cycleTheme() {
-        const currentTheme = getThemePreference();
-        const themeOrder = [THEMES.LIGHT, THEMES.DARK, THEMES.AUTO];
-        const currentIndex = themeOrder.indexOf(currentTheme);
-        const nextTheme = themeOrder[(currentIndex + 1) % themeOrder.length];
+        const currentTheme = getCurrentTheme();
+        let newTheme;
 
-        setTheme(nextTheme);
-    }
-
-    /**
-     * Initialize theme toggle functionality
-     */
-    function initThemeToggle() {
-        // Set initial theme
-        const savedTheme = getThemePreference();
-        setTheme(savedTheme);
-
-        // Add theme toggle listener
-        if (themeToggle) {
-            themeToggle.addEventListener('click', cycleTheme);
+        switch (currentTheme) {
+            case THEMES.LIGHT:
+                newTheme = THEMES.DARK;
+                break;
+            case THEMES.DARK:
+                newTheme = THEMES.AUTO;
+                break;
+            default:
+                newTheme = THEMES.LIGHT;
         }
 
-        // Listen for system theme changes when in auto mode
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        mediaQuery.addListener((e) => {
-            if (getThemePreference() === THEMES.AUTO) {
-                setTheme(THEMES.AUTO);
-            }
-        });
+        applyTheme(newTheme);
+
+        // Log theme change (can be removed in production)
+        console.log('Theme changed to:', newTheme);
     }
 
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initThemeToggle);
+        document.addEventListener('DOMContentLoaded', initTheme);
     } else {
-        initThemeToggle();
+        initTheme();
     }
 })();
