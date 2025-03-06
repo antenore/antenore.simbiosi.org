@@ -466,14 +466,20 @@ pre {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
+  
+  small {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: normal;
+  }
 }
 
 .theme-switch {
   position: relative;
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 24px;
 }
 
 .theme-switch input {
@@ -491,53 +497,59 @@ pre {
   right: 0;
   bottom: 0;
   background-color: var(--background-alt);
-  transition: .3s;
+  transition: all 0.3s ease;
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  border-radius: 24px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .slider:before {
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  content: "\f185"; /* sun icon */
   position: absolute;
-  color: var(--text-main);
-  font-size: 16px;
-  transition: .3s;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-main);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+  background-color: var(--accent);
+  border-color: var(--accent);
 }
 
 input:checked + .slider:before {
-  content: "\f186"; /* moon icon */
-  transform: translateY(0);
+  transform: translateX(16px);
+  background-color: white;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 0 2px var(--accent);
+  box-shadow: 0 0 0 2px rgba(38, 141, 210, 0.5);
 }
 
 .slider:hover {
-  background-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.slider:hover:before {
-  color: white;
-}
-
-// Hide the "Toggle Dark Mode" text on mobile
-@media (max-width: 500px) {
-  .theme-switch-wrapper em {
-    display: none;
-  }
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 // Header-specific theme toggle
 .header-minimal .theme-switch-wrapper {
-  margin: 0;
+  margin-left: 1rem;
+}
+
+// Responsive adjustments for theme toggle
+@media (max-width: 500px) {
+  .theme-switch-wrapper small {
+    display: none;
+  }
+  
+  .theme-switch-wrapper {
+    margin-left: 0.5rem;
+  }
 }
 
 // Utility classes
