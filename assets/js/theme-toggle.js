@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
   themeToggle.addEventListener('change', function() {
     if (this.checked) {
       document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
       localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark-theme');
+      document.documentElement.classList.add('light-theme');
       localStorage.setItem('theme', 'light');
     }
   });
@@ -29,9 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!localStorage.getItem('theme')) {
       if (e.matches) {
         document.documentElement.classList.add('dark-theme');
+        document.documentElement.classList.remove('light-theme');
         themeToggle.checked = true;
       } else {
         document.documentElement.classList.remove('dark-theme');
+        document.documentElement.classList.add('light-theme');
         themeToggle.checked = false;
       }
     }
