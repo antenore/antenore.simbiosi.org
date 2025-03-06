@@ -9,40 +9,69 @@ tags: [jekyll, ottimizzazione, immagini]
 
 # Esempio di Utilizzo delle Immagini Responsive
 
-Questo u00e8 un esempio di come utilizzare le immagini responsive nel blog.
+Questo è un esempio di come utilizzare le immagini responsive nel blog con il nostro approccio ottimizzato.
 
-## Immagine Standard (Preset Default)
+## Immagine Standard
 
-{% include responsive-image.html src="Antenore.png" alt="Antenore Gatta" %}
+{% include responsive-image.html 
+   src="/assets/images/Antenore.jpg" 
+   srcset="/assets/images/Antenore.webp 1x, /assets/images/Antenore@2x.webp 2x" 
+   sizes="(max-width: 800px) 100vw, 800px"
+   alt="Antenore Gatta" 
+   class="post-image" 
+%}
 
-## Immagine Post (Preset Post)
+## Immagine Post con Solo WebP
 
-{% include responsive-image.html src="Antenore.png" alt="Antenore Gatta" preset="post" %}
+{% include responsive-image.html 
+   src="/assets/images/Antenore.jpg" 
+   srcset="/assets/images/Antenore.webp" 
+   alt="Antenore Gatta" 
+   class="post-image large" 
+%}
 
-## Immagine Thumbnail (Preset Thumbnail)
+## Immagine Thumbnail
 
-{% include responsive-image.html src="Antenore.png" alt="Antenore Gatta" preset="thumbnail" %}
+{% include responsive-image.html 
+   src="/assets/images/Antenore.jpg" 
+   srcset="/assets/images/Antenore-small.webp 1x, /assets/images/Antenore.webp 2x" 
+   sizes="(max-width: 400px) 100vw, 400px"
+   alt="Antenore Gatta" 
+   class="thumbnail" 
+%}
 
-## Immagine Avatar (Preset Avatar)
+## Immagine Avatar
 
-{% include responsive-image.html src="Antenore.png" alt="Antenore Gatta" preset="avatar" %}
+{% include responsive-image.html 
+   src="/assets/images/Antenore.jpg" 
+   srcset="/assets/images/Antenore-avatar.webp" 
+   alt="Antenore Gatta" 
+   class="avatar" 
+%}
 
-## Utilizzo Diretto del Tag Picture
+## Utilizzo Diretto del Tag HTML
 
-{% picture post Antenore.png --alt "Antenore Gatta" %}
+<img 
+  src="/assets/images/Antenore.jpg" 
+  srcset="/assets/images/Antenore.webp 1x, /assets/images/Antenore@2x.webp 2x"
+  sizes="(max-width: 800px) 100vw, 800px"
+  alt="Antenore Gatta" 
+  loading="lazy"
+  class="post-image"
+>
 
 ## Benefici delle Immagini Responsive
 
 1. **Prestazioni migliori**: Le immagini vengono caricate alla dimensione appropriata per il dispositivo
-2. **Risparmio di larghezza di banda**: I dispositivi mobili scaricano immagini piu00f9 piccole
-3. **Formati moderni**: Utilizzo automatico di WebP quando supportato dal browser
+2. **Risparmio di larghezza di banda**: I dispositivi mobili scaricano immagini più piccole
+3. **Formati moderni**: Utilizzo di WebP quando supportato dal browser
 4. **Lazy loading**: Le immagini vengono caricate solo quando necessario
 
 ## Come Funziona
 
-Il plugin `jekyll-picture-tag` genera automaticamente:
+Il nostro approccio ottimizzato per le immagini responsive:
 
-- Versioni delle immagini in diversi formati (WebP + originale)
-- Dimensioni multiple per diversi dispositivi
-- Tag HTML ottimizzati per il caricamento
-- Fallback per browser piu00f9 vecchi
+1. **Ottimizzazione delle immagini**: Utilizziamo uno script Node.js per comprimere e convertire le immagini in WebP
+2. **Responsive HTML**: Utilizziamo `srcset` e `sizes` per servire la dimensione corretta dell'immagine
+3. **Lazy loading**: Le immagini vengono caricate solo quando diventano visibili nello schermo
+4. **Fallback**: Forniamo sempre un'immagine JPG/PNG di fallback per browser più vecchi

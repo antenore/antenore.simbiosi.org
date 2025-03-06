@@ -13,7 +13,15 @@ variables:
   LC_ALL: C.UTF-8
 
 before_script:
-  - apt-get update -qq && apt-get install -y -qq libvips-dev libvips-tools imagemagick
+  # Installazione Node.js e dipendenze per ottimizzazione immagini
+  - apt-get update -qq && apt-get install -y -qq curl gnupg
+  - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+  - apt-get install -y -qq nodejs
+  - npm install -g npm@latest
+  - npm install imagemin imagemin-jpegtran imagemin-pngquant imagemin-webp imagemin-gifsicle imagemin-svgo sharp
+  # Ottimizzazione delle immagini
+  - node scripts/optimize-images.js
+  # Installazione Ruby e Jekyll
   - ruby -v
   - gem install bundler
   - bundle install
