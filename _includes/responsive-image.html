@@ -1,0 +1,6 @@
+{% comment %}
+  Responsive image include che utilizza jekyll-picture-tag
+  Uso: {% include responsive-image.html src="path/to/image.jpg" alt="Alt text" preset="default" %}
+{% endcomment %}
+
+{% picture {{ include.preset | default: 'default' }} {{ include.src }} --alt {{ include.alt }} %}

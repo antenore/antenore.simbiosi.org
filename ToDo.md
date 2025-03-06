@@ -60,8 +60,8 @@
 - [x] Fix Deprecation warning  [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0§
 
 ### 2.2 Ottimizzazione Assets
-- [ ] Implementare compressione immagini
-- [ ] Configurare lazy loading
+- [x] Implementare compressione immagini
+- [x] Configurare lazy loading
 - [ ] Organizzare assets per dimensioni/tipo
 
 ### 2.3 Fix Accessibilità

@@ -1,0 +1,37 @@
+verbose: false
+skip_missing_workers: true
+nice: 10
+threads: 8
+
+png:
+  advpng:
+    level: 4
+  optipng:
+    level: 7
+  pngcrush:
+    chunks: alla
+    fix: true
+    brute: true
+  pngout:
+    copy_chunks: false
+    strategy: 0
+  pngquant:
+    quality: 70-80
+    speed: 3
+
+jpg:
+  jpegrecompress:
+    quality: 2
+  jpegtran:
+    copy_chunks: none
+    progressive: true
+    jpegoptim:
+      max_quality: 80
+      strip: all
+
+gif:
+  gifsicle:
+    interlace: false
+
+svg:
+  svgo: {}

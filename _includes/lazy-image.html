@@ -1,0 +1,11 @@
+{% comment %}
+  Lazy-loading image include
+  Usage: {% include lazy-image.html src="/path/to/image.jpg" alt="Alt text" class="optional-class" %}
+{% endcomment %}
+
+<img src="{{ include.src }}" 
+     alt="{{ include.alt }}" 
+     loading="lazy" 
+     {% if include.class %}class="{{ include.class }}"{% endif %}
+     {% if include.width %}width="{{ include.width }}"{% endif %}
+     {% if include.height %}height="{{ include.height }}"{% endif %}>

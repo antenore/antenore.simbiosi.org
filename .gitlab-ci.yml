@@ -13,6 +13,7 @@ variables:
   LC_ALL: C.UTF-8
 
 before_script:
+  - apt-get update -qq && apt-get install -y -qq libvips-dev libvips-tools imagemagick
   - ruby -v
   - gem install bundler
   - bundle install

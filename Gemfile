@@ -9,6 +9,8 @@ group :jekyll_plugins do
   gem 'jekyll-gist'
   gem 'jekyll-seo-tag'
   gem 'jemoji'
+  # Plugin per l'ottimizzazione delle immagini
+  gem 'jekyll-picture-tag', '~> 2.0'
 end
 
 # Per testing locale su Windows

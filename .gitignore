@@ -5,3 +5,6 @@ Gemfile.lock
 .bundle
 vendor/
 ctags
+node_modules
+package-lock.json
+package.json
