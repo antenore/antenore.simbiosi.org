@@ -24,10 +24,6 @@ layout: compress
 
     <!-- Main stylesheet with prefers-color-scheme support -->
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-
-    {% if site.analytics-google %}
-        {% include analytics-google.html %}
-    {% endif %}
 </head>
 <body>
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">

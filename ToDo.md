@@ -72,7 +72,7 @@
 ## TODO Priorità 3: UX/UI Improvements (Q3-Q4 2025)
 
 ### 3.1 Consolidamento CSS
-- [ ] Unificare file .sass ridondanti
+- [ ] Unificare file .scss ridondanti
 - [ ] Implementare variabili CSS per tema
 - [ ] Rimuovere stili non utilizzati
 
