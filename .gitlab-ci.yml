@@ -13,7 +13,7 @@ variables:
   LC_ALL: C.UTF-8
 
 before_script:
-- apt-get update -qq && apt-get install -y -qq curl gnupg
+  - apt-get update -qq && apt-get install -y -qq curl gnupg
   # Current version of nodejs on ruby:3.2 is too old
   #- curl -sL https://deb.nodesource.com/setup_16.x | bash -
   #- apt-get install -y -qq nodejs
