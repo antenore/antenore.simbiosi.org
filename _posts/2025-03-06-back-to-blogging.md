@@ -1,6 +1,7 @@
 ---
 title: "Returning to Blogging: AWS Governance, ARIA, and What's Next"
 layout: post
+permalink: /returning-to-blogging/
 tag:
 - AWS
 - cloud-governance
