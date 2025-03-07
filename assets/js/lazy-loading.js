@@ -1,46 +1,46 @@
-// Polyfill per il lazy loading in browser più vecchi
+// Polyfill for lazy loading in older browsers
 document.addEventListener('DOMContentLoaded', function() {
-  // Verifica se il browser supporta nativamente il lazy loading
+  // Check if the browser natively supports lazy loading
   if ('loading' in HTMLImageElement.prototype) {
-    // Il browser supporta il lazy loading nativo
-    console.log('Browser supporta lazy loading nativo');
+    // Browser natively supports lazy loading
+    console.log('Browser supports native lazy loading');
     return;
   }
 
-  // Per browser che non supportano il lazy loading nativo
-  console.log('Usando polyfill per lazy loading');
+  // For browsers that do not natively support lazy loading
+  console.log('Using polyfill for lazy loading');
   
-  // Seleziona tutte le immagini con attributo loading="lazy"
+  // Select all images with loading="lazy" attribute
   const lazyImages = document.querySelectorAll('img[loading="lazy"]');
   
-  // Configura l'Intersection Observer
+  // Configure Intersection Observer
   const imageObserver = new IntersectionObserver(function(entries, observer) {
     entries.forEach(function(entry) {
-      // Se l'immagine è visibile
+      // If the image is visible
       if (entry.isIntersecting) {
         const image = entry.target;
         
-        // Carica l'immagine impostando la src
+        // Load the image by setting the src
         if (image.dataset.src) {
           image.src = image.dataset.src;
           delete image.dataset.src;
         }
         
-        // Smetti di osservare l'immagine
+        // Stop observing the image
         observer.unobserve(image);
       }
     });
   });
   
-  // Osserva ogni immagine
+  // Observe each image
   lazyImages.forEach(function(image) {
-    // Salva la src originale in data-src e rimuovi src
+    // Save original src in data-src and remove src
     if (image.src) {
       image.dataset.src = image.src;
       image.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
     }
     
-    // Osserva l'immagine
+    // Observe the image
     imageObserver.observe(image);
   });
 });
