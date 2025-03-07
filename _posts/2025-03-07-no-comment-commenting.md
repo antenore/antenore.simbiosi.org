@@ -100,7 +100,8 @@ This ensures that users can only be redirected to trusted domains, preventing po
 
 With these changes in place, implementing comments on this blog was straightforward. I added a form at the bottom of each post:
 
-{% comment %}
+```html
+{% raw %}
 <form method="POST" action="{{ site.no_comment_url }}" id="comment-form">
   <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}">
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
@@ -111,47 +112,16 @@ With these changes in place, implementing comments on this blog was straightforw
   
   <button type="submit">Post Comment</button>
 </form>
-{% endcomment %}
+{% endraw %}
+```
 
-<!-- Example of HTML form code (not interpreted by Jekyll) -->
-<form method="POST" action="[site.no_comment_url]" id="comment-form">
-  <input name="options[redirect]" type="hidden" value="[site.no_comment_redirect]">
-  <input name="options[slug]" type="hidden" value="[page.slug]">
-  
-  <label>Name <input name="fields[name]" type="text" required></label>
-  <label>Email <input name="fields[email]" type="email" required></label>
-  <label>Message<textarea name="fields[message]" required></textarea></label>
-  
-  <button type="submit">Post Comment</button>
-</form>
+This submits to my Cloudflare Worker, which creates a merge request to add the comment as a data file in my GitLab repository. After I approve and merge the request, the comment appears on the site - no JavaScript required on the client side!
 
 ## The Results
 
 The implementation has been working flawlessly. Comments are submitted as data files, which Jekyll then renders alongside the post content:
 
-{% comment %}
-{% if site.data.comments[page.slug] %}
-  <h2>Comments</h2>
-  <div class="comments">
-    {% for comment_entry in site.data.comments[page.slug] %}
-    {% assign comment = comment_entry[1] %}
-      <div class="comment">
-        <div class="comment-header">
-          {{comment.name | strip_html}}
-          <span class="comment-date">
-            {{comment.date | date: "%B %d, %Y"}}
-          </span>
-        </div>
-        <div class="comment-content">
-          {{comment.message | strip_html | markdownify }}
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
-{% endcomment %}
-
-<!-- Example of comments rendering code (not interpreted by Jekyll) -->
+```html
 {% raw %}
 {% if site.data.comments[page.slug] %}
   <h2>Comments</h2>
@@ -173,6 +143,14 @@ The implementation has been working flawlessly. Comments are submitted as data f
   </div>
 {% endif %}
 {% endraw %}
+```
+
+The beauty of this approach is its simplicity and robustness:
+
+1. No JavaScript dependencies or third-party services on the client side
+2. Comments are stored in my repository as simple data files
+3. I have complete moderation control through the merge request process
+4. The entire system is highly cacheable, keeping the site fast
 
 ## Open Source Contribution
 
