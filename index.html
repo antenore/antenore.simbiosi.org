@@ -2,3 +2,27 @@
 layout: page
 title: Home
 ---
+
+<section class="home-section">
+    <h2>Latest Post</h2>
+    {% assign latest_post = site.posts | where: "category", "blog" | where_exp: "post", "post.hidden != true" | first %}
+    {% if latest_post %}
+        <div class="latest-post">
+            <h3><a href="{{ site.url }}{{ latest_post.url }}">{{ latest_post.title }}</a></h3>
+            <aside class="date"><time datetime="{{ latest_post.date | date:"%d-%m-%Y" }}">{{ latest_post.date | date: "%b %d %Y" }}</time></aside>
+            <div class="post-excerpt">
+                {% if latest_post.description %}
+                    {{ latest_post.description }}
+                {% else %}
+                    {{ latest_post.content | strip_html | truncatewords: 50 }}
+                {% endif %}
+            </div>
+            <a href="{{ site.url }}{{ latest_post.url }}" class="read-more">Read more</a>
+        </div>
+        <div class="see-more">
+            <a href="{{ site.url }}/blog" class="see-more-link">See more posts</a>
+        </div>
+    {% else %}
+        <p>No posts available yet.</p>
+    {% endif %}
+</section>
