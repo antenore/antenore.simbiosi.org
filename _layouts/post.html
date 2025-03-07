@@ -65,3 +65,17 @@ layout: page
     <button type="submit">Post</button>
     </form>
 {% endif %}
+{% if site.data.comments[page.slug] %}
+  <h2>Comments</h2>
+  <div>
+    {% for comment_entry in site.data.comments[page.slug] %}
+    {% assign comment = comment_entry[1] %}
+      <div>
+        {{comment.date | date: "%Y-%m-%d"}} {{comment.name | strip_html}}
+        <br />
+        {{comment.message | strip_html | markdownify }}
+      </div>
+      <hr>
+    {% endfor %}
+  </div>
+{% endif %}
