@@ -44,7 +44,7 @@ layout: page
     {% include author.html %}
 {% endif %}
 
-{% if site.no-comment %}
+{% if site.no_comment_url %}
     <h2>Post comment</h2>
     <form method="POST" action="{{ site.no_comment_url }}">
     <em><a href="https://www.markdownguide.org/">Markdown</a> is allowed, HTML is not. All comments are moderated.</em>
