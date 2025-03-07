@@ -28,6 +28,9 @@ permalink: /:title/
 # To enable google analytics, supply your token below
 # analytics-google: 'UA-MYANALYTICS'
 
+# To enable no-comment plugin
+no-comment:
+  no_comment_redirect: https://no-comment.antenore.workers.dev/
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
