@@ -20,6 +20,14 @@ permalink: /thanks/
       referrer = '{{ site.url }}';
     }
     
+    // Prevent form resubmission issues when user goes back
+    // Add a random parameter to the URL to force a new load
+    if (referrer.indexOf('?') > -1) {
+      referrer += '&nocache=' + new Date().getTime();
+    } else {
+      referrer += '?nocache=' + new Date().getTime();
+    }
+    
     // Start countdown
     let seconds = 5;
     const countdownElement = document.getElementById('countdown');
@@ -30,9 +38,16 @@ permalink: /thanks/
       
       if (seconds <= 0) {
         clearInterval(interval);
-        window.location.href = referrer;
+        // Use replaceState to prevent user from going back to the thank you page with the back button
+        window.history.replaceState(null, '', referrer);
+        window.location.replace(referrer);
       }
     }, 1000);
+    
+    // Clear form history
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, document.title, window.location.href);
+    }
   });
 </script>
 

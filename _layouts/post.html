@@ -46,20 +46,20 @@ layout: page
 
 {% if site.no_comment_url %}
     <h2>Post comment</h2>
-    <form method="POST" action="{{ site.no_comment_url }}">
+    <form method="POST" action="{{ site.no_comment_url }}" id="comment-form" autocomplete="off">
     <em><a href="https://www.markdownguide.org/">Markdown</a> is allowed, HTML is not. All comments are moderated.</em>
     <br />
     <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}">
     <input name="options[slug]" type="hidden" value="{{ page.slug }}">
 
     <!-- e.g. "2016-01-02-this-is-a-post" -->
-    <label style="width: 20px; display: inline-block">Name <input name="fields[name]" type="text"></label>
+    <label style="width: 20px; display: inline-block">Name <input name="fields[name]" type="text" autocomplete="off"></label>
     <br/>
 
-    <label style="width: 20px; display: inline-block">Email<input name="fields[email]" type="email"></label>
+    <label style="width: 20px; display: inline-block">Email<input name="fields[email]" type="email" autocomplete="off"></label>
     <br/>
 
-    <label style="width: 20px; display: inline-block">Message<textarea rows="40" cols="80" name="fields[message]"></textarea></label>
+    <label style="width: 20px; display: inline-block">Message<textarea rows="40" cols="80" name="fields[message]" autocomplete="off"></textarea></label>
     <br/>
 
     <button type="submit">Post</button>
