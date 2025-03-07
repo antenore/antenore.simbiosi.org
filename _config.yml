@@ -31,7 +31,7 @@ permalink: /:title/
 # To enable no-comment plugin
 
 no_comment_url: https://no-comment.antenore.workers.dev/
-no_comment_redirect: https://antenore.simbiosi.org/
+no_comment_redirect: https://antenore.simbiosi.org/thanks/
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
