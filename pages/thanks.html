@@ -1,0 +1,45 @@
+---
+layout: page
+title: Grazie per il tuo commento
+permalink: /thanks/
+---
+
+<div class="thanks-container">
+  <h1>Grazie per il tuo commento!</h1>
+  <p>Il tuo commento è stato ricevuto e verrà moderato non appena possibile.</p>
+  <p>Sarai reindirizzato alla pagina precedente tra <span id="countdown">5</span> secondi...</p>
+</div>
+
+<script>
+  // Definisci la variabile site_url per lo script esterno
+  var site_url = "{{ site.url }}";
+</script>
+<script src="{{ site.baseurl }}/assets/js/thanks-redirect.js"></script>
+
+<style>
+  .thanks-container {
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .thanks-container h1 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+  
+  .thanks-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #34495e;
+  }
+  
+  #countdown {
+    font-weight: bold;
+    color: #e74c3c;
+  }
+</style>
