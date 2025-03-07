@@ -49,7 +49,8 @@ layout: page
     <form method="POST" action="{{ site.no_comment_url }}" id="comment-form" autocomplete="off">
         <em><a href="https://www.markdownguide.org/">Markdown</a> is allowed, HTML is not. All comments are moderated.</em>
         <br />
-        <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}?from={{ page.url | url_encode }}&slug={{ page.slug }}">
+        <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}?from={{ page.url | url_encode }}">
+        <input name="options[slug]" type="hidden" value="{{ page.slug }}">
         <input name="fields[name]" type="text" autocomplete="off" placeholder="Name">
         <br/>
         <input name="fields[email]" type="email" autocomplete="off" placeholder="Email">
