@@ -9,7 +9,7 @@ group :jekyll_plugins do
   gem 'jekyll-gist'
   gem 'jekyll-seo-tag'
   gem 'jemoji'
-  # Plugin per l'ottimizzazione delle immagini rimosso per incompatibilità
+  gem 'jekyll-mermaid'
 end
 
 # Per testing locale su Windows
