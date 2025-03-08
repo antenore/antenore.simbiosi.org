@@ -9,7 +9,7 @@ group :jekyll_plugins do
   gem 'jekyll-gist'
   gem 'jekyll-seo-tag'
   gem 'jemoji'
-  gem 'jekyll-mermaid'
+  gem 'jekyll-spaceship'
 end
 
 # Per testing locale su Windows

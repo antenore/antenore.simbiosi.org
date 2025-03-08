@@ -57,7 +57,7 @@ This way, the email is never stored in plain text in the GitLab repository, prot
 
 Here's a diagram of how the entire system works:
 
-{% mermaid %}
+```mermaid
 graph LR
     A[User Browser] -->|Encrypted Email + Plain Text Name/Comment| B[No-Comment]
     B -->|Create MR with JSON file| C[GitLab Repository]
@@ -67,7 +67,7 @@ graph LR
     D -->|Decrypt Email| D
     D -->|Send Notification| F[AWS SES]
     F -->|Email| G[User Email]
-{% endmermaid %}
+```
 
 ## Client-Side Implementation
 
