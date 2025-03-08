@@ -1,8 +1,7 @@
 ---
 title: "Enhancing No-Comment with Email Encryption"
-date: 2025-03-08 19:38:00
+layout: post
 image: /assets/images/blog/encryption.jpg
-headerImage: true
 tag:
 - security
 - privacy
