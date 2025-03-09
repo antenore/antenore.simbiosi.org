@@ -6,7 +6,10 @@
  */
 
 // Import normalize first for consistent cross-browser rendering
-@use "normalize";
+@import "normalize";
+
+// Import syntax highlighting styles
+@import "syntax";
 
 // Core theme setup
 :root {
