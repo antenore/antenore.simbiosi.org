@@ -1,7 +1,7 @@
 ---
 title: "Enhancing No-Comment with Email Encryption"
 layout: post
-image: /assets/images/blog/encryption.jpg
+permalink: /no-comment-encrypted/
 tag:
 - security
 - privacy
@@ -71,64 +71,105 @@ graph LR
 
 ## Client-Side Implementation
 
-For the client-side encryption, I chose to use the node-forge library, which is actively maintained and provides robust cryptographic functions. Here's how I implemented it:
+For the client-side encryption, I chose to use the browser's native Web Crypto API, which provides robust cryptographic functions without requiring external libraries. Here's how I implemented it:
 
 ```javascript
-// Load forge from CDN
 document.addEventListener('DOMContentLoaded', function() {
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js';
-  script.integrity = 'sha256-MZBH/+oaYu4R0Ib7qmQZtCZ8wr/OjXZldKyBvFNq/Uo=';
-  script.crossOrigin = 'anonymous';
-  script.onload = setupEncryption;
-  document.head.appendChild(script);
+  setupEncryption();
 });
 
-function setupEncryption() {
+async function setupEncryption() {
   const form = document.getElementById('comment-form');
-  if (!form) return;
+  if (!form) {
+    console.error('Comment form not found');
+    return;
+  }
 
-  // RSA public key - only public key is exposed
+  console.log('Email encryption initialized');
+
+  // RSA public key in PEM format
   const publicKeyPem = `-----BEGIN PUBLIC KEY-----
   MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
   [... key content abbreviated for security ...]  
   -----END PUBLIC KEY-----`;
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  try {
+    // Convert PEM to a format usable by Web Crypto API
+    const publicKey = await importPublicKey(publicKeyPem);
     
-    // Get ONLY the email field - name and message remain unencrypted
-    const emailField = form.querySelector('input[name="fields[email]"]');
-    if (!emailField || !emailField.value) {
-      form.submit();
-      return;
-    }
+    // Replace the form's submit event with our own handler
+    form.addEventListener('submit', async function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+      
+      // Get ONLY the email field - name and message remain unencrypted
+      const emailField = form.querySelector('input[name="fields[email]"]');
+      if (!emailField || !emailField.value) {
+        form.submit();
+        return;
+      }
 
-    try {
-      // Parse the public key
-      const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
-      
-      // Encrypt using RSA-OAEP with SHA-256
-      const encrypted = publicKey.encrypt(emailField.value, 'RSA-OAEP', {
-        md: forge.md.sha256.create(),
-        mgf1: {
-          md: forge.md.sha1.create()
-        }
-      });
-      
-      // Convert to base64 for transmission
-      const encryptedBase64 = forge.util.encode64(encrypted);
-      emailField.value = encryptedBase64;
-    } catch (error) {
-      console.error('Error during encryption:', error);
-    }
-    
-    form.submit();
-  });
+      try {
+        // Encrypt the email using Web Crypto API
+        const encryptedBase64 = await encryptEmail(emailField.value, publicKey);
+        
+        // Replace the email value with the encrypted version
+        emailField.value = encryptedBase64;
+        
+        // Submit the form with the encrypted email
+        form.submit();
+      } catch (error) {
+        console.error('Error during encryption:', error);
+        form.submit();
+      }
+    });
+  } catch (error) {
+    console.error('Error setting up encryption:', error);
+  }
+}
+
+// Helper functions for Web Crypto API
+async function importPublicKey(pem) {
+  // Remove header, footer, and newlines to get the base64 encoded key
+  const pemContents = pem.replace(/(-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----)/g, '')
+                         .replace(/\s/g, '');
+  
+  // Convert base64 to ArrayBuffer
+  const binaryDer = base64ToArrayBuffer(pemContents);
+  
+  // Import the key
+  return window.crypto.subtle.importKey(
+    'spki',
+    binaryDer,
+    {
+      name: 'RSA-OAEP',
+      hash: { name: 'SHA-256' }
+    },
+    false, // not extractable
+    ['encrypt'] // can only be used for encryption
+  );
+}
+
+async function encryptEmail(email, publicKey) {
+  // Convert email string to ArrayBuffer
+  const encoder = new TextEncoder();
+  const data = encoder.encode(email);
+  
+  // Encrypt the data
+  const encryptedData = await window.crypto.subtle.encrypt(
+    { name: 'RSA-OAEP' },
+    publicKey,
+    data
+  );
+  
+  // Convert encrypted ArrayBuffer to base64 string
+  return arrayBufferToBase64(encryptedData);
 }
 ```
 
 This script is loaded only on pages with the comment form, and it intercepts the form submission to encrypt just the email address before sending it to the server. The name and comment fields remain untouched and are submitted as plain text.
+
+By using the Web Crypto API instead of an external library, I've eliminated the need for additional dependencies and improved security by leveraging the browser's native cryptographic capabilities.
 
 ## GitLab Merge Request Format
 
@@ -250,6 +291,8 @@ def send_notification_email(email, name, message):
 By implementing client-side email encryption, I've solved the privacy issue with No-Comment where email addresses were visible in plain text in GitLab merge requests. This ensures that email addresses are never stored in plain text in the GitLab repository, while still allowing me to send notifications to commenters when their comments are approved.
 
 The hybrid approach offers a good balance between security and functionality, and it was relatively easy to implement without changing the core No-Comment system. By encrypting only the email field and leaving the name and comment in plain text, I maintain the readability of comments while protecting the most sensitive information.
+
+Using the browser's native Web Crypto API instead of external libraries provides better security, eliminates dependency issues, and leverages the optimized cryptographic implementations built into modern browsers.
 
 The use of asymmetric encryption with a 4096-bit RSA key provides strong security, and storing the private key in AWS Parameter Store ensures that it's properly protected.
 

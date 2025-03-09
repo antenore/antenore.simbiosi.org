@@ -1,21 +1,13 @@
 /**
  * Email encryption for comment form
- * Uses forge for RSA encryption of email addresses
+ * Uses native Web Crypto API for RSA encryption of email addresses
  */
 
-// Load forge from CDN
 document.addEventListener('DOMContentLoaded', function() {
-  // Create script element for forge
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js';
-  script.integrity = 'sha256-MZBH/+oaYu4R0Ib7qmQZtCZ8wr/OjXZldKyBvFNq/Uo=';
-  script.crossOrigin = 'anonymous';
-  script.onload = setupEncryption;
-  document.head.appendChild(script);
+  setupEncryption();
 });
 
-// Setup encryption once forge is loaded
-function setupEncryption() {
+async function setupEncryption() {
   const form = document.getElementById('comment-form');
   if (!form) {
     console.error('Comment form not found');
@@ -24,7 +16,7 @@ function setupEncryption() {
 
   console.log('Email encryption initialized');
 
-  // RSA public key - only public key is exposed
+  // RSA public key in PEM format
   const publicKeyPem = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
 1u3W8A2J5S66Drcp39e9gfCeAfIkaiNzxTc+AOR/4nN4n7cwO1Q5Ma2q3GcOXkdY
@@ -40,56 +32,121 @@ q88SPCndKcYpZd4/WOhgWtRG+d2IjixcvrgZlzCIUd8zcUj7zWJN6cmY5T9NVdCC
 vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
 -----END PUBLIC KEY-----`;
 
-  // Replace the form's submit event with our own handler
-  form.addEventListener('submit', function(event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    console.log('Form submission intercepted');
+  try {
+    // Convert PEM to a format usable by Web Crypto API
+    const publicKey = await importPublicKey(publicKeyPem);
     
-    // Get the email field
-    const emailField = form.querySelector('input[name="fields[email]"]');
-    if (!emailField) {
-      console.error('Email field not found');
-      form.submit();
-      return;
-    }
-
-    if (!emailField.value) {
-      console.log('Email field is empty, submitting form without encryption');
-      form.submit();
-      return;
-    }
-
-    try {
-      console.log('Attempting to encrypt email: ' + emailField.value.substring(0, 3) + '...');
+    // Replace the form's submit event with our own handler
+    form.addEventListener('submit', async function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+      console.log('Form submission intercepted');
       
-      // Parse the public key
-      const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
-      
-      // Encrypt the email
-      const encrypted = publicKey.encrypt(emailField.value, 'RSA-OAEP', {
-        md: forge.md.sha256.create(),
-        mgf1: {
-          md: forge.md.sha1.create()
-        }
-      });
-      
-      // Convert to base64 for transmission
-      const encryptedBase64 = forge.util.encode64(encrypted);
-      
-      // Replace the email value with the encrypted version
-      emailField.value = encryptedBase64;
-      console.log('Email encrypted successfully');
-      
-      // Now submit the form with the encrypted email
-      setTimeout(() => {
-        console.log('Submitting form with encrypted email');
+      // Get the email field
+      const emailField = form.querySelector('input[name="fields[email]"]');
+      if (!emailField) {
+        console.error('Email field not found');
         form.submit();
-      }, 100);
-    } catch (error) {
-      console.error('Error during encryption:', error);
-      // If encryption fails, still submit the form
-      form.submit();
-    }
-  });
+        return;
+      }
+
+      if (!emailField.value) {
+        console.log('Email field is empty, submitting form without encryption');
+        form.submit();
+        return;
+      }
+
+      try {
+        console.log('Attempting to encrypt email: ' + emailField.value.substring(0, 3) + '...');
+        
+        // Encrypt the email using Web Crypto API
+        const encryptedBase64 = await encryptEmail(emailField.value, publicKey);
+        
+        // Replace the email value with the encrypted version
+        emailField.value = encryptedBase64;
+        console.log('Email encrypted successfully');
+        
+        // Now submit the form with the encrypted email
+        setTimeout(() => {
+          console.log('Submitting form with encrypted email');
+          form.submit();
+        }, 100);
+      } catch (error) {
+        console.error('Error during encryption:', error);
+        // If encryption fails, still submit the form
+        form.submit();
+      }
+    });
+  } catch (error) {
+    console.error('Error setting up encryption:', error);
+  }
+}
+
+/**
+ * Convert PEM format public key to a CryptoKey object
+ */
+async function importPublicKey(pem) {
+  // Remove header, footer, and newlines to get the base64 encoded key
+  const pemContents = pem.replace(/(-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----)/g, '')
+                         .replace(/\s/g, '');
+  
+  // Convert base64 to ArrayBuffer
+  const binaryDer = base64ToArrayBuffer(pemContents);
+  
+  // Import the key
+  return window.crypto.subtle.importKey(
+    'spki',
+    binaryDer,
+    {
+      name: 'RSA-OAEP',
+      hash: { name: 'SHA-256' }
+    },
+    false, // not extractable
+    ['encrypt'] // can only be used for encryption
+  );
+}
+
+/**
+ * Convert base64 string to ArrayBuffer
+ */
+function base64ToArrayBuffer(base64) {
+  const binaryString = window.atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+/**
+ * Encrypt email using RSA-OAEP
+ */
+async function encryptEmail(email, publicKey) {
+  // Convert email string to ArrayBuffer
+  const encoder = new TextEncoder();
+  const data = encoder.encode(email);
+  
+  // Encrypt the data
+  const encryptedData = await window.crypto.subtle.encrypt(
+    {
+      name: 'RSA-OAEP'
+    },
+    publicKey,
+    data
+  );
+  
+  // Convert encrypted ArrayBuffer to base64 string
+  return arrayBufferToBase64(encryptedData);
+}
+
+/**
+ * Convert ArrayBuffer to base64 string
+ */
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
 }

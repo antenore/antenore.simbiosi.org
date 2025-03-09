@@ -10,8 +10,9 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
   gem 'jemoji'
   gem 'jekyll-spaceship'
+  gem 'rouge'
 end
 
-# Per testing locale su Windows
+# For local testing on Windows
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'tzinfo-data' if Gem.win_platform?
