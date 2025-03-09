@@ -17,9 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // Setup encryption once forge is loaded
 function setupEncryption() {
   const form = document.getElementById('comment-form');
-  if (!form) return;
+  if (!form) {
+    console.error('Comment form not found');
+    return;
+  }
 
-  // Your RSA public key - replace this with your actual 4096-bit public key
+  console.log('Email encryption initialized');
+
+  // RSA public key - only public key is exposed
   const publicKeyPem = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
 1u3W8A2J5S66Drcp39e9gfCeAfIkaiNzxTc+AOR/4nN4n7cwO1Q5Ma2q3GcOXkdY
@@ -35,22 +40,33 @@ q88SPCndKcYpZd4/WOhgWtRG+d2IjixcvrgZlzCIUd8zcUj7zWJN6cmY5T9NVdCC
 vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
 -----END PUBLIC KEY-----`;
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  // Replace the form's submit event with our own handler
+  form.addEventListener('submit', function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+    console.log('Form submission intercepted');
     
     // Get the email field
     const emailField = form.querySelector('input[name="fields[email]"]');
-    if (!emailField || !emailField.value) {
+    if (!emailField) {
+      console.error('Email field not found');
+      form.submit();
+      return;
+    }
+
+    if (!emailField.value) {
+      console.log('Email field is empty, submitting form without encryption');
       form.submit();
       return;
     }
 
     try {
+      console.log('Attempting to encrypt email: ' + emailField.value.substring(0, 3) + '...');
+      
       // Parse the public key
       const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
       
       // Encrypt the email
-      // For RSA-OAEP which is more secure than PKCS#1 v1.5
       const encrypted = publicKey.encrypt(emailField.value, 'RSA-OAEP', {
         md: forge.md.sha256.create(),
         mgf1: {
@@ -64,11 +80,16 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
       // Replace the email value with the encrypted version
       emailField.value = encryptedBase64;
       console.log('Email encrypted successfully');
+      
+      // Now submit the form with the encrypted email
+      setTimeout(() => {
+        console.log('Submitting form with encrypted email');
+        form.submit();
+      }, 100);
     } catch (error) {
       console.error('Error during encryption:', error);
+      // If encryption fails, still submit the form
+      form.submit();
     }
-    
-    // Submit the form with the encrypted email
-    form.submit();
   });
 }
