@@ -92,9 +92,12 @@ layout: page
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                let isValid = true;
+                
                 const honeypot = document.querySelector('.checkthis input[name="website"]');
                 if (honeypot && honeypot.value) {
                     console.log('Honeypot triggered');
+                    isValid = false;
                     return false;
                 }
                 
@@ -104,6 +107,7 @@ layout: page
                     const userAnswer = parseInt(mathAnswer.value, 10);
                     if (isNaN(userAnswer) || userAnswer !== expectedValue) {
                         alert('Please solve the math problem correctly.');
+                        isValid = false;
                         return false;
                     }
                 }
@@ -116,11 +120,14 @@ layout: page
                     
                     if (timeDiff < 3) {
                         console.log('Time check failed');
+                        isValid = false;
                         return false;
                     }
                 }
                 
-                form.submit();
+                if (isValid) {
+                    form.submit();
+                }
             });
         }
     });
