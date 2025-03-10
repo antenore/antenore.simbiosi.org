@@ -52,11 +52,11 @@ layout: page
         <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}?from={{ page.url | url_encode }}">
         <input name="options[slug]" type="hidden" value="{{ page.slug }}">
         
-        <div style="display:none;" class="spam-check">
+        <div style="display:none;" class="checkthis">
             <input name="website" type="text" autocomplete="off" tabindex="-1">
         </div>
         
-        <div style="display:none;" class="spam-check">
+        <div style="display:none;" class="checkthis">
             <input type="hidden" id="form-timestamp" value="{{ site.time | date: '%s' }}">
             {% assign num1 = site.time | date: '%s' | modulo: 10 | plus: 1 %}
             {% assign num2 = site.time | date: '%M' | modulo: 10 | plus: 1 %}
