@@ -51,16 +51,76 @@ layout: page
         <br />
         <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}?from={{ page.url | url_encode }}">
         <input name="options[slug]" type="hidden" value="{{ page.slug }}">
-        <input name="fields[name]" type="text" autocomplete="off" placeholder="Name">
+        
+        <div style="display:none;">
+            <input name="fields[website]" type="text" autocomplete="off" tabindex="-1">
+        </div>
+        
+        {% assign timestamp = site.time | date: '%s' %}
+        <input type="hidden" name="options[timestamp]" value="{{ timestamp }}">
+        
+        {% assign num1 = timestamp | modulo: 10 | plus: 1 %}
+        {% assign num2 = timestamp | date: '%M' | modulo: 10 | plus: 1 %}
+        {% assign sum = num1 | plus: num2 %}
+        <div class="challenge">
+            <label for="math_answer">Verify you're human: {{ num1 }} + {{ num2 }} = </label>
+            <input type="number" name="options[math_answer]" id="math_answer" required>
+            <input type="hidden" name="options[math_expected]" value="{{ sum }}">
+        </div>
+        
+        <input name="fields[name]" type="text" autocomplete="off" placeholder="Name" required>
         <br/>
-        <input name="fields[email]" type="email" autocomplete="off" placeholder="Email">
+        <input name="fields[email]" type="email" autocomplete="off" placeholder="Email" required>
         <br/>
-        <textarea rows="40" cols="80" name="fields[message]" autocomplete="off" placeholder="Message"></textarea>
+        <textarea rows="40" cols="80" name="fields[message]" autocomplete="off" placeholder="Message" required></textarea>
         <br/>
         <button type="submit">Post</button>
     </form>
+    
     <!-- Load email encryption script -->
     <script src="{{ site.baseurl }}/assets/js/email-encryption.js" defer></script>
+    
+    <!-- Add anti-spam validation script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('comment-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Check if honeypot field is filled (bots often fill all fields)
+                const honeypot = form.querySelector('input[name="fields[website]"]');
+                if (honeypot && honeypot.value) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Check if the math challenge is correct
+                const mathAnswer = form.querySelector('input[name="options[math_answer]"]');
+                const mathExpected = form.querySelector('input[name="options[math_expected]"]');
+                
+                if (mathAnswer && mathExpected && 
+                    parseInt(mathAnswer.value, 10) !== parseInt(mathExpected.value, 10)) {
+                    e.preventDefault();
+                    alert('Please solve the math problem correctly.');
+                    return false;
+                }
+                
+                // Check if the form was filled too quickly (likely a bot)
+                const timestamp = form.querySelector('input[name="options[timestamp]"]');
+                if (timestamp) {
+                    const submissionTime = Math.floor(Date.now() / 1000);
+                    const formLoadTime = parseInt(timestamp.value, 10);
+                    const timeDiff = submissionTime - formLoadTime;
+                    
+                    // If form was submitted in less than 3 seconds, likely a bot
+                    if (timeDiff < 3) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+            });
+        }
+    });
+    </script>
 {% endif %}
 {% if site.data.comments[page.slug] %}
   <h2>Comments</h2>
