@@ -85,50 +85,169 @@ layout: page
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('comment-form');
-        if (form) {
-            const mathExpected = document.getElementById('math-expected');
-            const expectedValue = mathExpected ? parseInt(mathExpected.value, 10) : null;
+        if (!form) return;
+        
+        // Store the expected math answer when the page loads
+        const mathExpected = document.getElementById('math-expected');
+        const expectedValue = mathExpected ? parseInt(mathExpected.value, 10) : null;
+        
+        // Get the RSA public key from the email-encryption.js script
+        const publicKeyPem = `-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
+1u3W8A2J5S66Drcp39e9gfCeAfIkaiNzxTc+AOR/4nN4n7cwO1Q5Ma2q3GcOXkdY
+BkR7Rn0MYia+FUrDch84CHFjehURYyk0ho+YqLH8M3yEBLVZ38XngrgA8ZaOi7nT
+pLpvncDNOlMnmB8EkdtCybY+FqRf1+tpsIqQPzJqYNOC3HXDI//MSBu4mCEQIFad
+QKMCDzNFv3DmKBROB5b5Na8hvq+CSztFexBvHwVbnLV4QOhDrLYRj7eKMDecEajY
+La+AqwmY8Zkwd6UbKD+8rqHVa9EPJZpd3u8KvjemnyoJoYo3E0CzscMP5vOK2B3N
+n9a1ejMFWxSmGw12Qsit5Nf6HHBAJ3CctSOMi6+gnf0jqF01altfFnmmb/BIeZa+
+TDhw7lp/P4MKH91BVESgozd6GBFoTf+YjqdFbchYrBZvUk6fiaGKyKcTINKdXJpF
+IqcfJV+pky/0HBYHaK1kdrucU5yhFmcRXLkOHs3gtcybMi0eAKZtICQ86Dc50aVH
+SalJ+DdWHnqs7xb/9fWZLaHWdUhr+8F/HHdH2Ifv7ThGh6mgrxDoOJYh045kwyxm
+q88SPCndKcYpZd4/WOhgWtRG+d2IjixcvrgZlzCIUd8zcUj7zWJN6cmY5T9NVdCC
+vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
+-----END PUBLIC KEY-----`;
+        
+        // Import the RSA public key
+        let publicKey = null;
+        importPublicKey(publicKeyPem).then(key => {
+            publicKey = key;
+            console.log('RSA public key imported successfully');
+        }).catch(error => {
+            console.error('Error importing RSA public key:', error);
+        });
+        
+        // Replace the form's submit event with our own handler
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                let isValid = true;
-                
-                const honeypot = document.querySelector('.checkthis input[name="website"]');
-                if (honeypot && honeypot.value) {
-                    console.log('Honeypot triggered');
+            // Run anti-spam checks
+            let isValid = true;
+            
+            // Check honeypot field
+            const honeypot = document.querySelector('.checkthis input[name="website"]');
+            if (honeypot && honeypot.value) {
+                console.log('Honeypot triggered');
+                isValid = false;
+                return false;
+            }
+            
+            // Check math challenge
+            const mathAnswer = document.getElementById('math-answer');
+            if (mathAnswer && expectedValue !== null) {
+                const userAnswer = parseInt(mathAnswer.value, 10);
+                if (isNaN(userAnswer) || userAnswer !== expectedValue) {
+                    alert('Please solve the math problem correctly.');
                     isValid = false;
                     return false;
                 }
+            }
+            
+            // Check timing
+            const timestamp = document.getElementById('form-timestamp');
+            if (timestamp) {
+                const submissionTime = Math.floor(Date.now() / 1000);
+                const formLoadTime = parseInt(timestamp.value, 10);
+                const timeDiff = submissionTime - formLoadTime;
                 
-                const mathAnswer = document.getElementById('math-answer');
-                
-                if (mathAnswer && expectedValue !== null) {
-                    const userAnswer = parseInt(mathAnswer.value, 10);
-                    if (isNaN(userAnswer) || userAnswer !== expectedValue) {
-                        alert('Please solve the math problem correctly.');
-                        isValid = false;
-                        return false;
-                    }
+                if (timeDiff < 3) {
+                    console.log('Time check failed');
+                    isValid = false;
+                    return false;
                 }
-                
-                const timestamp = document.getElementById('form-timestamp');
-                if (timestamp) {
-                    const submissionTime = Math.floor(Date.now() / 1000);
-                    const formLoadTime = parseInt(timestamp.value, 10);
-                    const timeDiff = submissionTime - formLoadTime;
+            }
+            
+            // If all anti-spam checks pass, proceed with email encryption
+            if (isValid) {
+                try {
+                    // Get the email field
+                    const emailField = form.querySelector('input[name="fields[email]"]');
+                    if (emailField && emailField.value && publicKey) {
+                        console.log('Encrypting email...');
+                        // Encrypt the email
+                        const encryptedBase64 = await encryptEmail(emailField.value, publicKey);
+                        // Replace the email value with the encrypted version
+                        emailField.value = encryptedBase64;
+                        console.log('Email encrypted successfully');
+                    }
                     
-                    if (timeDiff < 3) {
-                        console.log('Time check failed');
-                        isValid = false;
-                        return false;
-                    }
-                }
-                
-                if (isValid) {
+                    // Submit the form
+                    console.log('All checks passed, submitting form');
+                    form.submit();
+                } catch (error) {
+                    console.error('Error during form processing:', error);
+                    // If there's an error, still submit the form
                     form.submit();
                 }
-            });
+            }
+        });
+        
+        /**
+         * Convert PEM format public key to a CryptoKey object
+         */
+        async function importPublicKey(pem) {
+            // Remove header, footer, and newlines to get the base64 encoded key
+            const pemContents = pem.replace(/(-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----)/g, '')
+                                  .replace(/\s/g, '');
+            
+            // Convert base64 to ArrayBuffer
+            const binaryDer = base64ToArrayBuffer(pemContents);
+            
+            // Import the key
+            return window.crypto.subtle.importKey(
+                'spki',
+                binaryDer,
+                {
+                    name: 'RSA-OAEP',
+                    hash: { name: 'SHA-256' }
+                },
+                false, // not extractable
+                ['encrypt'] // can only be used for encryption
+            );
+        }
+
+        /**
+         * Convert base64 string to ArrayBuffer
+         */
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        /**
+         * Encrypt email using RSA-OAEP
+         */
+        async function encryptEmail(email, publicKey) {
+            // Convert email string to ArrayBuffer
+            const encoder = new TextEncoder();
+            const data = encoder.encode(email);
+            
+            // Encrypt the data
+            const encryptedData = await window.crypto.subtle.encrypt(
+                {
+                    name: 'RSA-OAEP'
+                },
+                publicKey,
+                data
+            );
+            
+            // Convert encrypted ArrayBuffer to base64 string
+            return arrayBufferToBase64(encryptedData);
+        }
+
+        /**
+         * Convert ArrayBuffer to base64 string
+         */
+        function arrayBufferToBase64(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
         }
     });
     </script>
