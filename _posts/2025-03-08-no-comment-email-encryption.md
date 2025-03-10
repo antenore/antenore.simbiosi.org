@@ -191,44 +191,76 @@ The email field contains the base64-encoded RSA-encrypted email address, which c
 
 On the server side, I implemented an AWS Lambda function that's triggered by a GitLab webhook whenever a merge request is merged. This function decrypts the email address and sends a notification to the commenter.
 
-Here's the core of the Lambda function:
+I initially wrote the function in Python, but later migrated to JavaScript for better compatibility with Node.js runtime in AWS Lambda. Here's the core of the JavaScript Lambda function:
 
-```python
-def decrypt_email(encrypted_email):
-    """Decrypt the email using RSA private key"""
-    try:
-        # Get the RSA private key from AWS Parameter Store
-        ssm = boto3.client('ssm')
-        response = ssm.get_parameter(
-            Name='/simbiosi.org/gitlab-webhook/rsa-private-key',
-            WithDecryption=True
-        )
-        private_key_pem = response['Parameter']['Value']
-        
-        # Load the private key
-        private_key = load_pem_private_key(
-            private_key_pem.encode('utf-8'),
-            password=None,
-            backend=default_backend()
-        )
-        
-        # Base64 decode the encrypted email
-        encrypted_data = base64.b64decode(encrypted_email)
-        
-        # Decrypt the email using OAEP padding
-        decrypted_data = private_key.decrypt(
-            encrypted_data,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                algorithm=hashes.SHA256(),
-                label=None
-            )
-        )
-        
-        return decrypted_data.decode('utf-8')
-    except Exception as e:
-        print(f"Error decrypting email: {str(e)}")
-        return None
+```javascript
+async function decryptEmail(encryptedEmail) {
+  try {
+    console.log('Starting email decryption process');
+    
+    if (!encryptedEmail) {
+      console.error('Error: encryptedEmail is null or undefined');
+      return null;
+    }
+    
+    // Get the RSA private key from AWS Parameter Store
+    console.log('Retrieving private key from Parameter Store...');
+    const ssmClient = new SSMClient();
+    const getParameterCommand = new GetParameterCommand({
+      Name: '/simbiosi.org/gitlab-webhook/rsa-private-key',
+      WithDecryption: true
+    });
+    
+    const response = await ssmClient.send(getParameterCommand);
+    console.log('Private key retrieved successfully');
+    const privateKeyPem = response.Parameter.Value;
+    
+    // Base64 decode the encrypted email
+    console.log('Decoding base64 encrypted email...');
+    let encryptedData;
+    try {
+      encryptedData = Buffer.from(encryptedEmail, 'base64');
+    } catch (decodeError) {
+      console.error(`Error decoding base64: ${decodeError.message}`);
+      throw decodeError;
+    }
+    
+    // Decrypt the email using Node.js crypto module
+    console.log('Attempting to decrypt the email with private key...');
+    let decryptedData;
+    try {
+      decryptedData = crypto.privateDecrypt(
+        {
+          key: privateKeyPem,
+          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          oaepHash: 'sha256'
+        },
+        encryptedData
+      );
+    } catch (decryptError) {
+      // Try alternative padding as fallback
+      console.log('Trying alternative padding (PKCS1) as fallback...');
+      try {
+        decryptedData = crypto.privateDecrypt(
+          {
+            key: privateKeyPem,
+            padding: crypto.constants.RSA_PKCS1_PADDING
+          },
+          encryptedData
+        );
+      } catch (fallbackError) {
+        throw decryptError; // Throw the original error
+      }
+    }
+    
+    // Return the decrypted email address as a string
+    const result = decryptedData.toString('utf8');
+    return result;
+  } catch (error) {
+    console.error(`Error in decryptEmail function: ${error.message}`);
+    return null;
+  }
+}
 ```
 
 The Lambda function is triggered by a GitLab webhook when a merge request is merged, extracts the encrypted email from the JSON payload, decrypts it, and then uses the decrypted email to send a notification to the commenter.
@@ -248,42 +280,50 @@ This ensures that even if someone gains access to the GitLab repository or the L
 
 Once the email is decrypted, I use AWS SES to send notifications to commenters when their comments are approved and merged:
 
-```python
-def send_notification_email(email, name, message):
-    """Send a notification email using Amazon SES"""
-    try:
-        ses = boto3.client('ses', region_name='us-east-1')
-        
-        subject = "Your comment has been approved and merged"
-        body_text = f"""
-        Hello {name},
-        
-        I wanted to let you know that I've reviewed and approved your comment.
-        It has been successfully merged into the main branch.
-        
-        Your original message: "{message}"
-        
-        Thank you for your contribution to this project!
-        
-        Best regards,
-        Antenore
-        """
-        
-        response = ses.send_email(
-            Source="antenore@simbiosi.org",
-            Destination={
-                'ToAddresses': [email]
-            },
-            Message={
-                'Subject': {'Data': subject},
-                'Body': {'Text': {'Data': body_text}}
-            }
-        )
-        
-        return True
-    except Exception as e:
-        print(f"Error sending email: {str(e)}")
-        raise e
+```javascript
+async function sendNotificationEmail(email, name, message) {
+  try {
+    console.log(`Sending notification email to: ${email}`);
+    const sesClient = new SESClient({ region: 'us-east-1' });
+    
+    // Customize your email content - in first person, signed by Antenore
+    const subject = "Your comment has been approved and merged";
+    const bodyText = `
+    Hello ${name},
+    
+    I wanted to let you know that I've reviewed and approved your comment.
+    It has been successfully merged into the main branch.
+    
+    Your original message: "${message}"
+    
+    Thank you for your contribution to https://antenore.simbiosi.org !
+    
+    Best regards,
+    Antenore
+    `;
+    
+    console.log('Preparing to send email via SES...');
+    const sendEmailCommand = new SendEmailCommand({
+      Source: "antenore@simbiosi.org",
+      Destination: {
+        ToAddresses: [email]
+      },
+      Message: {
+        Subject: { Data: subject },
+        Body: { Text: { Data: bodyText } }
+      }
+    });
+    
+    const response = await sesClient.send(sendEmailCommand);
+    
+    console.log(`Email sent! Message ID: ${response.MessageId}`);
+    return true;
+  } catch (error) {
+    console.error(`Error sending email: ${error.message}`);
+    console.error(`Error stack: ${error.stack}`);
+    throw error;
+  }
+}
 ```
 
 ## Conclusion
