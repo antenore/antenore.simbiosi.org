@@ -86,38 +86,41 @@ layout: page
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('comment-form');
         if (form) {
+            const mathExpected = document.getElementById('math-expected');
+            const expectedValue = mathExpected ? parseInt(mathExpected.value, 10) : null;
+            
             form.addEventListener('submit', function(e) {
-                // Check if honeypot field is filled
-                const honeypot = document.querySelector('.spam-check input[name="website"]');
+                e.preventDefault();
+                
+                const honeypot = document.querySelector('.checkthis input[name="website"]');
                 if (honeypot && honeypot.value) {
-                    e.preventDefault();
+                    console.log('Honeypot triggered');
                     return false;
                 }
                 
-                // Check if the math challenge is correct
                 const mathAnswer = document.getElementById('math-answer');
-                const mathExpected = document.getElementById('math-expected');
                 
-                if (mathAnswer && mathExpected && 
-                    parseInt(mathAnswer.value, 10) !== parseInt(mathExpected.value, 10)) {
-                    e.preventDefault();
-                    alert('Please solve the math problem correctly.');
-                    return false;
+                if (mathAnswer && expectedValue !== null) {
+                    const userAnswer = parseInt(mathAnswer.value, 10);
+                    if (isNaN(userAnswer) || userAnswer !== expectedValue) {
+                        alert('Please solve the math problem correctly.');
+                        return false;
+                    }
                 }
                 
-                // Check if the form was filled too quickly (likely a bot)
                 const timestamp = document.getElementById('form-timestamp');
                 if (timestamp) {
                     const submissionTime = Math.floor(Date.now() / 1000);
                     const formLoadTime = parseInt(timestamp.value, 10);
                     const timeDiff = submissionTime - formLoadTime;
                     
-                    // If form was submitted in less than 3 seconds, likely a bot
                     if (timeDiff < 3) {
-                        e.preventDefault();
+                        console.log('Time check failed');
                         return false;
                     }
                 }
+                
+                form.submit();
             });
         }
     });
