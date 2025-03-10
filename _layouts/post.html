@@ -52,20 +52,21 @@ layout: page
         <input name="options[redirect]" type="hidden" value="{{ site.no_comment_redirect }}?from={{ page.url | url_encode }}">
         <input name="options[slug]" type="hidden" value="{{ page.slug }}">
         
-        <div style="display:none;">
-            <input name="fields[website]" type="text" autocomplete="off" tabindex="-1">
+        <div style="display:none;" class="spam-check">
+            <input name="website" type="text" autocomplete="off" tabindex="-1">
         </div>
         
-        {% assign timestamp = site.time | date: '%s' %}
-        <input type="hidden" name="options[timestamp]" value="{{ timestamp }}">
+        <div style="display:none;" class="spam-check">
+            <input type="hidden" id="form-timestamp" value="{{ site.time | date: '%s' }}">
+            {% assign num1 = site.time | date: '%s' | modulo: 10 | plus: 1 %}
+            {% assign num2 = site.time | date: '%M' | modulo: 10 | plus: 1 %}
+            {% assign sum = num1 | plus: num2 %}
+            <input type="hidden" id="math-expected" value="{{ sum }}">
+        </div>
         
-        {% assign num1 = timestamp | modulo: 10 | plus: 1 %}
-        {% assign num2 = timestamp | date: '%M' | modulo: 10 | plus: 1 %}
-        {% assign sum = num1 | plus: num2 %}
         <div class="challenge">
-            <label for="math_answer">Verify you're human: {{ num1 }} + {{ num2 }} = </label>
-            <input type="number" name="options[math_answer]" id="math_answer" required>
-            <input type="hidden" name="options[math_expected]" value="{{ sum }}">
+            <label for="math-answer">Verify you're human: {{ num1 }} + {{ num2 }} = </label>
+            <input type="number" id="math-answer" required>
         </div>
         
         <input name="fields[name]" type="text" autocomplete="off" placeholder="Name" required>
@@ -80,22 +81,22 @@ layout: page
     <!-- Load email encryption script -->
     <script src="{{ site.baseurl }}/assets/js/email-encryption.js" defer></script>
     
-    <!-- Add anti-spam validation script -->
+    <!-- Add anti-spam validation script that doesn't modify the form submission -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('comment-form');
         if (form) {
             form.addEventListener('submit', function(e) {
-                // Check if honeypot field is filled (bots often fill all fields)
-                const honeypot = form.querySelector('input[name="fields[website]"]');
+                // Check if honeypot field is filled
+                const honeypot = document.querySelector('.spam-check input[name="website"]');
                 if (honeypot && honeypot.value) {
                     e.preventDefault();
                     return false;
                 }
                 
                 // Check if the math challenge is correct
-                const mathAnswer = form.querySelector('input[name="options[math_answer]"]');
-                const mathExpected = form.querySelector('input[name="options[math_expected]"]');
+                const mathAnswer = document.getElementById('math-answer');
+                const mathExpected = document.getElementById('math-expected');
                 
                 if (mathAnswer && mathExpected && 
                     parseInt(mathAnswer.value, 10) !== parseInt(mathExpected.value, 10)) {
@@ -105,7 +106,7 @@ layout: page
                 }
                 
                 // Check if the form was filled too quickly (likely a bot)
-                const timestamp = form.querySelector('input[name="options[timestamp]"]');
+                const timestamp = document.getElementById('form-timestamp');
                 if (timestamp) {
                     const submissionTime = Math.floor(Date.now() / 1000);
                     const formLoadTime = parseInt(timestamp.value, 10);
