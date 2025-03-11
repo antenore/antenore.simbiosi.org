@@ -1,0 +1,37 @@
+<!-- Subscribe section for blog posts -->
+<div class="subscribe-container">
+    <h4>Stay updated</h4>
+    <p>Subscribe to get notified about new content:</p>
+    
+    <div class="subscribe-options">
+        <!-- RSS Feed -->
+        <a href="{{ site.url }}/feed.xml" class="subscribe-option rss" target="_blank" rel="noopener" aria-label="Subscribe via RSS">
+            <i class="fa-solid fa-rss"></i>
+            <span>RSS Feed</span>
+        </a>
+        
+        {% if site.twitter %}
+        <!-- Twitter/X Follow -->
+        <a href="https://twitter.com/intent/follow?screen_name={{ site.twitter }}" class="subscribe-option twitter" target="_blank" rel="noopener" aria-label="Follow on X">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Follow on X</span>
+        </a>
+        {% endif %}
+        
+        {% if site.linkedin %}
+        <!-- LinkedIn Follow -->
+        <a href="https://www.linkedin.com/in/{{ site.linkedin }}" class="subscribe-option linkedin" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>Connect on LinkedIn</span>
+        </a>
+        {% endif %}
+        
+        {% if site.github %}
+        <!-- GitHub Follow -->
+        <a href="https://github.com/{{ site.github }}" class="subscribe-option github" target="_blank" rel="noopener" aria-label="Follow on GitHub">
+            <i class="fa-brands fa-github"></i>
+            <span>Follow on GitHub</span>
+        </a>
+        {% endif %}
+    </div>
+</div>

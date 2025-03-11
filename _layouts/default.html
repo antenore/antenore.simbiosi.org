@@ -11,19 +11,26 @@ layout: compress
     {% seo %}
 
     {% include favicon.html %}
+    {% include open-graph.html %}
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
     <!-- FontAwesome with optimized loading -->
     <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous"></script>
 
-    <!-- Inline critical CSS -->
-    <style>
-        {{ site.data.critical }}
-    </style>
+    {% if site.data.critical %}
+    <!-- Inline critical CSS as a separate stylesheet to avoid linting issues -->
+    <link rel="stylesheet" href="{{ "/assets/css/critical.css" | relative_url }}">
+    {% endif %}
 
     <!-- Main stylesheet with prefers-color-scheme support -->
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <!-- Social sharing styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/social-share.css" | relative_url }}">
+    <!-- Related posts styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/related-posts.css" | relative_url }}">
+    <!-- Subscribe section styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/subscribe.css" | relative_url }}">
 </head>
 <body>
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">

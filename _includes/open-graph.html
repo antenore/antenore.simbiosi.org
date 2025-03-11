@@ -1,0 +1,36 @@
+<!-- Open Graph meta tags for better social sharing -->
+<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+{% if page.image %}
+<meta property="og:image" content="{% if page.image contains 'http' %}{{ page.image }}{% else %}{{ site.url }}{{ page.image }}{% endif %}">
+{% elsif site.default_img %}
+<meta property="og:image" content="{{ site.url }}{{ site.default_img }}">
+{% endif %}
+
+<meta property="og:site_name" content="{{ site.title }}">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+{% if site.twitter %}
+<meta name="twitter:site" content="@{{ site.twitter }}">
+<meta name="twitter:creator" content="@{{ site.twitter }}">
+{% endif %}
+<meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+{% if page.image %}
+<meta name="twitter:image" content="{% if page.image contains 'http' %}{{ page.image }}{% else %}{{ site.url }}{{ page.image }}{% endif %}">
+{% elsif site.default_img %}
+<meta name="twitter:image" content="{{ site.url }}{{ site.default_img }}">
+{% endif %}
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta itemprop="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+{% if page.image %}
+<meta itemprop="image" content="{% if page.image contains 'http' %}{{ page.image }}{% else %}{{ site.url }}{{ page.image }}{% endif %}">
+{% elsif site.default_img %}
+<meta itemprop="image" content="{{ site.url }}{{ site.default_img }}">
+{% endif %}

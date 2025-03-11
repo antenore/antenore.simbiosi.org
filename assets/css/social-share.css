@@ -1,0 +1,96 @@
+/* Social Share Buttons Styling */
+.social-share {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.social-share h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.share-buttons li {
+    margin-bottom: 10px;
+}
+
+.share-buttons a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.share-buttons a:hover {
+    transform: translateY(-2px);
+}
+
+.share-buttons i {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+/* Platform-specific colors */
+.share-buttons li:nth-child(1) a { background-color: #1DA1F2; } /* Twitter/X */
+.share-buttons li:nth-child(1) a:hover { background-color: #0c85d0; }
+
+.share-buttons li:nth-child(2) a { background-color: #0077B5; } /* LinkedIn */
+.share-buttons li:nth-child(2) a:hover { background-color: #005582; }
+
+.share-buttons li:nth-child(3) a { background-color: #3b5998; } /* Facebook */
+.share-buttons li:nth-child(3) a:hover { background-color: #2d4373; }
+
+.share-buttons li:nth-child(4) a { background-color: #FF4500; } /* Reddit */
+.share-buttons li:nth-child(4) a:hover { background-color: #cc3700; }
+
+.share-buttons li:nth-child(5) a { background-color: #F0652F; } /* Hacker News */
+.share-buttons li:nth-child(5) a:hover { background-color: #e0541f; }
+
+.share-buttons li:nth-child(6) a { background-color: #777; } /* Email */
+.share-buttons li:nth-child(6) a:hover { background-color: #555; }
+
+.share-buttons li:nth-child(7) a { background-color: #555; } /* Copy Link */
+.share-buttons li:nth-child(7) a:hover { background-color: #333; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .share-buttons {
+        flex-direction: column;
+    }
+    
+    .share-buttons li {
+        width: 100%;
+    }
+    
+    .share-buttons a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .social-share {
+        border-color: #444;
+    }
+    
+    .social-share h4 {
+        color: #ccc;
+    }
+}

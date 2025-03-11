@@ -1,0 +1,106 @@
+<!-- Social sharing buttons for blog posts -->
+<div class="social-share">
+    <h4>Share this post</h4>
+    <ul class="share-buttons">
+        <!-- Twitter/X Share -->
+        <li>
+            <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&text={{ page.title | url_encode }}{% if site.twitter %}&via={{ site.twitter }}{% endif %}" 
+               target="_blank" 
+               rel="noopener" 
+               aria-label="Share on Twitter/X">
+                <i class="fa-brands fa-x-twitter"></i> Share on X
+            </a>
+        </li>
+        
+        <!-- LinkedIn Share -->
+        <li>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url }}&title={{ page.title | url_encode }}&summary={{ page.description | url_encode }}&source={{ site.title | url_encode }}" 
+               target="_blank" 
+               rel="noopener" 
+               aria-label="Share on LinkedIn">
+                <i class="fa-brands fa-linkedin"></i> Share on LinkedIn
+            </a>
+        </li>
+        
+        <!-- Facebook Share -->
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}&quote={{ page.title | url_encode }}" 
+               target="_blank" 
+               rel="noopener" 
+               aria-label="Share on Facebook">
+                <i class="fa-brands fa-facebook"></i> Share on Facebook
+            </a>
+        </li>
+        
+        <!-- Reddit Share -->
+        <li>
+            <a href="https://www.reddit.com/submit?url={{ site.url }}{{ page.url }}&title={{ page.title | url_encode }}" 
+               target="_blank" 
+               rel="noopener" 
+               aria-label="Share on Reddit">
+                <i class="fa-brands fa-reddit"></i> Share on Reddit
+            </a>
+        </li>
+        
+        <!-- HackerNews Share - good for technical content -->
+        <li>
+            <a href="https://news.ycombinator.com/submitlink?u={{ site.url }}{{ page.url }}&t={{ page.title | url_encode }}" 
+               target="_blank" 
+               rel="noopener" 
+               aria-label="Share on Hacker News">
+                <i class="fa-brands fa-hacker-news"></i> Share on Hacker News
+            </a>
+        </li>
+        
+        <!-- Email Share -->
+        <li>
+            <a href="mailto:?subject={{ page.title | url_encode }}&body=Check out this article: {{ site.url }}{{ page.url }}" 
+               rel="noopener" 
+               aria-label="Share via Email">
+                <i class="fa-regular fa-envelope"></i> Share via Email
+            </a>
+        </li>
+        
+        <!-- Copy Link -->
+        <li>
+            <a href="javascript:void(0);" 
+               onclick="copyToClipboard('{{ site.url }}{{ page.url }}')" 
+               aria-label="Copy Link">
+                <i class="fa-regular fa-copy"></i> Copy Link
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Script to copy URL to clipboard -->
+<script>
+function copyToClipboard(text) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('Link copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            const msg = successful ? 'Link copied to clipboard!' : 'Unable to copy';
+            alert(msg);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+        
+        document.body.removeChild(textArea);
+    }
+}
+</script>

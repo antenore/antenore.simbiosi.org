@@ -1,0 +1,108 @@
+/* Related Posts Styling */
+.related-posts {
+    margin: 3rem 0 2rem;
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.related-posts h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #444;
+}
+
+.related-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.related-posts-list li {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.related-posts-list li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.related-posts-list a {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 0.3rem;
+    transition: color 0.2s;
+}
+
+.related-posts-list a:hover {
+    color: #0366d6;
+}
+
+.related-posts-list small {
+    display: block;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.related-tags {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.related-tag {
+    display: inline-block;
+    background-color: #f1f8ff;
+    border: 1px solid #c8e1ff;
+    border-radius: 3px;
+    padding: 0.1rem 0.5rem;
+    margin: 0.2rem;
+    font-size: 0.8rem;
+    color: #0366d6;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .related-posts {
+        background-color: #2a2a2a;
+        border-color: #444;
+    }
+    
+    .related-posts h3 {
+        color: #ccc;
+    }
+    
+    .related-posts-list li {
+        border-color: #444;
+    }
+    
+    .related-posts-list a {
+        color: #ccc;
+    }
+    
+    .related-posts-list a:hover {
+        color: #58a6ff;
+    }
+    
+    .related-posts-list small {
+        color: #999;
+    }
+    
+    .related-tags {
+        color: #999;
+    }
+    
+    .related-tag {
+        background-color: #0d1117;
+        border-color: #30363d;
+        color: #58a6ff;
+    }
+}
