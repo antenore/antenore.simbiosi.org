@@ -32,25 +32,42 @@
         return null;
     }
 
+    // Function to show the cookie consent banner
+    function showCookieConsent() {
+        const cookieConsent = document.getElementById('cookie-consent');
+        if (cookieConsent) {
+            cookieConsent.style.display = 'block';
+        }
+    }
+
+    // Function to hide the cookie consent banner
+    function hideCookieConsent() {
+        const cookieConsent = document.getElementById('cookie-consent');
+        if (cookieConsent) {
+            cookieConsent.style.display = 'none';
+        }
+    }
+
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-        const cookieConsent = document.getElementById('cookie-consent');
-        
         // First check if consent was previously given
         if (readCookie('cookie-consent') === 'accepted') {
-            cookieConsent.style.display = 'none';
+            hideCookieConsent();
             enableAnalytics();
         } else {
             // If no consent yet, show the banner
-            cookieConsent.style.display = 'block';
+            showCookieConsent();
         }
 
         // Handle accept button click
-        document.getElementById('cookie-accept').addEventListener('click', function() {
-            createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
-            cookieConsent.style.display = 'none';
-            enableAnalytics();
-        });
+        const acceptButton = document.getElementById('cookie-accept');
+        if (acceptButton) {
+            acceptButton.addEventListener('click', function() {
+                createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
+                hideCookieConsent();
+                enableAnalytics();
+            });
+        }
     });
 
     // Function to enable Google Analytics
