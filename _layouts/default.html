@@ -37,7 +37,90 @@ layout: compress
     <link rel="stylesheet" href="{{ "/assets/css/cookie-consent.css" | relative_url }}">
 </head>
 <body>
-    {% include cookie-consent.html %}
+    <!-- Direct cookie consent implementation -->
+    <div id="cookie-consent" class="cookie-consent" style="display: block !important; position: fixed; bottom: 0; left: 0; width: 100%; background-color: #2c3e50; color: #ffffff; padding: 15px; z-index: 9999; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <p style="margin: 0; padding: 10px 0; flex: 1 1 60%;">This website uses cookies to ensure you get the best experience. By continuing to browse, you agree to our use of cookies.</p>
+            <div style="display: flex; gap: 10px; flex: 1 1 30%; justify-content: flex-end;">
+                <button id="cookie-accept" style="background-color: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">Accept</button>
+                <a href="/privacy" style="background-color: transparent; color: white; border: 1px solid white; padding: 8px 15px; border-radius: 4px; text-decoration: none; cursor: pointer;">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie handling functions
+        function createCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/; SameSite=Lax";
+            console.log('Cookie created:', name, value);
+        }
+
+        function readCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            console.log('Cookie not found:', name);
+            return null;
+        }
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            const cookieConsent = document.getElementById('cookie-consent');
+            console.log('Cookie consent element:', cookieConsent);
+            
+            // Handle accept button click
+            const acceptButton = document.getElementById('cookie-accept');
+            if (acceptButton) {
+                console.log('Accept button found, adding click listener');
+                acceptButton.addEventListener('click', function() {
+                    console.log('Accept button clicked');
+                    createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
+                    cookieConsent.style.display = 'none';
+                    enableAnalytics();
+                });
+            } else {
+                console.error('Accept button not found');
+            }
+        });
+
+        // Function to enable Google Analytics
+        function enableAnalytics() {
+            console.log('Enabling analytics');
+            // Only load analytics if the configuration exists
+            if ('{{ site.analytics-google }}' !== '') {
+                console.log('Analytics ID found:', '{{ site.analytics-google }}');
+                // Load Google Analytics
+                const gtagScript = document.createElement('script');
+                gtagScript.async = true;
+                gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
+                document.head.appendChild(gtagScript);
+
+                // Initialize Google Analytics
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', '{{ site.analytics-google }}');
+                console.log('Analytics script loaded');
+            } else {
+                console.log('No analytics ID configured');
+            }
+        }
+
+        // Debug info
+        console.log('Cookie consent script loaded');
+    </script>
+    <!-- End of direct cookie consent implementation -->
 
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
         {% if page.title == "Home" %}
