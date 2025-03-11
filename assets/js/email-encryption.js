@@ -16,7 +16,7 @@ async function setupEncryption() {
 
   console.log('Email encryption initialized');
 
-  // RSA public key in PEM format
+  /* RSA public key in PEM format */
   const publicKeyPem = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
 1u3W8A2J5S66Drcp39e9gfCeAfIkaiNzxTc+AOR/4nN4n7cwO1Q5Ma2q3GcOXkdY
@@ -33,16 +33,16 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
 -----END PUBLIC KEY-----`;
 
   try {
-    // Convert PEM to a format usable by Web Crypto API
+    /* Convert PEM to a format usable by Web Crypto API */
     const publicKey = await importPublicKey(publicKeyPem);
     
-    // Replace the form's submit event with our own handler
+    /* Replace the form's submit event with our own handler */
     form.addEventListener('submit', async function(event) {
-      // Prevent the default form submission
+      /* Prevent the default form submission */
       event.preventDefault();
       console.log('Form submission intercepted');
       
-      // Get the email field
+      /* Get the email field */
       const emailField = form.querySelector('input[name="fields[email]"]');
       if (!emailField) {
         console.error('Email field not found');
@@ -59,21 +59,21 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
       try {
         console.log('Attempting to encrypt email: ' + emailField.value.substring(0, 3) + '...');
         
-        // Encrypt the email using Web Crypto API
+        /* Encrypt the email using Web Crypto API */
         const encryptedBase64 = await encryptEmail(emailField.value, publicKey);
         
-        // Replace the email value with the encrypted version
+        /* Replace the email value with the encrypted version */
         emailField.value = encryptedBase64;
         console.log('Email encrypted successfully');
         
-        // Now submit the form with the encrypted email
+        /* Now submit the form with the encrypted email */
         setTimeout(() => {
           console.log('Submitting form with encrypted email');
           form.submit();
         }, 100);
       } catch (error) {
         console.error('Error during encryption:', error);
-        // If encryption fails, still submit the form
+        /* If encryption fails, still submit the form */
         form.submit();
       }
     });
@@ -86,14 +86,14 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
  * Convert PEM format public key to a CryptoKey object
  */
 async function importPublicKey(pem) {
-  // Remove header, footer, and newlines to get the base64 encoded key
+  /* Remove header, footer, and newlines to get the base64 encoded key */
   const pemContents = pem.replace(/(-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----)/g, '')
                          .replace(/\s/g, '');
   
-  // Convert base64 to ArrayBuffer
+  /* Convert base64 to ArrayBuffer */
   const binaryDer = base64ToArrayBuffer(pemContents);
   
-  // Import the key
+  /* Import the key */
   return window.crypto.subtle.importKey(
     'spki',
     binaryDer,
@@ -101,8 +101,8 @@ async function importPublicKey(pem) {
       name: 'RSA-OAEP',
       hash: { name: 'SHA-256' }
     },
-    false, // not extractable
-    ['encrypt'] // can only be used for encryption
+    false, /* not extractable */
+    ['encrypt'] /* can only be used for encryption */
   );
 }
 
@@ -122,11 +122,11 @@ function base64ToArrayBuffer(base64) {
  * Encrypt email using RSA-OAEP
  */
 async function encryptEmail(email, publicKey) {
-  // Convert email string to ArrayBuffer
+  /* Convert email string to ArrayBuffer */
   const encoder = new TextEncoder();
   const data = encoder.encode(email);
   
-  // Encrypt the data
+  /* Encrypt the data */
   const encryptedData = await window.crypto.subtle.encrypt(
     {
       name: 'RSA-OAEP'
@@ -135,7 +135,7 @@ async function encryptEmail(email, publicKey) {
     data
   );
   
-  // Convert encrypted ArrayBuffer to base64 string
+  /* Convert encrypted ArrayBuffer to base64 string */
   return arrayBufferToBase64(encryptedData);
 }
 

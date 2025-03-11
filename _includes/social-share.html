@@ -54,7 +54,7 @@
         
         <!-- Email Share -->
         <li>
-            <a href="mailto:?subject={{ page.title | url_encode }}&body=Check out this article: {{ site.url }}{{ page.url }}" 
+            <a href="mailto:?subject={{ page.title | url_encode }}&body=Check%20out%20this%20article:%20{{ site.url }}{{ page.url }}" 
                rel="noopener" 
                aria-label="Share via Email">
                 <i class="fa-regular fa-envelope"></i> Share via Email
@@ -84,7 +84,7 @@ function copyToClipboard(text) {
                 console.error('Failed to copy: ', err);
             });
     } else {
-        // Fallback for older browsers
+        /* Fallback for older browsers */
         const textArea = document.createElement('textarea');
         textArea.value = text;
         textArea.style.position = 'fixed';
