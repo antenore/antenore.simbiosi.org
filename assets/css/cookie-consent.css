@@ -1,6 +1,6 @@
 /* Cookie Consent Banner Styles */
 .cookie-consent {
-    display: none;
+    display: block; /* Changed from 'none' to 'block' to make it visible by default */
     position: fixed;
     bottom: 0;
     left: 0;

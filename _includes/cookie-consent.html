@@ -32,21 +32,20 @@
         return null;
     }
 
+    // Show the banner immediately
+    document.getElementById('cookie-consent').style.display = 'block';
+    
     // Check if consent was previously given
-    document.addEventListener('DOMContentLoaded', function() {
-        if (readCookie('cookie-consent') !== 'accepted') {
-            document.getElementById('cookie-consent').style.display = 'block';
-        } else {
-            // If consent was given, enable analytics
-            enableAnalytics();
-        }
+    if (readCookie('cookie-consent') === 'accepted') {
+        document.getElementById('cookie-consent').style.display = 'none';
+        enableAnalytics();
+    }
 
-        // Handle accept button click
-        document.getElementById('cookie-accept').addEventListener('click', function() {
-            createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
-            document.getElementById('cookie-consent').style.display = 'none';
-            enableAnalytics();
-        });
+    // Handle accept button click
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+        createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
+        document.getElementById('cookie-consent').style.display = 'none';
+        enableAnalytics();
     });
 
     // Function to enable Google Analytics
