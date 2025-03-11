@@ -5,8 +5,14 @@ layout: compress
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="author" content="{{ site.name }}">
+
+    {% if page.title %}
+        <title>{{ page.title }}</title>
+    {% else %}
+        <title>{{ site.name }}</title>
+    {% endif %}
 
     {% seo %}
 
@@ -14,6 +20,17 @@ layout: compress
     {% include open-graph.html %}
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
+
+    <!-- Google tag (gtag.js) for Google Analytics 4 -->
+    {% if site.analytics-google %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.analytics-google }}');
+    </script>
+    {% endif %}
 
     <!-- FontAwesome with optimized loading -->
     <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous"></script>

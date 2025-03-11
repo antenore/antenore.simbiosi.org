@@ -26,7 +26,7 @@ url: https://antenore.simbiosi.org
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
+analytics-google: 'G-BQW332C6TV'
 
 # To enable no-comment plugin
 
