@@ -18,7 +18,7 @@
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + value + expires + "; path=/";
+        document.cookie = name + "=" + value + expires + "; path=/; SameSite=Lax";
     }
 
     function readCookie(name) {
@@ -32,20 +32,25 @@
         return null;
     }
 
-    // Show the banner immediately
-    document.getElementById('cookie-consent').style.display = 'block';
-    
-    // Check if consent was previously given
-    if (readCookie('cookie-consent') === 'accepted') {
-        document.getElementById('cookie-consent').style.display = 'none';
-        enableAnalytics();
-    }
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const cookieConsent = document.getElementById('cookie-consent');
+        
+        // First check if consent was previously given
+        if (readCookie('cookie-consent') === 'accepted') {
+            cookieConsent.style.display = 'none';
+            enableAnalytics();
+        } else {
+            // If no consent yet, show the banner
+            cookieConsent.style.display = 'block';
+        }
 
-    // Handle accept button click
-    document.getElementById('cookie-accept').addEventListener('click', function() {
-        createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
-        document.getElementById('cookie-consent').style.display = 'none';
-        enableAnalytics();
+        // Handle accept button click
+        document.getElementById('cookie-accept').addEventListener('click', function() {
+            createCookie('cookie-consent', 'accepted', 365); // Cookie valid for 1 year
+            cookieConsent.style.display = 'none';
+            enableAnalytics();
+        });
     });
 
     // Function to enable Google Analytics
