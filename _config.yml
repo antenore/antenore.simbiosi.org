@@ -91,6 +91,9 @@ show-tags: true
 # related posts inside a post?
 related: true
 
+# enable related posts feature
+related_posts_enabled: true
+
 # Display links for next and previous posts for the specified categories
 post-advance-links: [blog]
 
@@ -99,6 +102,9 @@ show-author: true
 
 # do you want some animations?
 animation: true
+
+# default image for social sharing when no specific image is provided
+default_img: assets/images/Antenore.webp
 
 # add default values to specific pages or layouts
 defaults:
