@@ -96,11 +96,11 @@ layout: page
         const form = document.getElementById('comment-form');
         if (!form) return;
         
-        // Store the expected math answer when the page loads
+        /* Store the expected math answer when the page loads */
         const mathExpected = document.getElementById('math-expected');
         const expectedValue = mathExpected ? parseInt(mathExpected.value, 10) : null;
         
-        // Get the RSA public key from the email-encryption.js script
+        /* Get the RSA public key from the email-encryption.js script */
         const publicKeyPem = `-----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1HkoughjOBPXuA7k5F8V
 1u3W8A2J5S66Drcp39e9gfCeAfIkaiNzxTc+AOR/4nN4n7cwO1Q5Ma2q3GcOXkdY
@@ -116,7 +116,7 @@ q88SPCndKcYpZd4/WOhgWtRG+d2IjixcvrgZlzCIUd8zcUj7zWJN6cmY5T9NVdCC
 vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
 -----END PUBLIC KEY-----`;
         
-        // Import the RSA public key
+        /* Import the RSA public key */
         let publicKey = null;
         importPublicKey(publicKeyPem).then(key => {
             publicKey = key;
@@ -125,14 +125,14 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
             console.error('Error importing RSA public key:', error);
         });
         
-        // Replace the form's submit event with our own handler
+        /* Replace the form's submit event with our own handler */
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Run anti-spam checks
+            /* Run anti-spam checks */
             let isValid = true;
             
-            // Check honeypot field
+            /* Check honeypot field */
             const honeypot = document.querySelector('.checkthis input[name="website"]');
             if (honeypot && honeypot.value) {
                 console.log('Honeypot triggered');
@@ -140,7 +140,7 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
                 return false;
             }
             
-            // Check math challenge
+            /* Check math challenge */
             const mathAnswer = document.getElementById('math-answer');
             if (mathAnswer && expectedValue !== null) {
                 const userAnswer = parseInt(mathAnswer.value, 10);
@@ -151,7 +151,7 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
                 }
             }
             
-            // Check timing
+            /* Check timing */
             const timestamp = document.getElementById('form-timestamp');
             if (timestamp) {
                 const submissionTime = Math.floor(Date.now() / 1000);
@@ -165,26 +165,26 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
                 }
             }
             
-            // If all anti-spam checks pass, proceed with email encryption
+            /* If all anti-spam checks pass, proceed with email encryption */
             if (isValid) {
                 try {
-                    // Get the email field
+                    /* Get the email field */
                     const emailField = form.querySelector('input[name="fields[email]"]');
                     if (emailField && emailField.value && publicKey) {
                         console.log('Encrypting email...');
-                        // Encrypt the email
+                        /* Encrypt the email */
                         const encryptedBase64 = await encryptEmail(emailField.value, publicKey);
-                        // Replace the email value with the encrypted version
+                        /* Replace the email value with the encrypted version */
                         emailField.value = encryptedBase64;
                         console.log('Email encrypted successfully');
                     }
                     
-                    // Submit the form
+                    /* Submit the form */
                     console.log('All checks passed, submitting form');
                     form.submit();
                 } catch (error) {
                     console.error('Error during form processing:', error);
-                    // If there's an error, still submit the form
+                    /* If there's an error, still submit the form */
                     form.submit();
                 }
             }
@@ -194,14 +194,14 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
          * Convert PEM format public key to a CryptoKey object
          */
         async function importPublicKey(pem) {
-            // Remove header, footer, and newlines to get the base64 encoded key
+            /* Remove header, footer, and newlines to get the base64 encoded key */
             const pemContents = pem.replace(/(-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----)/g, '')
                                   .replace(/\s/g, '');
             
-            // Convert base64 to ArrayBuffer
+            /* Convert base64 to ArrayBuffer */
             const binaryDer = base64ToArrayBuffer(pemContents);
             
-            // Import the key
+            /* Import the key */
             return window.crypto.subtle.importKey(
                 'spki',
                 binaryDer,
@@ -209,8 +209,8 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
                     name: 'RSA-OAEP',
                     hash: { name: 'SHA-256' }
                 },
-                false, // not extractable
-                ['encrypt'] // can only be used for encryption
+                false, /* not extractable */
+                ['encrypt'] /* can only be used for encryption */
             );
         }
 
@@ -230,11 +230,11 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
          * Encrypt email using RSA-OAEP
          */
         async function encryptEmail(email, publicKey) {
-            // Convert email string to ArrayBuffer
+            /* Convert email string to ArrayBuffer */
             const encoder = new TextEncoder();
             const data = encoder.encode(email);
             
-            // Encrypt the data
+            /* Encrypt the data */
             const encryptedData = await window.crypto.subtle.encrypt(
                 {
                     name: 'RSA-OAEP'
@@ -243,7 +243,7 @@ vkWLihGtrHqVRreErdFKlj0CAwEAAQ==
                 data
             );
             
-            // Convert encrypted ArrayBuffer to base64 string
+            /* Convert encrypted ArrayBuffer to base64 string */
             return arrayBufferToBase64(encryptedData);
         }
 
