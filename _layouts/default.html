@@ -21,8 +21,15 @@ layout: compress
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
-    <!-- FontAwesome with optimized loading -->
-    <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous"></script>
+    <!-- Preload FontAwesome for better performance -->
+    <link rel="preload" href="https://kit.fontawesome.com/d9b09040a7.js" as="script" crossorigin="anonymous">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Load FontAwesome with async to prevent render blocking -->
+    <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous" async defer></script>
 
     {% if site.data.critical %}
     <!-- Inline critical CSS as a separate stylesheet to avoid linting issues -->
@@ -31,9 +38,6 @@ layout: compress
 
     <!-- Main stylesheet with prefers-color-scheme support -->
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/social-share.css" | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/related-posts.css" | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/subscribe.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/cookie-consent.css" | relative_url }}">
 </head>
 <body>

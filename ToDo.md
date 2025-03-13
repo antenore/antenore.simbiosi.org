@@ -24,12 +24,13 @@
 - [x] Implement cookie consent with options for "Accept All" and "Necessary Only"
 - [x] Remove unused CSS (social-share.css, subscribe.css, related-posts.css)
 - [x] Remove unused components from post layout
+- [x] Optimize font loading
+- [x] Organize assets by size/type
 
 ## Immediate Focus
 
 ### Performance Optimization
-- [ ] Optimize font loading
-- [ ] Organize assets by size/type
+- [ ] 
 
 ### Accessibility Improvements
 - [ ] Add missing alt attributes to images
