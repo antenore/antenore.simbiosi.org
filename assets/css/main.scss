@@ -321,7 +321,8 @@ pre {
     text-decoration: none;
     color: inherit;
 
-    &:hover .title {
+    &:hover .title,
+    &:hover .date {
       color: var(--accent);
     }
   }
@@ -343,7 +344,7 @@ pre {
   .date {
     color: var(--text-light);
     font-size: 1.4rem;
-    pointer-events: none;
+    transition: color 0.2s ease;
 
     @media (min-width: 780px) {
       text-align: right;
