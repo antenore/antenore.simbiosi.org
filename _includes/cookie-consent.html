@@ -3,7 +3,8 @@
     <div class="cookie-content">
         <p>This website uses cookies to ensure you get the best experience. By continuing to browse, you agree to our use of cookies.</p>
         <div class="cookie-buttons">
-            <button id="cookie-accept" class="btn-accept">Accept</button>
+            <button id="cookie-accept-all" class="btn-accept">Accept All</button>
+            <button id="cookie-accept-necessary" class="btn-necessary">Necessary Only</button>
             <a href="/privacy" class="btn-more">Privacy Policy</a>
         </div>
     </div>
@@ -56,19 +57,36 @@
         }
     }
 
-    /* Load Google Tag Manager with Consent Mode v2 */
-    function loadGoogleTagManager() {
-        /* Add Google Tag Manager script with consent mode */
-        const gtagScript = document.createElement('script');
-        gtagScript.async = true;
-        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
-        document.head.appendChild(gtagScript);
+    /* Load Google Analytics script */
+    function loadGoogleAnalytics() {
+        if ('{{ site.analytics-google }}' !== '') {
+            console.log('Loading Google Analytics script with ID: {{ site.analytics-google }}');
+            
+            /* Create and append the gtag.js script */
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
+            document.head.appendChild(gtagScript);
+            
+            /* Initialize the dataLayer and gtag function */
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function() { dataLayer.push(arguments); }
+            
+            /* Set the initial gtag configuration */
+            gtag('js', new Date());
+            gtag('config', '{{ site.analytics-google }}');
+            
+            console.log('Google Analytics script loaded successfully');
+            return true;
+        } else {
+            console.log('No Google Analytics ID configured');
+            return false;
+        }
+    }
 
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        /* Initialize consent mode v2 - default all to denied */
+    /* Function to initialize consent mode */
+    function initializeConsentMode() {
+        /* Default all consent types to denied except security */
         gtag('consent', 'default', {
             'ad_storage': 'denied',
             'analytics_storage': 'denied',
@@ -76,18 +94,18 @@
             'personalization_storage': 'denied',
             'security_storage': 'granted' /* Always grant security storage */
         });
-
-        /* Configure Google Analytics with GA4 property */
-        gtag('config', '{{ site.analytics-google }}', {
-            'anonymize_ip': true
-        });
-        
-        console.log('Google Tag Manager loaded with consent mode');
+        console.log('Consent mode initialized with default settings');
     }
 
     /* Function to update consent based on user choice */
-    function updateConsent(granted) {
-        if (granted) {
+    function updateConsent(consentType) {
+        if (!window.gtag) {
+            console.error('gtag not available, loading Google Analytics first');
+            loadGoogleAnalytics();
+        }
+        
+        if (consentType === 'all') {
+            /* Grant consent for all storage types */
             gtag('consent', 'update', {
                 'ad_storage': 'granted',
                 'analytics_storage': 'granted',
@@ -95,7 +113,19 @@
                 'personalization_storage': 'granted'
             });
             console.log('Consent granted for all storage types');
+            createCookie('cookie-consent', 'all', 365); /* Cookie valid for 1 year */
+        } else if (consentType === 'necessary') {
+            /* Grant consent only for necessary cookies */
+            gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'functionality_storage': 'granted', /* Necessary for site functionality */
+                'personalization_storage': 'denied'
+            });
+            console.log('Consent granted only for necessary cookies');
+            createCookie('cookie-consent', 'necessary', 365); /* Cookie valid for 1 year */
         } else {
+            /* Deny consent for all storage types except security */
             gtag('consent', 'update', {
                 'ad_storage': 'denied',
                 'analytics_storage': 'denied',
@@ -112,35 +142,53 @@
         const cookieConsent = document.getElementById('cookie-consent');
         console.log('Cookie consent element:', cookieConsent);
         
-        /* Load Google Tag Manager with consent mode regardless of consent status */
-        loadGoogleTagManager();
+        /* Load Google Analytics first */
+        const analyticsLoaded = loadGoogleAnalytics();
         
-        /* First check if consent was previously given */
-        const consentCookie = readCookie('cookie-consent');
-        console.log('Consent cookie value:', consentCookie);
-        
-        if (consentCookie === 'accepted') {
-            hideCookieConsent();
-            /* Update consent if previously granted */
-            updateConsent(true);
-        } else {
-            /* If no consent yet, show the banner */
-            showCookieConsent();
+        if (analyticsLoaded) {
+            /* Initialize consent mode after analytics is loaded */
+            initializeConsentMode();
+            
+            /* Check if consent was previously given */
+            const consentCookie = readCookie('cookie-consent');
+            console.log('Consent cookie value:', consentCookie);
+            
+            if (consentCookie) {
+                hideCookieConsent();
+                /* Update consent based on stored preference */
+                updateConsent(consentCookie);
+            } else {
+                /* If no consent yet, show the banner */
+                showCookieConsent();
+            }
         }
 
-        /* Handle accept button click */
-        const acceptButton = document.getElementById('cookie-accept');
-        if (acceptButton) {
-            console.log('Accept button found, adding click listener');
-            acceptButton.addEventListener('click', function() {
-                console.log('Accept button clicked');
-                createCookie('cookie-consent', 'accepted', 365); /* Cookie valid for 1 year */
+        /* Handle accept all button click */
+        const acceptAllButton = document.getElementById('cookie-accept-all');
+        if (acceptAllButton) {
+            console.log('Accept all button found, adding click listener');
+            acceptAllButton.addEventListener('click', function() {
+                console.log('Accept all button clicked');
                 hideCookieConsent();
-                /* Update consent when granted */
-                updateConsent(true);
+                /* Update consent to grant all */
+                updateConsent('all');
             });
         } else {
-            console.error('Accept button not found');
+            console.error('Accept all button not found');
+        }
+
+        /* Handle necessary only button click */
+        const acceptNecessaryButton = document.getElementById('cookie-accept-necessary');
+        if (acceptNecessaryButton) {
+            console.log('Necessary only button found, adding click listener');
+            acceptNecessaryButton.addEventListener('click', function() {
+                console.log('Necessary only button clicked');
+                hideCookieConsent();
+                /* Update consent to grant only necessary */
+                updateConsent('necessary');
+            });
+        } else {
+            console.error('Necessary only button not found');
         }
     });
 

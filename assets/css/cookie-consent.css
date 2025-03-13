@@ -49,6 +49,21 @@
     background-color: #2ecc71;
 }
 
+.btn-necessary {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-necessary:hover {
+    background-color: #2980b9;
+}
+
 .btn-more {
     background-color: transparent;
     color: white;
@@ -90,7 +105,7 @@
         width: 100%;
     }
     
-    .btn-accept, .btn-more {
+    .btn-accept, .btn-necessary, .btn-more {
         flex: 1;
         text-align: center;
     }
