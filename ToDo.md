@@ -26,11 +26,15 @@
 - [x] Remove unused components from post layout
 - [x] Optimize font loading
 - [x] Organize assets by size/type
+- [x] Fix image display issues in blog posts
+- [x] Improve default layout for better space utilization
+- [x] Fix duplicated content on home page
 
 ## Immediate Focus
 
 ### Performance Optimization
-- [ ] 
+- [ ] Implement responsive images with srcset
+- [ ] Further optimize CSS delivery
 
 ### Accessibility Improvements
 - [ ] Add missing alt attributes to images

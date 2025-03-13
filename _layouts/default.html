@@ -45,19 +45,21 @@ layout: compress
     {% include cookie-consent.html %}
 
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
-        {% if page.title == "Home" %}
-            {% include header.html %}
-        {% else %}
-            {% include header-minimal.html %}
-        {% endif %}
+        <div class="content-container">
+            {% if page.title == "Home" %}
+                {% include header.html %}
+            {% else %}
+                {% include header-minimal.html %}
+            {% endif %}
 
-        {% include nav.html %}
+            {% include nav.html %}
 
-        <main class="content {% if page.layout == "post" %}post{% else %}page{% endif %} {{ page.title | slugify }}">
-            {{ content }}
-        </main>
+            <main class="content {% if page.layout == "post" %}post{% else %}page{% endif %} {{ page.title | slugify }}">
+                {{ content }}
+            </main>
 
-        {% include footer.html %}
+            {% include footer.html %}
+        </div>
     </div>
 
     <!-- Theme toggle script -->

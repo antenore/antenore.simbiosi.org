@@ -2,6 +2,7 @@
 - Do not use these commands: git push, npm, bundle. Just use commands you need to search code
 - I push code to GitLab and GitHub by myslef
 - in javascript use comments with /* */
+- Keep updated the ToDo.md file
 # BEGIN ARIA POLICY
 # ARIA Policy: Default Policy
 # Default ARIA policy configuration

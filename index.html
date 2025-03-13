@@ -1,117 +1,28 @@
 ---
-layout: default
+layout: page
 title: Home
 ---
 
-<div class="home-container">
-    <!-- Profile section with photo, name, bio and social links -->
-    <section class="profile-section">
-        <div class="profile-content">
-            <img class="profile-image" alt="{{ site.title }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
-            <h1 class="profile-name">{{ site.name }}</h1>
-            <p class="profile-bio">{{ site.bio }}</p>
+<section class="home-section">
+    <h2>Latest Post</h2>
+    {% assign latest_post = site.posts | where: "category", "blog" | where_exp: "post", "post.hidden != true" | first %}
+    {% if latest_post %}
+        <div class="latest-post">
+            <h3><a href="{{ site.url }}{{ latest_post.url }}">{{ latest_post.title }}</a></h3>
+            <aside class="date"><time datetime="{{ latest_post.date | date:"%d-%m-%Y" }}">{{ latest_post.date | date: "%b %d %Y" }}</time></aside>
+            <div class="post-excerpt">
+                {% if latest_post.description %}
+                    {{ latest_post.description }}
+                {% else %}
+                    {{ latest_post.content | strip_html | truncatewords: 50 }}
+                {% endif %}
+            </div>
+            <a href="{{ site.url }}{{ latest_post.url }}" class="read-more">Read more</a>
         </div>
-        
-        <!-- Navigation links -->
-        <nav class="home-nav">
-            <ul class="nav-list">
-                {% if site.blog == true %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ site.url }}/blog">Blog</a>
-                </li>
-                {% endif %}
-                
-                {% if site.projects == true %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ site.url }}/projects">Projects</a>
-                </li>
-                {% endif %}
-                
-                {% if site.about == true %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ site.url }}/about">About</a>
-                </li>
-                {% endif %}
-                
-                {% if site.resume == true %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% if site.resume-external %}{{ site.resume-url }}{% else %}{{ site.url }}/{{ site.resume-url }}{% endif %}">Résumé</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </section>
-    
-    <!-- Latest posts section -->
-    <section class="latest-posts-section">
-        <h2 class="section-title">Latest Posts</h2>
-        
-        <div class="posts-container">
-            {% assign posts = site.posts | where_exp: "post", "post.hidden != true" | limit: 3 %}
-            {% for post in posts %}
-            <article class="post-card">
-                <h3 class="post-title"><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h3>
-                <time class="post-date" datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d, %Y" }}</time>
-                <div class="post-excerpt">
-                    {% if post.description %}
-                        {{ post.description }}
-                    {% else %}
-                        {{ post.content | strip_html | truncatewords: 30 }}
-                    {% endif %}
-                </div>
-                <a href="{{ site.url }}{{ post.url }}" class="read-more-link">Read more</a>
-            </article>
-            {% endfor %}
+        <div class="see-more">
+            <a href="{{ site.url }}/blog" class="see-more-link">See more posts</a>
         </div>
-        
-        <a href="{{ site.url }}/blog" class="view-all-link">View all posts</a>
-    </section>
-    
-    <!-- Social links section -->
-    <section class="social-section">
-        <div class="social-links">
-            {% if site.twitter %}
-                <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter" class="social-link">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-            {% endif %}
-
-            {% if site.linkedin %}
-                <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-            {% endif %}
-
-            {% if site.github %}
-                <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            {% endif %}
-
-            {% if site.gitlab %}
-                <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="GitLab" class="social-link">
-                    <i class="fa-brands fa-gitlab"></i>
-                </a>
-            {% endif %}
-
-            {% if site.email %}
-                <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Email" class="social-link">
-                    <i class="fa-regular fa-envelope"></i>
-                </a>
-            {% endif %}
-            
-            {% if site.rss %}
-                <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="RSS" class="social-link">
-                    <i class="fa-solid fa-rss"></i>
-                </a>
-            {% endif %}
-            
-            <span class="theme-toggle">
-                <input type="checkbox" class="checkbox" id="theme-toggle-checkbox">
-                <label for="theme-toggle-checkbox" class="theme-label">
-                    <span>Theme</span>
-                </label>
-            </span>
-        </div>
-    </section>
-</div>
+    {% else %}
+        <p>No posts available yet.</p>
+    {% endif %}
+</section>

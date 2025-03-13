@@ -914,3 +914,133 @@ input:focus + .slider {
     font-size: 1rem;
   }
 }
+
+// Improved layout styles
+.content-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.nav {
+  margin-bottom: 2rem;
+}
+
+.nav-home {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+// Home page specific styles
+.home-section {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.latest-post {
+  background-color: var(--background-color-alt);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.latest-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.latest-post h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.latest-post h3 a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.latest-post h3 a:hover {
+  color: var(--secondary-color);
+}
+
+.latest-post .date {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  margin-bottom: 1rem;
+}
+
+.latest-post .post-excerpt {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.read-more {
+  display: inline-block;
+  color: var(--secondary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: var(--primary-color);
+}
+
+.see-more {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.see-more-link {
+  display: inline-block;
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.see-more-link:hover {
+  color: var(--secondary-color);
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .content-container {
+    padding: 0 1rem;
+  }
+  
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .nav, .nav-home {
+    margin-bottom: 1.5rem;
+  }
+  
+  .home-section {
+    padding: 0;
+  }
+}
