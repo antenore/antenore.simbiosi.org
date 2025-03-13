@@ -7,24 +7,17 @@ title: Home
     <section class="home-intro">
         <h2>Latest Posts</h2>
         <div class="posts-grid">
-            {% assign posts = site.posts | where_exp: "post", "post.hidden != true" | limit: 6 %}
+            {% assign posts = site.posts | where_exp: "post", "post.hidden != true" | limit: 3 %}
             {% for post in posts %}
             <article class="post-card">
-                {% if post.image %}
-                <div class="post-image">
-                    <a href="{{ site.url }}{{ post.url }}">
-                        <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
-                    </a>
-                </div>
-                {% endif %}
                 <div class="post-content">
                     <h3 class="post-title"><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h3>
                     <time class="post-date" datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d, %Y" }}</time>
                     <div class="post-excerpt">
                         {% if post.description %}
-                            {{ post.description | truncatewords: 25 }}
+                            {{ post.description | truncatewords: 15 }}
                         {% else %}
-                            {{ post.content | strip_html | truncatewords: 25 }}
+                            {{ post.content | strip_html | truncatewords: 15 }}
                         {% endif %}
                     </div>
                     <a href="{{ site.url }}{{ post.url }}" class="read-more-link">Read more</a>
@@ -53,6 +46,46 @@ title: Home
         </div>
         <div class="see-more">
             <a href="{{ site.url }}/projects" class="see-more-link">See all projects</a>
+        </div>
+    </section>
+    
+    <section class="social-section">
+        <div class="social-links">
+            {% if site.twitter %}
+                <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter" class="social-link">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+            {% endif %}
+
+            {% if site.linkedin %}
+                <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            {% endif %}
+
+            {% if site.github %}
+                <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            {% endif %}
+
+            {% if site.gitlab %}
+                <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="GitLab" class="social-link">
+                    <i class="fa-brands fa-gitlab"></i>
+                </a>
+            {% endif %}
+
+            {% if site.email %}
+                <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Email" class="social-link">
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+            {% endif %}
+            
+            {% if site.rss %}
+                <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="RSS" class="social-link">
+                    <i class="fa-solid fa-rss"></i>
+                </a>
+            {% endif %}
         </div>
     </section>
 </div>
