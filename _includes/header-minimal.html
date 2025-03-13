@@ -1,13 +1,14 @@
 <header class="header">
-    <div class="container">
-        <a href="{{ site.url }}">
-            {% if site.profile_picture %}
-                <img class="selfie" src="{{ site.profile_picture }}" alt="{{ site.name }}" />
-            {% endif %}
-            <h1 class="title">
-                {{ site.name }}
-            </h1>
-        </a>
+    <a href="{{ site.url }}">
+        {% if site.profile_picture %}
+            <img class="selfie" src="{{ site.profile_picture }}" alt="{{ site.name }}" />
+        {% endif %}
+    </a>
+    
+    <div>
+        <h1 class="title">
+            <a href="{{ site.url }}">{{ site.name }}</a>
+        </h1>
         
         {% if site.bio %}
             <h2 class="description">{{ site.bio }}</h2>

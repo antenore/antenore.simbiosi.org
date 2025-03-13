@@ -237,20 +237,21 @@ pre {
 
 // Header
 .header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 2rem 0;
 }
 
 .header .selfie,
 .header .avatar {
-  margin-right: 1rem;
-  width: 80px;
-  height: 80px;
+  margin-right: 1.5rem;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   transition: all 0.2s ease;
   
@@ -263,13 +264,13 @@ pre {
 .header .site-title,
 .header .title {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 2.4rem;
 }
 
 .header .site-description,
 .header .description {
   margin: 0.5rem 0 0 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--text-light);
 }
 
@@ -599,7 +600,25 @@ input:focus + .slider {
 
 .slider:hover {
   border-color: var(--accent);
-  transform: translateY(-1px);
+}
+
+/* Theme toggle in footer */
+.social-links .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+.social-links .theme-toggle .theme-switch-wrapper {
+  margin-left: 0;
+}
+
+.social-links .theme-toggle:hover {
+  transform: translateY(-3px);
 }
 
 // Improved layout styles - more compact

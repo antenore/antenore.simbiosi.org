@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   /* DOM elements */
-  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggle = document.getElementById('checkbox');
   if (!themeToggle) return;
 
   /* Check for saved theme preference */
