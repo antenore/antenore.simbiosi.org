@@ -1,28 +1,58 @@
 ---
-layout: page
+layout: default
 title: Home
 ---
 
-<section class="home-section">
-    <h2>Latest Post</h2>
-    {% assign latest_post = site.posts | where: "category", "blog" | where_exp: "post", "post.hidden != true" | first %}
-    {% if latest_post %}
-        <div class="latest-post">
-            <h3><a href="{{ site.url }}{{ latest_post.url }}">{{ latest_post.title }}</a></h3>
-            <aside class="date"><time datetime="{{ latest_post.date | date:"%d-%m-%Y" }}">{{ latest_post.date | date: "%b %d %Y" }}</time></aside>
-            <div class="post-excerpt">
-                {% if latest_post.description %}
-                    {{ latest_post.description }}
-                {% else %}
-                    {{ latest_post.content | strip_html | truncatewords: 50 }}
+<div class="home-container">
+    <section class="home-intro">
+        <h2>Latest Posts</h2>
+        <div class="posts-grid">
+            {% assign posts = site.posts | where_exp: "post", "post.hidden != true" | limit: 6 %}
+            {% for post in posts %}
+            <article class="post-card">
+                {% if post.image %}
+                <div class="post-image">
+                    <a href="{{ site.url }}{{ post.url }}">
+                        <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                    </a>
+                </div>
                 {% endif %}
-            </div>
-            <a href="{{ site.url }}{{ latest_post.url }}" class="read-more">Read more</a>
+                <div class="post-content">
+                    <h3 class="post-title"><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h3>
+                    <time class="post-date" datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d, %Y" }}</time>
+                    <div class="post-excerpt">
+                        {% if post.description %}
+                            {{ post.description | truncatewords: 25 }}
+                        {% else %}
+                            {{ post.content | strip_html | truncatewords: 25 }}
+                        {% endif %}
+                    </div>
+                    <a href="{{ site.url }}{{ post.url }}" class="read-more-link">Read more</a>
+                </div>
+            </article>
+            {% endfor %}
         </div>
         <div class="see-more">
-            <a href="{{ site.url }}/blog" class="see-more-link">See more posts</a>
+            <a href="{{ site.url }}/blog" class="see-more-link">See all posts</a>
         </div>
-    {% else %}
-        <p>No posts available yet.</p>
-    {% endif %}
-</section>
+    </section>
+
+    <section class="home-projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3><a href="https://remmina.org">Remmina</a></h3>
+                <p>The GTK+ Remote Desktop Client</p>
+                <a href="https://remmina.org" class="project-link" target="_blank">Visit Project</a>
+            </div>
+            <div class="project-card">
+                <h3><a href="https://github.com/antenore/vimsafe">VimSafe</a></h3>
+                <p>A VIM Password Safe (Vault) like tool</p>
+                <a href="https://github.com/antenore/vimsafe" class="project-link" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+        <div class="see-more">
+            <a href="{{ site.url }}/projects" class="see-more-link">See all projects</a>
+        </div>
+    </section>
+</div>
