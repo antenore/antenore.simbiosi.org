@@ -324,9 +324,8 @@ pre {
 .list {
   .item {
     margin-bottom: 3rem;
-    border-bottom: 1px solid var(--border);
     padding-bottom: 3rem;
-
+    
     &:last-child {
       border-bottom: none;
     }

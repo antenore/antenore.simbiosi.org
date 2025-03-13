@@ -1,7 +1,6 @@
 ---
 title: "Shell tidbits"
 layout: post
-image: /assets/images/markdown.jpg
 image: /assets/images/shell-symbolic.svg
 headerImage: true
 tag:
@@ -135,4 +134,3 @@ Same as basename...
 _mypath="/usr/bin/bash"
 printf "%s\n" "${_mypath%/*}"
 {% endhighlight %}
-
