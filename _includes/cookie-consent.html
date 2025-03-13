@@ -56,11 +56,64 @@
         }
     }
 
+    /* Load Google Tag Manager with Consent Mode v2 */
+    function loadGoogleTagManager() {
+        /* Add Google Tag Manager script with consent mode */
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        /* Initialize consent mode v2 - default all to denied */
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied',
+            'functionality_storage': 'denied',
+            'personalization_storage': 'denied',
+            'security_storage': 'granted' // Always grant security storage
+        });
+
+        /* Configure Google Analytics with GA4 property */
+        gtag('config', '{{ site.analytics-google }}', {
+            'anonymize_ip': true
+        });
+        
+        console.log('Google Tag Manager loaded with consent mode');
+    }
+
+    /* Function to update consent based on user choice */
+    function updateConsent(granted) {
+        if (granted) {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'analytics_storage': 'granted',
+                'functionality_storage': 'granted',
+                'personalization_storage': 'granted'
+            });
+            console.log('Consent granted for all storage types');
+        } else {
+            gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'functionality_storage': 'denied',
+                'personalization_storage': 'denied'
+            });
+            console.log('Consent denied for all storage types');
+        }
+    }
+
     /* Wait for DOM to be fully loaded */
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM fully loaded');
         const cookieConsent = document.getElementById('cookie-consent');
         console.log('Cookie consent element:', cookieConsent);
+        
+        /* Load Google Tag Manager with consent mode regardless of consent status */
+        loadGoogleTagManager();
         
         /* First check if consent was previously given */
         const consentCookie = readCookie('cookie-consent');
@@ -68,7 +121,7 @@
         
         if (consentCookie === 'accepted') {
             hideCookieConsent();
-            enableAnalytics();
+            updateConsent(true); // Update consent if previously granted
         } else {
             /* If no consent yet, show the banner */
             showCookieConsent();
@@ -82,35 +135,12 @@
                 console.log('Accept button clicked');
                 createCookie('cookie-consent', 'accepted', 365); /* Cookie valid for 1 year */
                 hideCookieConsent();
-                enableAnalytics();
+                updateConsent(true); // Update consent when granted
             });
         } else {
             console.error('Accept button not found');
         }
     });
-
-    /* Function to enable Google Analytics */
-    function enableAnalytics() {
-        console.log('Enabling analytics');
-        /* Only load analytics if the configuration exists */
-        if ('{{ site.analytics-google }}' !== '') {
-            console.log('Analytics ID found:', '{{ site.analytics-google }}');
-            /* Load Google Analytics */
-            const gtagScript = document.createElement('script');
-            gtagScript.async = true;
-            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
-            document.head.appendChild(gtagScript);
-
-            /* Initialize Google Analytics */
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', '{{ site.analytics-google }}');
-            console.log('Analytics script loaded');
-        } else {
-            console.log('No analytics ID configured');
-        }
-    }
 
     /* Debug info */
     console.log('Cookie consent script loaded');

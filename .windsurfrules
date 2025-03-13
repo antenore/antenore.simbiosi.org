@@ -1,6 +1,7 @@
 - Write code and comments in english
 - Do not use these commands: git push, npm, bundle. Just use commands you need to search code
 - I push code to GitLab and GitHub by myslef
+- in javascript use comments with /* */
 # BEGIN ARIA POLICY
 # ARIA Policy: Default Policy
 # Default ARIA policy configuration
