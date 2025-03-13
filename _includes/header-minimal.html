@@ -1,15 +1,16 @@
-<header class="header-minimal">
+<header class="header">
     <div class="container">
-        <a href="{{ site.url }}" class="site-title">
-            {{ site.name }}
+        <a href="{{ site.url }}">
+            {% if site.profile_picture %}
+                <img class="selfie" src="{{ site.profile_picture }}" alt="{{ site.name }}" />
+            {% endif %}
+            <h1 class="title">
+                {{ site.name }}
+            </h1>
         </a>
-
-        <div class="theme-switch-wrapper" aria-label="Toggle Dark Mode">
-            <label class="theme-switch" for="theme-toggle">
-                <input type="checkbox" id="theme-toggle" />
-                <span class="slider"></span>
-            </label>
-            <small>Theme</small>
-        </div>
+        
+        {% if site.bio %}
+            <h2 class="description">{{ site.bio }}</h2>
+        {% endif %}
     </div>
 </header>

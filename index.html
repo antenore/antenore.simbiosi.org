@@ -49,43 +49,5 @@ title: Home
         </div>
     </section>
     
-    <section class="social-section">
-        <div class="social-links">
-            {% if site.twitter %}
-                <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter" class="social-link">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-            {% endif %}
-
-            {% if site.linkedin %}
-                <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
-                    <i class="fa-brands fa-linkedin"></i>
-                </a>
-            {% endif %}
-
-            {% if site.github %}
-                <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            {% endif %}
-
-            {% if site.gitlab %}
-                <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="GitLab" class="social-link">
-                    <i class="fa-brands fa-gitlab"></i>
-                </a>
-            {% endif %}
-
-            {% if site.email %}
-                <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Email" class="social-link">
-                    <i class="fa-regular fa-envelope"></i>
-                </a>
-            {% endif %}
-            
-            {% if site.rss %}
-                <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="RSS" class="social-link">
-                    <i class="fa-solid fa-rss"></i>
-                </a>
-            {% endif %}
-        </div>
-    </section>
+    <!-- Social links are now in the footer.html include file -->
 </div>
