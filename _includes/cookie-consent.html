@@ -57,6 +57,50 @@
         }
     }
 
+    /* Initialize dataLayer and set default consent before loading GA */
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    
+    /* Set default consent mode - must be done before loading GA script */
+    gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'ad_user_data': 'denied',       /* Required for consent mode v2 in EEA */
+        'ad_personalization': 'denied', /* Required for consent mode v2 in EEA */
+        'security_storage': 'granted'   /* Always grant security storage */
+    });
+    console.log('Default consent settings initialized');
+    
+    /* Check for existing consent */
+    const consentCookie = readCookie('cookie-consent');
+    console.log('Consent cookie value:', consentCookie);
+    
+    /* Update consent if previously given */
+    if (consentCookie === 'all') {
+        gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'analytics_storage': 'granted',
+            'functionality_storage': 'granted',
+            'personalization_storage': 'granted',
+            'ad_user_data': 'granted',       /* Required for consent mode v2 in EEA */
+            'ad_personalization': 'granted'  /* Required for consent mode v2 in EEA */
+        });
+        console.log('Consent restored from cookie: all');
+    } else if (consentCookie === 'necessary') {
+        gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied',
+            'functionality_storage': 'granted',
+            'personalization_storage': 'denied',
+            'ad_user_data': 'denied',        /* Required for consent mode v2 in EEA */
+            'ad_personalization': 'denied'   /* Required for consent mode v2 in EEA */
+        });
+        console.log('Consent restored from cookie: necessary');
+    }
+
     /* Load Google Analytics script */
     function loadGoogleAnalytics() {
         if ('{{ site.analytics-google }}' !== '') {
@@ -68,14 +112,11 @@
             gtagScript.src = "https://www.googletagmanager.com/gtag/js?id={{ site.analytics-google }}";
             document.head.appendChild(gtagScript);
             
-            /* Initialize the dataLayer and gtag function */
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { window.dataLayer.push(arguments); }
-            window.gtag = gtag;
-            
             /* Set the initial gtag configuration */
             gtag('js', new Date());
-            gtag('config', '{{ site.analytics-google }}');
+            gtag('config', '{{ site.analytics-google }}', {
+                'anonymize_ip': true
+            });
             
             console.log('Google Analytics script loaded successfully');
             return true;
@@ -83,25 +124,6 @@
             console.log('No Google Analytics ID configured');
             return false;
         }
-    }
-
-    /* Function to initialize consent mode */
-    function initializeConsentMode() {
-        if (typeof window.gtag !== 'function') {
-            console.error('gtag function not available');
-            return false;
-        }
-        
-        /* Default all consent types to denied except security */
-        window.gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'analytics_storage': 'denied',
-            'functionality_storage': 'denied',
-            'personalization_storage': 'denied',
-            'security_storage': 'granted' /* Always grant security storage */
-        });
-        console.log('Consent mode initialized with default settings');
-        return true;
     }
 
     /* Function to update consent based on user choice */
@@ -117,7 +139,9 @@
                 'ad_storage': 'granted',
                 'analytics_storage': 'granted',
                 'functionality_storage': 'granted',
-                'personalization_storage': 'granted'
+                'personalization_storage': 'granted',
+                'ad_user_data': 'granted',       /* Required for consent mode v2 in EEA */
+                'ad_personalization': 'granted'  /* Required for consent mode v2 in EEA */
             });
             console.log('Consent granted for all storage types');
             createCookie('cookie-consent', 'all', 365); /* Cookie valid for 1 year */
@@ -127,7 +151,9 @@
                 'ad_storage': 'denied',
                 'analytics_storage': 'denied',
                 'functionality_storage': 'granted', /* Necessary for site functionality */
-                'personalization_storage': 'denied'
+                'personalization_storage': 'denied',
+                'ad_user_data': 'denied',        /* Required for consent mode v2 in EEA */
+                'ad_personalization': 'denied'   /* Required for consent mode v2 in EEA */
             });
             console.log('Consent granted only for necessary cookies');
             createCookie('cookie-consent', 'necessary', 365); /* Cookie valid for 1 year */
@@ -137,7 +163,9 @@
                 'ad_storage': 'denied',
                 'analytics_storage': 'denied',
                 'functionality_storage': 'denied',
-                'personalization_storage': 'denied'
+                'personalization_storage': 'denied',
+                'ad_user_data': 'denied',        /* Required for consent mode v2 in EEA */
+                'ad_personalization': 'denied'   /* Required for consent mode v2 in EEA */
             });
             console.log('Consent denied for all storage types');
         }
@@ -147,31 +175,15 @@
     /* Wait for DOM to be fully loaded */
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM fully loaded');
-        const cookieConsent = document.getElementById('cookie-consent');
-        console.log('Cookie consent element:', cookieConsent);
         
-        /* First check if consent was previously given */
-        const consentCookie = readCookie('cookie-consent');
-        console.log('Consent cookie value:', consentCookie);
+        /* Load Google Analytics after consent is initialized */
+        loadGoogleAnalytics();
         
-        /* Always show the banner if no consent was given */
+        /* Show/hide consent banner based on cookie */
         if (!consentCookie) {
             showCookieConsent();
         } else {
             hideCookieConsent();
-        }
-        
-        /* Load Google Analytics */
-        const analyticsLoaded = loadGoogleAnalytics();
-        
-        /* Initialize consent mode if analytics loaded */
-        if (analyticsLoaded) {
-            initializeConsentMode();
-            
-            /* Apply stored consent if available */
-            if (consentCookie) {
-                updateConsent(consentCookie);
-            }
         }
 
         /* Handle accept all button click */
