@@ -121,7 +121,8 @@
         
         if (consentCookie === 'accepted') {
             hideCookieConsent();
-            updateConsent(true); // Update consent if previously granted
+            /* Update consent if previously granted */
+            updateConsent(true);
         } else {
             /* If no consent yet, show the banner */
             showCookieConsent();
@@ -135,7 +136,8 @@
                 console.log('Accept button clicked');
                 createCookie('cookie-consent', 'accepted', 365); /* Cookie valid for 1 year */
                 hideCookieConsent();
-                updateConsent(true); // Update consent when granted
+                /* Update consent when granted */
+                updateConsent(true);
             });
         } else {
             console.error('Accept button not found');
