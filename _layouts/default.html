@@ -32,8 +32,10 @@ layout: compress
     <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous" async defer></script>
 
     {% if site.data.critical %}
-    <!-- Inline critical CSS as a separate stylesheet to avoid linting issues -->
-    <link rel="stylesheet" href="{{ "/assets/css/critical.css" | relative_url }}">
+    <!-- Inline critical CSS for faster rendering -->
+    <style>
+        {{ site.data.critical }}
+    </style>
     {% endif %}
 
     <!-- Main stylesheet with prefers-color-scheme support -->
@@ -46,12 +48,10 @@ layout: compress
 
     <div class="wrapper {% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
         <div class="content-container">
-            {% if page.title == "Home" %}
-                {% include header.html %}
-            {% else %}
-                {% include header-minimal.html %}
-            {% endif %}
+            <!-- Unified header for all pages -->
+            {% include header.html %}
 
+            <!-- Enhanced navigation -->
             {% include nav.html %}
 
             <main class="content {% if page.layout == "post" %}post{% else %}page{% endif %} {{ page.title | slugify }}">
