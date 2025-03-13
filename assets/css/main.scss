@@ -319,6 +319,7 @@ pre {
     align-items: baseline;
     flex-wrap: wrap;
     text-decoration: none;
+    color: inherit;
 
     &:hover .title {
       color: var(--accent);
@@ -331,6 +332,7 @@ pre {
     margin: 0 0 1rem;
     transition: color 0.2s ease;
     flex: 1 0 100%;
+    cursor: pointer;
 
     @media (min-width: 780px) {
       flex: 1;
@@ -341,6 +343,7 @@ pre {
   .date {
     color: var(--text-light);
     font-size: 1.4rem;
+    pointer-events: none;
 
     @media (min-width: 780px) {
       text-align: right;
