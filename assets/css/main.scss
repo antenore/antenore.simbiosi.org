@@ -304,50 +304,40 @@ pre {
 }
 
 // Posts lists
-.list-item {
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 3rem;
+.list {
+  .item {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3rem;
 
-  &:last-child {
-    border-bottom: none;
-  }
-
-  a {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    text-decoration: none;
-    color: inherit;
-
-    &:hover .title,
-    &:hover .date {
-      color: var(--accent);
+    &:last-child {
+      border-bottom: none;
     }
-  }
 
-  .title {
-    font-size: 2rem;
-    color: var(--primary);
-    margin: 0 0 1rem;
-    transition: color 0.2s ease;
-    flex: 1 0 100%;
-    cursor: pointer;
+    a.url {
+      display: block;
+      text-decoration: none;
+      color: inherit;
 
-    @media (min-width: 780px) {
-      flex: 1;
-      margin: 0;
-    }
-  }
+      &:hover .title,
+      &:hover .date {
+        color: var(--accent);
+      }
 
-  .date {
-    color: var(--text-light);
-    font-size: 1.4rem;
-    transition: color 0.2s ease;
+      .title {
+        font-size: 2rem;
+        color: var(--primary);
+        margin: 20px 0 15px;
+        transition: color 0.2s ease;
+        display: block;
+      }
 
-    @media (min-width: 780px) {
-      text-align: right;
+      .date {
+        color: var(--text-light);
+        font-size: 1.6rem;
+        transition: color 0.2s ease;
+        display: block;
+      }
     }
   }
 }
