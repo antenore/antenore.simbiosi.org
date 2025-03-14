@@ -141,12 +141,14 @@ Of course, legitimate service accounts need programmatic access too. For these c
 You can extend the SCP to allow specific service role patterns:
 
 ```json
-"StringNotLike": {
-  "aws:PrincipalARN": [
-    "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_*",
-    "arn:aws:iam::*:role/service-role/lambda-*",
-    "arn:aws:iam::*:role/service-role/cloudformation-*"
-  ]
+{
+  "StringNotLike": {
+    "aws:PrincipalARN": [
+      "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_*",
+      "arn:aws:iam::*:role/service-role/lambda-*",
+      "arn:aws:iam::*:role/service-role/cloudformation-*"
+    ]
+  }
 }
 ```
 
