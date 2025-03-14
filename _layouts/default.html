@@ -73,17 +73,25 @@ layout: compress
         document.addEventListener('DOMContentLoaded', function() {
             /* Initialize Mermaid with theme detection */
             mermaid.initialize({
-                startOnLoad: true,
+                startOnLoad: false,  /* We'll manually initialize */
                 theme: document.documentElement.classList.contains('dark-theme') ? 'dark' : 'default'
             });
             
-            /* Process code blocks with mermaid class */
-            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeBlock) {
-                const container = document.createElement('div');
-                container.classList.add('mermaid');
-                container.innerHTML = codeBlock.textContent;
-                codeBlock.parentNode.parentNode.replaceWith(container);
+            /* Only target specific mermaid code blocks without affecting other content */
+            document.querySelectorAll('pre > code.language-mermaid').forEach(function(codeBlock) {
+                /* Create a div for mermaid */
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.innerHTML = codeBlock.textContent;
+                
+                /* Replace only the code block, not its parent containers */
+                const preElement = codeBlock.parentNode;
+                preElement.parentNode.insertBefore(mermaidDiv, preElement);
+                preElement.style.display = 'none';
             });
+            
+            /* Initialize mermaid after we've set up the divs */
+            mermaid.init(undefined, '.mermaid');
         });
     </script>
 </body>
