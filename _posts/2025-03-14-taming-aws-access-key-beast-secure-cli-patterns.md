@@ -40,7 +40,7 @@ The most critical insight is that **most human users creating access keys should
 
 The risks associated with long-lived access keys are significant:
 
-```mermaid!
+```mermaid
 graph TD
     A[Long-lived Access Keys] --> B[Key Compromise Risk]
     A --> C[Excessive Privileges]
@@ -78,7 +78,7 @@ AWS IAM Identity Center provides a superior approach for human users needing CLI
 
 For a developer or operations engineer, the workflow is straightforward:
 
-```mermaid!
+```mermaid
 sequenceDiagram
     participant Developer
     participant SSO as AWS IAM Identity Center
@@ -141,7 +141,6 @@ Of course, legitimate service accounts need programmatic access too. For these c
 You can extend the SCP to allow specific service role patterns:
 
 ```json
-{
   "StringNotLike": {
     "aws:PrincipalARN": [
       "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_*",
@@ -149,14 +148,13 @@ You can extend the SCP to allow specific service role patterns:
       "arn:aws:iam::*:role/service-role/cloudformation-*"
     ]
   }
-}
 ```
 
 ### Option 2: Implement IAM Roles Everywhere
 
 A more comprehensive approach is to eliminate IAM users entirely and implement role-based authentication for all services:
 
-```mermaid!
+```mermaid
 graph TD
     A[Service/Application] --> B{Authentication Method}
     B -->|Best Practice| C[AssumeRole with OIDC/Web Identity]
@@ -193,7 +191,7 @@ When implementing this approach, consider these best practices:
 
 Here's a sample implementation approach:
 
-```mermaid!
+```mermaid
 gantt
     title Implementation Timeline
     dateFormat  YYYY-MM-DD
