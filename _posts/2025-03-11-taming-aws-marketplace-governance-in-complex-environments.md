@@ -42,7 +42,7 @@ I found this problem particularly challenging because some account environments 
 
 To better understand how all these components work together, here's a visualization of the complete marketplace governance architecture:
 
-```mermaid!
+```mermaid
 flowchart TB
     subgraph "AWS Marketplace Governance Framework"
     
@@ -171,7 +171,7 @@ For our implementation, we created a specialized role structure that balanced se
 
 For IAM Identity Center environments, we created specific permission sets:
 
-```mermaid!
+```mermaid
 flowchart TD
     subgraph "MarketplaceAdmin Permission Set"
     MP["AWS Managed Policies"]
@@ -189,7 +189,7 @@ This approach was particularly important in our shared privileged account manage
 
 The final piece of the puzzle was establishing a clear process for legitimate marketplace purchases:
 
-```mermaid!
+```mermaid
 sequenceDiagram
     actor User
     participant SN as ServiceNow
@@ -219,7 +219,7 @@ For organizations with mature procurement processes, integrating AWS Marketplace
 3. **Invoice Integration**: Streamline billing and accounting processes
 4. **Budget Alignment**: Connect cloud purchases to existing departmental budgets
 
-```mermaid!
+```mermaid
 sequenceDiagram
     actor User
     participant Ariba as SAP Ariba
@@ -250,7 +250,7 @@ The most challenging aspect of this implementation was adapting our controls to 
 
 Each required a slightly different implementation approach while maintaining consistent security posture. The solution was to create a modular control framework:
 
-```mermaid!
+```mermaid
 flowchart TD
     Base["Base Layer: SCPs that apply organization-wide"]
     Identity["Identity Layer: Custom controls based on account identity model"]
@@ -286,7 +286,7 @@ Through our implementation, we identified several pitfalls that can undermine yo
 
 A robust monitoring framework was essential to ensure continuous compliance with marketplace controls:
 
-```mermaid!
+```mermaid
 graph LR
     subgraph "CloudWatch Metrics"
     Access["MarketplaceAccessCount"]
