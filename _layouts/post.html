@@ -44,7 +44,8 @@ layout: page
     {% include author.html %}
 {% endif %}
 
-<!-- Removed social-share, subscribe, and related-posts components as part of cleanup -->
+<!-- Add social sharing buttons for blog posts -->
+{% include social-share.html %}
 
 {% if site.no_comment_url %}
     <h2>Post comment</h2>
