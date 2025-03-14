@@ -66,5 +66,25 @@ layout: compress
     <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
     <!-- Lazy loading script -->
     <script src="{{ '/assets/js/lazy-loading.js' | relative_url }}"></script>
+    
+    <!-- Mermaid diagram support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            /* Initialize Mermaid with theme detection */
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: document.documentElement.classList.contains('dark-theme') ? 'dark' : 'default'
+            });
+            
+            /* Process code blocks with mermaid class */
+            document.querySelectorAll('pre code.language-mermaid').forEach(function(codeBlock) {
+                const container = document.createElement('div');
+                container.classList.add('mermaid');
+                container.innerHTML = codeBlock.textContent;
+                codeBlock.parentNode.parentNode.replaceWith(container);
+            });
+        });
+    </script>
 </body>
 </html>
