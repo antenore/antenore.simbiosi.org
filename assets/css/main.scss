@@ -111,10 +111,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.5rem;
 }
 
-h1 {
+h1, .title {
   font-size: 3rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: -1px;
+  color: var(--primary);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 
   @media (max-width: 400px) {
     font-size: 2.6rem;
@@ -727,6 +730,29 @@ input:focus + .slider {
   }
 }
 
+// Ensure special components pages have proper title styling
+.page .title, 
+.diabetes-guide .title {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+// Dark theme adjustments for component titles
+.dark-theme .page .title,
+.dark-theme .diabetes-guide .title,
+.dark-theme h1 {
+  color: var(--accent); // Use accent color in dark mode for better visibility
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) .page .title,
+  :root:not(.light-theme) .diabetes-guide .title,
+  :root:not(.light-theme) h1 {
+    color: var(--accent); // Apply for system dark theme preference too
+  }
+}
+
 // Table styling
 table {
   width: 100%;
@@ -831,3 +857,16 @@ table tbody tr:last-of-type {
   clear: both;
 }
 .hidden { display: none; }
+
+// Mermaid diagram styling
+.mermaid {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+// Dark theme adjustments for mermaid
+.dark-theme .mermaid {
+  filter: brightness(0.85);
+}

@@ -6,6 +6,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const [loading, setLoading] = React.useState(true);
     const [activeTab, setActiveTab] = React.useState('overview');
     const [selectedIntensity, setSelectedIntensity] = React.useState('medium');
+    const [themeMode, setThemeMode] = React.useState('light');
+
+    /* Check current theme on component mount and set up theme detection */
+    React.useEffect(function() {
+      /* Function to detect theme */
+      function detectTheme() {
+        if (document.documentElement.classList.contains('dark-theme')) {
+          setThemeMode('dark');
+        } else {
+          setThemeMode('light');
+        }
+      }
+      
+      /* Initialize theme detection */
+      detectTheme();
+      
+      /* Set up a mutation observer to detect theme changes */
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'class') {
+            detectTheme();
+          }
+        });
+      });
+      
+      /* Start observing document for class changes */
+      observer.observe(document.documentElement, { attributes: true });
+      
+      /* Clean up observer on component unmount */
+      return function() {
+        observer.disconnect();
+      };
+    }, []);
 
     /* Fetch data on component mount */
     React.useEffect(function() {
@@ -28,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         React.createElement(
           'div', { className: 'p-3 bg-blue-50 md:p-4' },
           React.createElement(
-            'h2', { className: 'text-lg font-semibold text-center md:text-xl' },
+            'h2', { className: 'text-lg font-semibold text-center md:text-xl', style: { color: 'white' } },
             'Loading...'
           )
         )
@@ -42,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         React.createElement(
           'div', { className: 'p-3 bg-red-50 md:p-4' },
           React.createElement(
-            'h2', { className: 'text-lg font-semibold text-center md:text-xl' },
+            'h2', { className: 'text-lg font-semibold text-center md:text-xl', style: { color: 'white' } },
             'Failed to load guide data'
           )
         )
@@ -215,12 +248,21 @@ document.addEventListener('DOMContentLoaded', function() {
       );
     };
 
+    /* Determine header color based on theme - enhanced for better visibility */
+    const headerStyle = {
+      color: 'white',
+      textShadow: '0px 1px 2px rgba(0, 0, 0, 0.2)'  /* Add text shadow for better contrast */
+    };
+
     return React.createElement(
       'div', { className: 'card' },
       React.createElement(
         'div', { className: 'p-3 bg-blue-50 md:p-4' },
         React.createElement(
-          'h2', { className: 'text-lg font-semibold text-center md:text-xl' },
+          'h2', { 
+            className: 'text-lg font-semibold text-center md:text-xl',
+            style: headerStyle
+          },
           'Training & Diabetes Management Guide'
         )
       ),
