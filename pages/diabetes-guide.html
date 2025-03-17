@@ -1,0 +1,22 @@
+---
+layout: default
+title: Training & Diabetes Management Guide
+permalink: /diabetes-guide/
+---
+
+<div class="content diabetes-guide">
+  <h1 class="title">{{ page.title }}</h1>
+  
+  <!-- React dependencies (loaded with defer for better performance) -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" defer></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" defer></script>
+  
+  <!-- Custom styles for the guide -->
+  <link rel="stylesheet" href="/assets/css/diabetes-guide.css">
+  
+  <!-- Guide container -->
+  <div id="diabetes-guide-root"></div>
+  
+  <!-- Load guide script -->
+  <script src="/assets/js/diabetes-guide.js" defer></script>
+</div>

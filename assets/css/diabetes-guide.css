@@ -1,0 +1,266 @@
+/* Diabetes Guide Styles */
+.diabetes-guide .card {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.diabetes-guide .tab-button {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition-property: background-color, border-color, color, fill, stroke;
+  font-size: 0.875rem;
+}
+
+.diabetes-guide .tab-button.active {
+  background-color: #dbeafe;
+}
+
+.diabetes-guide .tab-button:not(.active) {
+  background-color: #f9fafb;
+}
+
+.diabetes-guide .tab-button:not(.active):hover {
+  background-color: #f3f4f6;
+}
+
+.diabetes-guide .info-card {
+  padding: 0.75rem;
+  background-color: #dbeafe;
+  border-radius: 0.5rem;
+}
+
+.diabetes-guide .section-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .diabetes-guide .card {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .diabetes-guide .card {
+    max-width: 720px;
+  }
+  
+  .diabetes-guide .tab-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .diabetes-guide .info-card {
+    padding: 1rem;
+  }
+  
+  .diabetes-guide .section-title {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .diabetes-guide .card {
+    max-width: 960px;
+  }
+}
+
+/* Layout helpers */
+.diabetes-guide .space-y-1 > * + * {
+  margin-top: 0.25rem;
+}
+
+.diabetes-guide .space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.diabetes-guide .space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+.diabetes-guide .space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.diabetes-guide .gap-2 {
+  gap: 0.5rem;
+}
+
+.diabetes-guide .gap-3 {
+  gap: 0.75rem;
+}
+
+.diabetes-guide .mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.diabetes-guide .mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.diabetes-guide .mt-1 {
+  margin-top: 0.25rem;
+}
+
+.diabetes-guide .grid {
+  display: grid;
+}
+
+.diabetes-guide .flex {
+  display: flex;
+}
+
+.diabetes-guide .flex-wrap {
+  flex-wrap: wrap;
+}
+
+.diabetes-guide .flex-1 {
+  flex: 1 1 0%;
+}
+
+.diabetes-guide .justify-between {
+  justify-content: space-between;
+}
+
+.diabetes-guide .font-medium {
+  font-weight: 500;
+}
+
+.diabetes-guide .font-semibold {
+  font-weight: 600;
+}
+
+.diabetes-guide .text-center {
+  text-align: center;
+}
+
+.diabetes-guide .text-xs {
+  font-size: 0.75rem;
+}
+
+.diabetes-guide .text-sm {
+  font-size: 0.875rem;
+}
+
+.diabetes-guide .text-base {
+  font-size: 1rem;
+}
+
+.diabetes-guide .text-lg {
+  font-size: 1.125rem;
+}
+
+.diabetes-guide .text-xl {
+  font-size: 1.25rem;
+}
+
+.diabetes-guide .text-gray-600 {
+  color: #4b5563;
+}
+
+.diabetes-guide .capitalize {
+  text-transform: capitalize;
+}
+
+.diabetes-guide .p-2 {
+  padding: 0.5rem;
+}
+
+.diabetes-guide .p-3 {
+  padding: 0.75rem;
+}
+
+.diabetes-guide .p-4 {
+  padding: 1rem;
+}
+
+.diabetes-guide .pl-4 {
+  padding-left: 1rem;
+}
+
+.diabetes-guide .rounded {
+  border-radius: 0.25rem;
+}
+
+.diabetes-guide .rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.diabetes-guide .border {
+  border: 1px solid #e5e7eb;
+}
+
+.diabetes-guide .bg-white {
+  background-color: white;
+}
+
+.diabetes-guide .bg-blue-50 {
+  background-color: #dbeafe;
+}
+
+.diabetes-guide .bg-red-50 {
+  background-color: #fee2e2;
+}
+
+.diabetes-guide .list-disc {
+  list-style-type: disc;
+}
+
+@media (min-width: 768px) {
+  .diabetes-guide .md\:space-y-3 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  .diabetes-guide .md\:space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  .diabetes-guide .md\:gap-3 {
+    gap: 0.75rem;
+  }
+  
+  .diabetes-guide .md\:mb-3 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .diabetes-guide .md\:mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .diabetes-guide .md\:min-w-0 {
+    min-width: 0;
+  }
+  
+  .diabetes-guide .md\:p-3 {
+    padding: 0.75rem;
+  }
+  
+  .diabetes-guide .md\:p-4 {
+    padding: 1rem;
+  }
+  
+  .diabetes-guide .md\:text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .diabetes-guide .md\:text-base {
+    font-size: 1rem;
+  }
+  
+  .diabetes-guide .md\:text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .diabetes-guide .md\:text-xl {
+    font-size: 1.25rem;
+  }
+}
