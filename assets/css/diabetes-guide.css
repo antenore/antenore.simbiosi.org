@@ -50,9 +50,39 @@
   color: var(--primary, #2B5B84);
 }
 
-.diabetes-guide h2 {
-  color: var(--primary, #2B5B84);
-  font-size: 2.2rem;
+.diabetes-guide h1,
+.diabetes-guide .title {
+  color: var(--primary) !important;
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.dark-theme .diabetes-guide h1,
+.dark-theme .diabetes-guide .title,
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) .diabetes-guide h1,
+  :root:not(.light-theme) .diabetes-guide .title {
+    color: var(--accent) !important; /* Uso il colore accent per maggiore contrasto in dark mode */
+  }
+}
+
+
+
+.diabetes-guide h2,
+.diabetes-guide .section-title {
+  color: var(--primary) !important;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.dark-theme .diabetes-guide h2,
+.dark-theme .diabetes-guide .section-title,
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) .diabetes-guide h2,
+  :root:not(.light-theme) .diabetes-guide .section-title {
+    color: var(--accent) !important;
+  }
 }
 
 .diabetes-guide h3 {
@@ -78,9 +108,10 @@
 }
 
 .diabetes-guide .subtitle {
-  color: var(--text-light, #585858);
+  color: var(--text-light) !important;
   font-size: 1.6rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .diabetes-guide ul {
@@ -336,4 +367,29 @@
   .diabetes-guide .md\:text-xl {
     font-size: 2rem;
   }
+}
+
+.diabetes-guide {
+  color: var(--text-main);
+  background-color: var(--background);
+}
+
+.diabetes-guide .card {
+  background-color: var(--background);
+}
+
+.diabetes-guide .info-card {
+  background-color: var(--background-alt);
+}
+
+.diabetes-guide .tab-button {
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  background-color: var(--background-alt);
+}
+
+.diabetes-guide .tab-button.active {
+  background-color: var(--primary);
+  color: white !important;
+  border-color: var(--primary);
 }
