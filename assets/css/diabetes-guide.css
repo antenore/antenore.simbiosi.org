@@ -375,3 +375,38 @@
     font-size: 2rem;
   }
 }
+
+/* Fix for the blue header section to ensure text is visible in both light and dark modes */
+.diabetes-guide .bg-blue-50 {
+  background-color: var(--primary, #2B5B84);
+  position: relative;
+}
+
+.diabetes-guide .bg-blue-50 h2 {
+  color: white !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Enhance contrast for the tab buttons */
+.diabetes-guide .tab-button.active {
+  background-color: var(--primary, #2B5B84);
+  color: white !important;
+  border-color: var(--primary, #2B5B84);
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Accessibility helper for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

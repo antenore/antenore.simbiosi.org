@@ -248,16 +248,26 @@ document.addEventListener('DOMContentLoaded', function() {
       );
     };
 
-    /* Determine header color based on theme - enhanced for better visibility */
+    /* FIX: Ensure header text is always visible by applying proper contrast */
     const headerStyle = {
+      /* Use black text with white text shadow for better contrast in both light and dark modes */
       color: 'white',
-      textShadow: '0px 1px 2px rgba(0, 0, 0, 0.2)'  /* Add text shadow for better contrast */
+      textShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
+      fontWeight: 'bold'
     };
-
+    
+    /* FIX: Add a second header that is only visible for screen readers to ensure accessibility */
     return React.createElement(
       'div', { className: 'card' },
+      /* Header section with blue background */
       React.createElement(
         'div', { className: 'p-3 bg-blue-50 md:p-4' },
+        /* Visually hidden h2 for main title - will be read by screen readers */
+        React.createElement(
+          'span', { className: 'sr-only' },
+          'Training & Diabetes Management Guide'
+        ),
+        /* Visible title with improved contrast */
         React.createElement(
           'h2', { 
             className: 'text-lg font-semibold text-center md:text-xl',
@@ -266,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
           'Training & Diabetes Management Guide'
         )
       ),
+      /* Tab navigation and content section */
       React.createElement(
         'div', { className: 'p-2 md:p-4' },
         React.createElement(
