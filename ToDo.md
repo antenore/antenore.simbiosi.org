@@ -30,6 +30,8 @@
 - [x] Improve default layout for better space utilization
 - [x] Fix duplicated content on home page
 - [x] Update AWS Access Key blog post with cautionary notes and updated date
+- [x] Move pages to directory structure (about.md, blog.html, projects.html, tags.html, 404.html)
+- [x] Fix theme flickering when changing pages
 
 ## Immediate Focus
 

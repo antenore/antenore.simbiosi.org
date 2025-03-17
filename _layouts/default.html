@@ -41,6 +41,46 @@ layout: compress
     {% include favicon.html %}
     {% include open-graph.html %}
 
+    <!-- Prevent theme flickering by setting theme immediately -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark-theme');
+                    document.documentElement.classList.remove('light-theme');
+                } else if (savedTheme === 'light') {
+                    document.documentElement.classList.remove('dark-theme');
+                    document.documentElement.classList.add('light-theme');
+                } else {
+                    /* If no saved preference, check system preference */
+                    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        document.documentElement.classList.add('dark-theme');
+                        document.documentElement.classList.remove('light-theme');
+                    } else {
+                        document.documentElement.classList.remove('dark-theme');
+                        document.documentElement.classList.add('light-theme');
+                    }
+                    /* Save the initial theme preference */
+                    localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
+                }
+            } catch (e) {
+                /*  If localStorage is not available (e.g., in private browsing mode or blocked by cookie settings)
+                    Default to system preference without saving
+                */
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    document.documentElement.classList.add('dark-theme');
+                    document.documentElement.classList.remove('light-theme');
+                } else {
+                    document.documentElement.classList.remove('dark-theme');
+                    document.documentElement.classList.add('light-theme');
+                }
+            }
+        })();
+    </script>
+
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
     <!-- Preload FontAwesome for better performance -->
