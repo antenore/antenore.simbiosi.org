@@ -14,6 +14,7 @@ tag:
 category: blog
 author: antenore
 description: "How to implement secure AWS CLI access patterns and prevent the proliferation of long-lived IAM access keys in your AWS organization"
+updated_date: 2023-11-15
 ---
 
 ## The Access Key Problem
@@ -131,6 +132,25 @@ This policy works by:
 - Blocking access when the requester is an IAM user
 
 This simple but powerful control prevents the use of long-lived access keys while supporting proper SSO-based access patterns.
+
+### Important Cautionary Notes About aws:UserAgent
+
+While the approach described above can be effective as part of a defense-in-depth strategy, it's essential to understand its limitations:
+
+**AWS Documentation Warning**: AWS explicitly cautions against relying on `aws:UserAgent` as a primary security control. According to the [official AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-useragent):
+
+> Warning: This key should be used carefully. Since the aws:UserAgent value is provided by the caller in an HTTP header, unauthorized parties can use modified or custom browsers to provide any aws:UserAgent value that they choose.
+
+**Real-World Limitations**: In practical testing, I've observed inconsistent behavior with `aws:UserAgent` conditions. The User-Agent string can vary across different AWS SDK implementations, versions, and client applications. If you implement this approach and encounter unexpected access denials, I recommend engaging AWS Support to troubleshoot the specific User-Agent patterns in your environment.
+
+**Alternative Approaches**: Given these limitations, consider these more robust security controls:
+
+1. **IAM Access Key Lifecycle Management**: Implement automated key rotation and strict expiration policies
+2. **CloudTrail Monitoring**: Set up alerts for access key creation and usage from unexpected sources
+3. **IAM Identity Center (SSO)**: Focus on migrating all human users to temporary credentials
+4. **IAM Permission Boundaries**: Apply permission boundaries to limit what IAM users can do, even with valid credentials
+
+The SCP approach described in this article should be viewed as one component of a comprehensive strategy rather than a complete solution on its own.
 
 ## Handling Exceptions: Service Accounts
 

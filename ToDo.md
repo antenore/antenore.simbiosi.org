@@ -29,6 +29,7 @@
 - [x] Fix image display issues in blog posts
 - [x] Improve default layout for better space utilization
 - [x] Fix duplicated content on home page
+- [x] Update AWS Access Key blog post with cautionary notes and updated date
 
 ## Immediate Focus
 

@@ -689,6 +689,12 @@ input:focus + .slider {
     color: var(--text-light);
     font-size: 1.4rem;
     margin-bottom: 3rem;
+    
+    .updated-date {
+      font-style: italic;
+      font-size: 1.3rem;
+      margin-left: 0.5rem;
+    }
   }
 
   .tags {
