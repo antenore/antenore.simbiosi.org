@@ -33,6 +33,7 @@
 - [x] Move pages to directory structure (about.md, blog.html, projects.html, tags.html, 404.html)
 - [x] Fix theme flickering when changing pages
 - [x] Refactor Interactive Diabetes Guide for better performance and integration
+- [x] Improve Diabetes Guide styling to match blog theme
 
 ## Immediate Focus
 

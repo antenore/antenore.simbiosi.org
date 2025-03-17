@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
           'div', { className: 'info-card' },
           React.createElement('h3', { className: 'section-title' }, 'Key Principles'),
           React.createElement(
-            'ul', { className: 'space-y-1 text-sm md:text-base' },
+            'ul', { className: 'list-disc space-y-1 text-sm md:text-base' },
             mealTimingPrinciples.general.map(function(principle, i) {
-              return React.createElement('li', { key: i }, '• ' + principle);
+              return React.createElement('li', { key: i }, principle);
             })
           )
         )
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 meal.replace(/([A-Z])/g, ' $1').trim()
               ),
               React.createElement(
-                'ul', { className: 'list-disc pl-4 space-y-1 text-sm md:text-base' },
+                'ul', { className: 'list-disc space-y-1 text-sm md:text-base' },
                 items.map(function(item, i) {
                   return React.createElement('li', { key: i }, item);
                 })
@@ -176,9 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
               category + ' Timing'
             ),
             React.createElement(
-              'ul', { className: 'space-y-1 text-sm md:text-base' },
+              'ul', { className: 'list-disc space-y-1 text-sm md:text-base' },
               principles.map(function(principle, i) {
-                return React.createElement('li', { key: i }, '• ' + principle);
+                return React.createElement('li', { key: i }, principle);
               })
             )
           );
@@ -198,13 +198,13 @@ document.addEventListener('DOMContentLoaded', function() {
                   intensity.name
                 ),
                 React.createElement(
-                  'ul', { className: 'space-y-1 text-xs md:text-sm' },
+                  'ul', { className: 'list-disc space-y-1 text-xs md:text-sm' },
                   Object.entries(intensity.timing).map(function(timingEntry) {
                     const timeKey = timingEntry[0];
                     const value = timingEntry[1];
                     return React.createElement(
                       'li', { key: timeKey },
-                      '• ' + timeKey.replace(/([A-Z])/g, ' $1').trim() + ': ' + value
+                      timeKey.replace(/([A-Z])/g, ' $1').trim() + ': ' + value
                     );
                   })
                 )
@@ -242,7 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 className: 'tab-button flex-1 min-w-[calc(50%-0.5rem)] md:min-w-0 ' +
                   (activeTab === tab.id ? 'active' : '')
               },
-              tab.label
+              React.createElement('span', {}, tab.label.split(' ')[0]),
+              React.createElement('span', {}, tab.label.split(' ').slice(1).join(' '))
             );
           })
         ),
