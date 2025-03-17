@@ -14,7 +14,7 @@ tag:
 category: blog
 author: antenore
 description: "How to implement secure AWS CLI access patterns and prevent the proliferation of long-lived IAM access keys in your AWS organization"
-updated_date: 2023-11-15
+updated_date: 2025-03-17
 ---
 
 ## The Access Key Problem
