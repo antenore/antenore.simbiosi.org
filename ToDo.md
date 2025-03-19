@@ -34,12 +34,15 @@
 - [x] Fix theme flickering when changing pages
 - [x] Refactor Interactive Diabetes Guide for better performance and integration
 - [x] Improve Diabetes Guide styling to match blog theme
+- [x] Implement responsive images with srcset
+- [x] Implement WebP image format with fallbacks
+- [x] Create image gallery component
 
 ## Immediate Focus
 
 ### Performance Optimization
-- [ ] Implement responsive images with srcset
-- [ ] Further optimize CSS delivery
+- [ ] Run image optimization script on all assets
+- [ ] Implement preloading for critical images
 
 ### Accessibility Improvements
 - [ ] Add missing alt attributes to images

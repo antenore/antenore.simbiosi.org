@@ -1,0 +1,72 @@
+{% comment %}
+  Image gallery include
+  Usage: 
+  {% include image-gallery.html folder="/assets/posts/2025/my-gallery" %}
+  
+  This include automatically creates a responsive image gallery from all images in the specified folder.
+  It uses the responsive-image.html include for each image.
+{% endcomment %}
+
+<div class="image-gallery">
+  {% assign image_files = site.static_files | where: "image", true %}
+  {% assign gallery_images = image_files | where_exp: "item", "item.path contains include.folder" %}
+  
+  {% for image in gallery_images %}
+    {% assign image_path = image.path %}
+    {% assign image_basename = image.basename %}
+    {% assign image_ext = image.extname %}
+    
+    {% assign webp_path = image_path | replace: image_ext, '.webp' %}
+    {% assign webp_2x_path = image_path | replace: image_ext, '@2x.webp' %}
+    {% assign original_2x_path = image_path | replace: image_ext, '@2x' | append: image_ext %}
+    
+    <div class="gallery-item">
+      {% include responsive-image.html 
+        src=image_path 
+        srcset=image_path | append: ' 1x, ' | append: original_2x_path | append: ' 2x' 
+        webp_srcset=webp_path | append: ' 1x, ' | append: webp_2x_path | append: ' 2x' 
+        sizes="(max-width: 600px) 100vw, 600px" 
+        alt=image_basename | replace: '-', ' ' | capitalize 
+        class="gallery-image" 
+      %}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+  
+  /* Dark theme adjustments */
+  .dark-theme .gallery-item {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .dark-theme .gallery-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  }
+</style>

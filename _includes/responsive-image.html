@@ -1,13 +1,36 @@
 {% comment %}
-  Responsive image include che utilizza srcset e sizes per immagini responsive
-  Uso: {% include responsive-image.html src="path/to/image.jpg" srcset="path/to/image.webp 1x, path/to/image-2x.webp 2x" sizes="(max-width: 800px) 100vw, 800px" alt="Alt text" class="post-image" %}
+  Enhanced responsive image include with WebP support and fallbacks
+  Usage: 
+  {% include responsive-image.html 
+     src="path/to/image.jpg" 
+     srcset="path/to/image.jpg 1x, path/to/image@2x.jpg 2x" 
+     sizes="(max-width: 800px) 100vw, 800px" 
+     alt="Alt text" 
+     class="post-image" 
+     width="800" 
+     height="600" 
+     webp_srcset="path/to/image.webp 1x, path/to/image@2x.webp 2x"
+  %}
 {% endcomment %}
 
-<img 
-  src="{{ include.src | relative_url }}" 
-  {% if include.srcset %}srcset="{{ include.srcset }}"{% endif %}
-  {% if include.sizes %}sizes="{{ include.sizes }}"{% endif %}
-  alt="{{ include.alt }}" 
-  loading="lazy"
-  class="{{ include.class }}"
->
+<picture>
+  {% if include.webp_srcset %}
+  <!-- WebP version for browsers that support it -->
+  <source 
+    srcset="{{ include.webp_srcset }}" 
+    {% if include.sizes %}sizes="{{ include.sizes }}"{% endif %}
+    type="image/webp">
+  {% endif %}
+  
+  <!-- Original format as fallback -->
+  <img 
+    src="{{ include.src | relative_url }}" 
+    {% if include.srcset %}srcset="{{ include.srcset }}"{% endif %}
+    {% if include.sizes %}sizes="{{ include.sizes }}"{% endif %}
+    alt="{{ include.alt }}" 
+    loading="lazy"
+    class="{{ include.class }}"
+    {% if include.width %}width="{{ include.width }}"{% endif %}
+    {% if include.height %}height="{{ include.height }}"{% endif %}
+  >
+</picture>
