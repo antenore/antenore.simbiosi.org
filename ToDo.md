@@ -37,6 +37,12 @@
 - [x] Implement responsive images with srcset
 - [x] Implement WebP image format with fallbacks
 - [x] Create image gallery component
+- [x] Add missing alt attributes to images
+- [x] Implement automatic fallback alt text generation
+- [x] Add skip-to-content link for keyboard users
+- [x] Improve ARIA attributes in navigation and interactive elements
+- [x] Add proper roles and ARIA labels to components
+- [x] Create dedicated accessibility CSS file
 
 ## Immediate Focus
 
@@ -45,7 +51,6 @@
 - [ ] Implement preloading for critical images
 
 ### Accessibility Improvements
-- [ ] Add missing alt attributes to images
 - [ ] Fix color contrasts
 - [ ] Fix heading hierarchy
 

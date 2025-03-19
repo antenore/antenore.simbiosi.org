@@ -13,6 +13,12 @@
   %}
 {% endcomment %}
 
+{% assign alt_text = include.alt | default: "Image" %}
+{% if alt_text == "Image" or alt_text == "" %}
+  <!-- Warning: Missing descriptive alt text -->
+  {% assign alt_text = include.src | split: "/" | last | split: "." | first | replace: "-", " " | replace: "_", " " | capitalize %}
+{% endif %}
+
 <picture>
   {% if include.webp_srcset %}
   <!-- WebP version for browsers that support it -->
@@ -27,7 +33,7 @@
     src="{{ include.src | relative_url }}" 
     {% if include.srcset %}srcset="{{ include.srcset }}"{% endif %}
     {% if include.sizes %}sizes="{{ include.sizes }}"{% endif %}
-    alt="{{ include.alt }}" 
+    alt="{{ alt_text }}" 
     loading="lazy"
     class="{{ include.class }}"
     {% if include.width %}width="{{ include.width }}"{% endif %}

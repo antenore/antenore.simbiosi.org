@@ -1,13 +1,19 @@
 {% comment %}
   Image gallery include
   Usage: 
-  {% include image-gallery.html folder="/assets/posts/2025/my-gallery" %}
+  {% include image-gallery.html folder="/assets/posts/2025/my-gallery" title="My Gallery Title" %}
   
   This include automatically creates a responsive image gallery from all images in the specified folder.
   It uses the responsive-image.html include for each image.
 {% endcomment %}
 
-<div class="image-gallery">
+{% assign gallery_title = include.title | default: "Image Gallery" %}
+
+<div class="image-gallery" role="region" aria-label="{{ gallery_title }}">
+  {% if include.title %}
+    <h2 class="gallery-title">{{ include.title }}</h2>
+  {% endif %}
+  
   {% assign image_files = site.static_files | where: "image", true %}
   {% assign gallery_images = image_files | where_exp: "item", "item.path contains include.folder" %}
   
@@ -20,13 +26,18 @@
     {% assign webp_2x_path = image_path | replace: image_ext, '@2x.webp' %}
     {% assign original_2x_path = image_path | replace: image_ext, '@2x' | append: image_ext %}
     
+    {% assign alt_text = image_basename | replace: '-', ' ' | replace: '_', ' ' | capitalize %}
+    {% if alt_text contains "IMG" or alt_text contains "DSC" or alt_text contains "DCIM" %}
+      {% assign alt_text = gallery_title | append: " - Image " | append: forloop.index %}
+    {% endif %}
+    
     <div class="gallery-item">
       {% include responsive-image.html 
         src=image_path 
         srcset=image_path | append: ' 1x, ' | append: original_2x_path | append: ' 2x' 
         webp_srcset=webp_path | append: ' 1x, ' | append: webp_2x_path | append: ' 2x' 
         sizes="(max-width: 600px) 100vw, 600px" 
-        alt=image_basename | replace: '-', ' ' | capitalize 
+        alt=alt_text 
         class="gallery-image" 
       %}
     </div>
@@ -39,6 +50,11 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 1rem;
     margin: 2rem 0;
+  }
+  
+  .gallery-title {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
   }
   
   .gallery-item {

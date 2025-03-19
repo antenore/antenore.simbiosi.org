@@ -130,9 +130,8 @@ compress_html:
     envs:
       - development  # Skip compression when developing locally
       - stage        # Skip compression in staging environment
-  # Other options you could enable:
-  # clippings: all    # Remove all clippable elements
-  # comments: all     # Remove all comments
+  clippings: all      # Remove all clippable elements
+  comments: all       # Remove all comments
   # endings: all      # Remove all optional end tags
   # blanklines: false # Remove blank lines
   # profile: false    # Generate compression stats

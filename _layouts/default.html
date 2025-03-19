@@ -103,8 +103,12 @@ layout: compress
     <!-- Main stylesheet with prefers-color-scheme support -->
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/cookie-consent.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/css/accessibility.css" | relative_url }}">
 </head>
 <body>
+    <!-- Skip to content link for keyboard users -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQ55VPD2"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -121,7 +125,7 @@ layout: compress
             <!-- Enhanced navigation -->
             {% include nav.html %}
 
-            <main class="content {% if page.layout == "post" %}post{% else %}page{% endif %} {{ page.title | slugify }}">
+            <main id="main-content" class="content {% if page.layout == "post" %}post{% else %}page{% endif %} {{ page.title | slugify }}">
                 {{ content }}
             </main>
 
