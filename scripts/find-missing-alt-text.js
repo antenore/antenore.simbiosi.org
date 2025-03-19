@@ -184,8 +184,8 @@ async function generateReport() {
       
       for (const issue of result.issues) {
         report += `- **Line ${issue.line}**: ${issue.type} image without alt text\n`;
-        report += `  - Source: `${issue.src}`\n`;
-        report += `  - Snippet: `${issue.snippet.replace(/\n/g, ' ')}`\n\n`;
+        report += `  - Source: \`${issue.src}\`\n`;
+        report += `  - Snippet: \`${issue.snippet.replace(/\n/g, ' ')}\`\n\n`;
       }
     }
     

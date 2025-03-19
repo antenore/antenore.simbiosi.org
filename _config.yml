@@ -123,11 +123,19 @@ plugins:
   - jemoji
   - jekyll-spaceship
 
+# HTML Compression settings
+# See: https://jch.penibelst.de/ for documentation
 compress_html:
   ignore:
     envs:
-      - development
-      - stage
+      - development  # Skip compression when developing locally
+      - stage        # Skip compression in staging environment
+  # Other options you could enable:
+  # clippings: all    # Remove all clippable elements
+  # comments: all     # Remove all comments
+  # endings: all      # Remove all optional end tags
+  # blanklines: false # Remove blank lines
+  # profile: false    # Generate compression stats
 
 exclude:
   [
