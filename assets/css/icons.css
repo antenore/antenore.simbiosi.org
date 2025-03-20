@@ -1,4 +1,4 @@
-/* Icon styling for both Simple Icons (brands) and Feather (general purpose) */
+/* Icon styling for text-based icons */
 
 /* Simple Icons styling - used for brand icons */
 .simple-icon {
@@ -7,20 +7,8 @@
     opacity: 1;
     transition: opacity 0.3s ease;
     vertical-align: middle;
-}
-
-/* Feather icon styling - used for general purpose icons */
-[data-feather] {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-    vertical-align: middle;
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* Text-based share icons */
@@ -34,19 +22,18 @@
 }
 
 /* Adjust icon size in different contexts */
-.social-links .simple-icon,
-.social-links [data-feather] {
+.social-links .simple-icon {
     height: 24px;
     width: 24px;
+    font-size: 20px;
 }
 
 .social-share .simple-icon,
-.social-share [data-feather],
-.subscribe-options .simple-icon,
-.subscribe-options [data-feather] {
+.subscribe-options .simple-icon {
     height: 16px;
     width: 16px;
     margin-right: 8px;
+    font-size: 16px;
 }
 
 /* Ensure proper vertical alignment */
@@ -114,18 +101,8 @@
     color: #5dade2; /* Lighter blue on hover in dark mode */
 }
 
-/* Make sure icons in share buttons are colored appropriately */
-.social-share [data-feather] {
-    color: #3498db;
-}
-
-.dark-theme .social-share [data-feather] {
-    color: #3498db;
-}
-
 /* Ensure consistent color scheme support */
 @media (prefers-color-scheme: dark) {
-    .social-share [data-feather]:not(.dark-theme [data-feather]),
     .social-share .share-icon:not(.dark-theme .share-icon) {
         color: #3498db;
     }

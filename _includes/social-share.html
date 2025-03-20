@@ -57,7 +57,7 @@
             <a href="mailto:?subject={{ page.title | url_encode }}&body=Check%20out%20this%20article:%20{{ site.url }}{{ page.url }}" 
                rel="noopener" 
                aria-label="Share via Email">
-                <i data-feather="mail"></i> Share via Email
+                <span class="share-icon">✉</span> Share via Email
             </a>
         </li>
         
@@ -65,7 +65,7 @@
         <li>
             <a href="javascript:void(0);" onclick="copyToClipboard('{{ site.url }}{{ page.url }}')" 
                aria-label="Copy link to clipboard">
-                <i data-feather="copy"></i> Copy Link
+                <span class="share-icon">⧉</span> Copy Link
             </a>
         </li>
     </ul>

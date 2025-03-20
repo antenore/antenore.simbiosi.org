@@ -56,7 +56,7 @@ This document outlines the accessibility improvements made to the blog to ensure
 
 - **Icon Library Strategy**: 
   - Simple Icons for brand icons (Twitter/X, LinkedIn, GitHub, etc.)
-  - Feather icons for general purpose UI elements (mail, copy, etc.)
+  - Use UTF-8 characters for general purpose icons
 - **Proper Icon Labeling**: Added appropriate aria-label attributes to all icon links
 - **Icon Visibility**: Ensured icons are visible in both light and dark modes with proper contrast
 - **Semantic Markup**: Used aria-hidden="true" for decorative icons and alt="" for icon images

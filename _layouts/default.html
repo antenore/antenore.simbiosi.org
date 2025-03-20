@@ -82,23 +82,11 @@ layout: compress
     </script>
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
-
-    <!-- Preload Feather icons for better performance -->
-    <link rel="preload" href="https://unpkg.com/feather-icons/dist/feather.min.js" as="script" crossorigin="anonymous">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Load Feather icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js" crossorigin="anonymous"></script>
-    <script>
-      /* Initialize Feather icons when the document is ready */
-      document.addEventListener('DOMContentLoaded', function() {
-        feather.replace();
-      });
-    </script>
-
     {% if site.data.critical %}
     <!-- Inline critical CSS for faster rendering -->
     <style>
