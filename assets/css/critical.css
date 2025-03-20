@@ -11,161 +11,124 @@
     --background: #FFFFFF;  /* Main background (white) */
     --background-alt: #F5F5F5; /* Secondary background (very light gray) */
     --border: #DDDDDD;      /* Border color (light gray) */
-    --accent-color: #3D80B9; /* Blue for highlights */
-
+    
     /* Material Design variables */
     --elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     --elevation-2: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
     --border-radius: 4px;
     --transition-speed: 0.2s;
-
-    /* Spacing grid (8px based) */
-    --space-1: 8px;
-    --space-2: 16px;
-    --space-3: 24px;
-    --space-4: 32px;
+    
+    /* Spacing system (8px grid) */
+    --space-1: 0.5rem;  /* 8px */
+    --space-2: 1rem;    /* 16px */
+    --space-3: 1.5rem;  /* 24px */
+    --space-4: 2rem;    /* 32px */
+    --space-5: 3rem;    /* 48px */
+    
+    /* Typography */
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height: 1.5;
+    
+    /* Container widths */
+    --content-width: 800px;
+    --wide-width: 1200px;
 }
 
 /* Dark theme variables */
 .dark-theme {
     --primary: #FFFFFF;     /* Primary text (white) */
-    --secondary: #DDDDDD;   /* Secondary text (light gray - improved contrast) */
-    --accent: #82B7F0;      /* Links (bright light blue with 7:1 contrast ratio) */
+    --secondary: #CCCCCC;   /* Secondary text (light gray) */
+    --accent: #4D9FFF;      /* Links (lighter blue for dark mode) */
     --text-main: #FFFFFF;   /* Main text color (white) */
-    --text-light: #DDDDDD;  /* Secondary text color (light gray) */
-    --background: #121212;  /* Main background (near black) */
-    --background-alt: #222222; /* Secondary background (dark gray) */
-    --border: #444444;      /* Border color (medium gray) */
-    --accent-color: #3D80B9; /* Blue for highlights */
-    
-    /* Darker shadows for dark mode */
-    --elevation-1: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.36);
-    --elevation-2: 0 3px 6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.24);
+    --text-light: #CCCCCC;  /* Secondary text color (light gray) */
+    --background: #121212;  /* Main background (dark gray) */
+    --background-alt: #1E1E1E; /* Secondary background (slightly lighter dark gray) */
+    --border: #333333;      /* Border color (dark gray) */
 }
 
-/* Basic reset and typography */
-body {
+/* Basic styles to avoid flash of unstyled content */
+html, body {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    line-height: 1.7;
-    color: var(--text-main);
-    background-color: var(--background);
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Ensure content doesn't shift when scrollbar appears */
-html {
+    font-family: var(--font-sans);
     font-size: 62.5%;
-    overflow-y: scroll;
 }
 
-/* Basic layout */
+body {
+    background: var(--background);
+    color: var(--text-main);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .wrapper {
-    max-width: 810px;
+    width: 90%;
+    max-width: var(--content-width);
     margin: 0 auto;
     padding: 0 var(--space-2);
 }
 
-/* Header styles */
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: var(--space-4) auto var(--space-3);
+/* Minimal header styles */
+h1, h2, h3 {
+    color: var(--primary);
 }
 
-@media (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        text-align: center;
-    }
+/* Avatar styles */
+.selfie {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    background-color: var(--border);
+    clip-path: circle();
+    object-fit: cover;
+    display: block;
 }
 
-/* Navigation */
+/* Navigation styles */
 .nav-home {
-    margin: var(--space-2) 0;
+    background-color: var(--primary);
+    width: 100%;
+    box-shadow: var(--elevation-1);
+    margin-bottom: var(--space-3);
 }
 
 .nav-home .list {
     display: flex;
     justify-content: center;
     list-style: none;
+    list-style-type: none;
+    overflow: hidden;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    max-width: var(--content-width);
 }
 
 .nav-home .item {
-    margin: 0 var(--space-1);
+    margin: 0;
+    float: left;
 }
 
 .nav-home .link {
-    color: var(--accent);
-    font-size: 1.6rem;
-    text-decoration: underline;
-    font-weight: 400;
-    transition: color var(--transition-speed) ease;
+    display: block;
+    color: var(--background);
+    text-align: center;
+    padding: var(--space-2) var(--space-3);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .nav-home .link:hover,
 .nav-home .link:focus {
-    color: var(--primary);
+    background-color: var(--accent);
+    color: var(--background);
 }
 
 .nav-home .link.active {
-    color: var(--primary);
-    font-weight: 700;
-}
-
-/* Basic link styling */
-a {
-    color: var(--accent);
-    text-decoration: underline;
-    transition: color var(--transition-speed) ease;
-}
-
-a:hover,
-a:focus {
-    color: var(--primary);
-}
-
-/* Basic typography */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--primary);
-    font-weight: 700;
-    margin: var(--space-3) 0 var(--space-2);
-}
-
-h1 { font-size: 3.2rem; }
-h2 { font-size: 2.6rem; }
-h3 { font-size: 2.0rem; }
-
-/* Card styling */
-.card {
-    background-color: var(--background);
-    border-radius: var(--border-radius);
-    padding: var(--space-2);
-    margin-bottom: var(--space-3);
-    box-shadow: var(--elevation-1);
-    transition: box-shadow var(--transition-speed) ease;
-}
-
-.card:hover {
-    box-shadow: var(--elevation-2);
-}
-
-/* Mobile optimizations */
-@media (max-width: 480px) {
-    .wrapper {
-        padding: 0 var(--space-1);
-    }
-    
-    h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.2rem; }
-    
-    .nav-home .list {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+    background-color: var(--accent);
+    color: var(--background);
+    font-weight: var(--font-weight-bold);
 }

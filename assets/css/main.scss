@@ -256,7 +256,7 @@ a {
 }
 
 .nav-home {
-  background-color: var(--accent-color);
+  background-color: var(--primary);
   width: 100%;
   box-shadow: var(--elevation-1);
   margin-bottom: var(--space-3);
@@ -292,16 +292,27 @@ a {
     
     &:hover,
     &:focus {
-      background-color: var(--accent-hover);
+      background-color: var(--accent);
       color: var(--background);
     }
     
     &.active {
-      background-color: var(--accent-color);
+      background-color: var(--accent);
       color: var(--background);
       font-weight: var(--font-weight-bold);
     }
   }
+}
+
+// Author avatar
+.selfie {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background-color: var(--border);
+  clip-path: circle();
+  object-fit: cover;
+  display: block;
 }
 
 // Footer

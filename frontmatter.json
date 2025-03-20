@@ -7,41 +7,59 @@
       "previewPath": null,
       "fields": [
         {
-          "title": "Title",
+          "title": "title",
           "name": "title",
           "type": "string"
         },
         {
-          "title": "Description",
-          "name": "description",
+          "title": "layout",
+          "name": "layout",
           "type": "string"
         },
         {
-          "title": "Publishing date",
-          "name": "date",
-          "type": "datetime",
-          "default": "{{now}}",
-          "isPublishDate": true
-        },
-        {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
-        },
-        {
-          "title": "Is in draft",
-          "name": "draft",
-          "type": "draft"
-        },
-        {
-          "title": "Tags",
+          "title": "tags",
           "name": "tags",
           "type": "tags"
         },
         {
-          "title": "Categories",
-          "name": "categories",
+          "title": "image",
+          "name": "image",
+          "type": "image"
+        },
+        {
+          "title": "headerImage",
+          "name": "headerImage",
+          "type": "image"
+        },
+        {
+          "title": "projects",
+          "name": "projects",
+          "type": "boolean"
+        },
+        {
+          "title": "hidden",
+          "name": "hidden",
+          "type": "boolean"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "category",
+          "name": "category",
           "type": "categories"
+        },
+        {
+          "title": "author",
+          "name": "author",
+          "type": "string"
+        },
+        {
+          "title": "externalLink",
+          "name": "externalLink",
+          "type": "string"
         }
       ]
     }
@@ -57,11 +75,8 @@
     {
       "title": "pages",
       "path": "[[workspace]]/pages"
-    },
-    {
-      "title": "posts",
-      "path": "[[workspace]]/_posts"
     }
   ],
-  "frontMatter.git.enabled": false
+  "frontMatter.git.enabled": false,
+  "frontMatter.website.host": "https://antenore.simbiosi.org"
 }

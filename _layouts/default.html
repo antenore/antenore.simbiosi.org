@@ -87,12 +87,8 @@ layout: compress
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    {% if site.data.critical %}
     <!-- Inline critical CSS for faster rendering -->
-    <style>
-        {{ site.data.critical }}
-    </style>
-    {% endif %}
+    <link rel="stylesheet" href="{{ "/assets/css/critical.css" | relative_url }}">
 
     <!-- Main stylesheet with prefers-color-scheme support -->
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">

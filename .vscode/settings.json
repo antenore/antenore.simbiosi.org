@@ -7,5 +7,6 @@
         "editor.lineNumbers": "off",
         "editor.quickSuggestions": false,
         "editor.minimap.enabled": false
-    }
+    },
+    "frontMatter.panel.openOnSupportedFile": true
 }
