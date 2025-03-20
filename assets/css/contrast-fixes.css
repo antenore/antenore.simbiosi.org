@@ -1,26 +1,29 @@
 /* Contrast fixes to meet WCAG 2 AA standards */
 
 /* Navigation links - overriding critical.css */
-.nav a {
+:not(.dark-theme) .nav a,
+:not(.dark-theme) .nav-home .link {
     color: #0d47a1; /* Darker blue with better contrast */
     font-weight: 600;
     text-decoration: underline;
 }
 
-.nav a:hover,
-.nav a:focus {
+:not(.dark-theme) .nav a:hover,
+:not(.dark-theme) .nav a:focus,
+:not(.dark-theme) .nav-home .link:hover,
+:not(.dark-theme) .nav-home .link:focus {
     color: #0a3170; /* Even darker on hover/focus */
     text-decoration: underline;
 }
 
-.nav a[aria-current="page"],
-.nav-home .link.active {
+:not(.dark-theme) .nav a[aria-current="page"],
+:not(.dark-theme) .nav-home .link.active {
     color: #000000; /* Black for active link */
     font-weight: 700;
 }
 
 /* Fix for active navigation link background color */
-.nav-home .link.active {
+:not(.dark-theme) .nav-home .link.active {
     background-color: #1a5a9e; /* Darker blue background for better contrast with white text */
     color: #ffffff;
     font-weight: 700;

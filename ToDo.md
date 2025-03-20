@@ -49,6 +49,7 @@
 - [x] Style social share buttons and footer social links
 - [x] Unify icon styles using text-based icons for consistency
 - [x] Remove unnecessary includes (related-posts.html, subscribe.html)
+- [x] Improve navigation link contrast for better accessibility
 
 ## Immediate Focus
 
