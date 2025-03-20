@@ -1,43 +1,7 @@
 <footer class="footer">
     <div class="container">
         <!-- Social links in the footer -->
-        <div class="social-links">
-            {% if site.facebook %}
-                <a href="https://facebook.com/{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Visit our Facebook page">
-                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/facebook.svg" alt="" aria-hidden="true" class="simple-icon" />
-                </a>
-            {% endif %}
-            
-            {% if site.twitter %}
-                <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Visit our Twitter/X page">
-                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="" aria-hidden="true" class="simple-icon" />
-                </a>
-            {% endif %}
-            
-            {% if site.linkedin %}
-                <a href="https://linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Visit our LinkedIn profile">
-                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" class="simple-icon" />
-                </a>
-            {% endif %}
-            
-            {% if site.github %}
-                <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="Visit our GitHub profile">
-                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="" aria-hidden="true" class="simple-icon" />
-                </a>
-            {% endif %}
-            
-            {% if site.gitlab %}
-                <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="Visit our GitLab profile">
-                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/gitlab.svg" alt="" aria-hidden="true" class="simple-icon" />
-                </a>
-            {% endif %}
-            
-            {% if site.email %}
-                <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Send us an email">
-                    <span class="simple-icon">✉</span>
-                </a>
-            {% endif %}
-        </div>
+        {% include social-links.html %}
         
         <!-- Copyright information -->
         <p class="copyright">

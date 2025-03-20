@@ -1,3 +1,9 @@
+---
+title: Accessibility Improvements
+layout: page
+permalink: /accessibility/
+---
+
 # Accessibility Improvements
 
 This document outlines the accessibility improvements made to the blog to ensure it's usable by people with disabilities and complies with web accessibility standards.
