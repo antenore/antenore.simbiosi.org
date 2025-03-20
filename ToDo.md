@@ -64,6 +64,8 @@
 - [x] Create consistent spacing using 8px grid system
 - [x] Add subtle elevation shadows for interactive elements
 - [x] Implement smooth transitions for state changes
+- [x] Replace deprecated Sass @import with @use
+- [x] Fix Sass color functions to work with CSS variables
 
 ## Immediate Focus
 

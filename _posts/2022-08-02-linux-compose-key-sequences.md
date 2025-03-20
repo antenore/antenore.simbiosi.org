@@ -1,7 +1,7 @@
 ---
 title: "Linux Compose Key Sequences"
 layout: post
-tag:
+tags:
 - shell
 - unix
 - compose

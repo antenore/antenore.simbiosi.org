@@ -2,7 +2,7 @@
 title: "Taming AWS Marketplace: Governance in Complex Multi-Account Environments"
 layout: post
 permalink: /blog/2025/03/aws-marketplace-governance/
-tag:
+tags:
 - AWS
 - cloud-governance
 - marketplace

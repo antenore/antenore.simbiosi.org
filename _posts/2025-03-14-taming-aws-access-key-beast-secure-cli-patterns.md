@@ -2,7 +2,7 @@
 title: "Taming the AWS Access Key Beast: Implementing Secure CLI Access Patterns"
 layout: post
 permalink: /blog/2025/03/taming-aws-access-key-beast-secure-cli-patterns/
-tag:
+tags:
 - AWS
 - cloud-governance
 - security

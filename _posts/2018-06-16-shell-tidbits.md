@@ -3,7 +3,7 @@ title: "Shell tidbits"
 layout: post
 image: /assets/images/shell-symbolic.svg
 headerImage: true
-tag:
+tags:
 - shell
 - unix
 category: blog

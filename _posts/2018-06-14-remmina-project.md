@@ -1,7 +1,11 @@
 ---
 title: "Remmina - The Gtk remote desktop client"
 layout: post
-tag: remmina
+tags:
+- remmina
+- remote-desktop
+- gtk
+- project
 image: https://remmina.org/assets/images/org.remmina.Remmina.webp
 headerImage: true
 projects: true

@@ -2,7 +2,7 @@
 title: "Enhancing No-Comment with Email Encryption"
 layout: post
 permalink: /no-comment-encrypted/
-tag:
+tags:
 - security
 - privacy
 - encryption

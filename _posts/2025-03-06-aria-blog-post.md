@@ -1,7 +1,7 @@
 ---
 title: "ARIA: Governing AI Participation in Software Development"
 layout: post
-tag:
+tags:
 - AWS
 - cloud-governance
 - security

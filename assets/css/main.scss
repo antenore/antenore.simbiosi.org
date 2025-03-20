@@ -6,8 +6,8 @@
  */
 
 // Import normalize first for consistent cross-browser rendering
-@import "normalize";
-@import "highlight";
+@use "normalize";
+@use "highlight";
 
 // Font optimization
 @font-face {
@@ -32,6 +32,7 @@
   --primary: #000000;     // Primary text (black)
   --secondary: #333333;   // Secondary text (dark gray, better contrast)
   --accent: #0066cc;      // Links (accessible blue with better contrast)
+  --accent-hover: #004c99; // Darker accent for hover states (pre-calculated)
   --text-main: #000000;   // Main text color (black)
   --text-light: #333333;  // Secondary text color (dark gray)
   --background: #FFFFFF;  // Main background (white)
@@ -80,6 +81,7 @@
     --primary: #FFFFFF;     // Primary text (white)
     --secondary: #DDDDDD;   // Secondary text (light gray - improved contrast)
     --accent: #82B7F0;      // Links (bright light blue with 7:1 contrast ratio)
+    --accent-hover: #a9d1ff; // Lighter accent for hover states in dark mode (pre-calculated)
     --text-main: #FFFFFF;   // Main text color (white)
     --text-light: #DDDDDD;  // Secondary text color (light gray)
     --background: #121212;  // Main background (near black)
@@ -99,6 +101,7 @@
   --primary: #FFFFFF;     // Primary text (white)
   --secondary: #DDDDDD;   // Secondary text (light gray - improved contrast)
   --accent: #82B7F0;      // Links (bright light blue with 7:1 contrast ratio)
+  --accent-hover: #a9d1ff; // Lighter accent for hover states in dark mode (pre-calculated)
   --text-main: #FFFFFF;   // Main text color (white)
   --text-light: #DDDDDD;  // Secondary text color (light gray)
   --background: #121212;  // Main background (near black)
@@ -117,6 +120,7 @@
   --primary: #000000;     // Primary text (black)
   --secondary: #333333;   // Secondary text (dark gray, better contrast)
   --accent: #0066cc;      // Links (accessible blue with better contrast)
+  --accent-hover: #004c99; // Darker accent for hover states (pre-calculated)
   --text-main: #000000;   // Main text color (black)
   --text-light: #333333;  // Secondary text color (dark gray)
   --background: #FFFFFF;  // Main background (white)
@@ -168,7 +172,7 @@ a {
   
   &:hover,
   &:focus {
-    color: darken(var(--accent), 15%);
+    color: var(--accent-hover);
   }
 }
 
@@ -235,7 +239,7 @@ a {
     
     &:hover,
     &:focus {
-      color: var(--primary);
+      color: var(--accent-hover);
     }
   }
 }
@@ -260,7 +264,7 @@ a {
     
     &:hover,
     &:focus {
-      color: var(--primary);
+      color: var(--accent-hover);
     }
     
     &.active {
@@ -460,7 +464,7 @@ blockquote {
 :not(.dark-theme) .nav a:focus,
 :not(.dark-theme) .nav-home .link:hover,
 :not(.dark-theme) .nav-home .link:focus {
-  color: darken(var(--accent), 15%);
+  color: var(--accent-hover);
   text-decoration: underline;
 }
 

@@ -2,7 +2,7 @@
 title: "No-Comment: Adding GitLab Support to a Static Comments Service"
 layout: post
 permalink: /no-comment/
-tag:
+tags:
 - gitlab
 - jekyll
 - comments
