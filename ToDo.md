@@ -66,6 +66,7 @@
 - [x] Implement smooth transitions for state changes
 - [x] Replace deprecated Sass @import with @use
 - [x] Fix Sass color functions to work with CSS variables
+- [x] Improve navigation styling for better usability and accessibility
 
 ## Immediate Focus
 

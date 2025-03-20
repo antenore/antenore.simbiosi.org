@@ -7,6 +7,8 @@
   --primary: #2B5B84;
   --secondary: #B7410E;
   --accent: #268BD2;
+  --accent-color: #268BD2;
+  --accent-hover: rgba(255, 255, 255, 0.1);
   --background: #FFFFFF;
   --background-alt: #F8F8F8;
   --text-main: #2D2D2D;
@@ -19,6 +21,10 @@
   --font-weight-bold: 700;
   --content-width-normal: 560px;
   --content-width-large: 810px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --elevation-1: 0 2px 4px rgba(0,0,0,0.15);
 }
 
 /* Dark theme detection */
@@ -27,6 +33,8 @@
     --primary: #3D80B9;
     --secondary: #E05A21;
     --accent: #5DA8E0;
+    --accent-color: #5DA8E0;
+    --accent-hover: rgba(0, 0, 0, 0.2);
     --background: #121212;
     --background-alt: #1E1E1E;
     --text-main: #DDDDDD;
@@ -40,6 +48,8 @@
   --primary: #3D80B9;
   --secondary: #E05A21;
   --accent: #5DA8E0;
+  --accent-color: #5DA8E0;
+  --accent-hover: rgba(0, 0, 0, 0.2);
   --background: #121212;
   --background-alt: #1E1E1E;
   --text-main: #DDDDDD;
@@ -80,6 +90,7 @@ h1, h2, h3 {
   height: 125px;
   border-radius: 50%;
   background-color: var(--border);
+  clip-path: circle();
 }
 
 /* Basic animations */
@@ -110,4 +121,49 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Navigation styles */
+.nav-home {
+  background-color: var(--accent-color);
+  width: 100%;
+  box-shadow: var(--elevation-1);
+  margin-bottom: var(--space-3);
+}
+
+.nav-home .list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  list-style-type: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.nav-home .item {
+  margin: 0;
+  float: left;
+}
+
+.nav-home .link {
+  display: block;
+  color: var(--background);
+  text-align: center;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-home .link:hover,
+.nav-home .link:focus {
+  background-color: var(--accent-hover);
+  color: var(--background);
+}
+
+.nav-home .link.active {
+  background-color: var(--accent-color);
+  color: var(--background);
+  font-weight: var(--font-weight-bold);
 }

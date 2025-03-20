@@ -6,8 +6,8 @@
  */
 
 // Import normalize first for consistent cross-browser rendering
-@use "normalize";
-@use "highlight";
+@use "normalize" as *;
+@use "highlight" as *;
 
 // Font optimization
 @font-face {
@@ -178,20 +178,31 @@ a {
 
 // Layout
 .wrapper {
-  width: 90%;
-  max-width: var(--content-width-large);
+  height: 100%;
+  width: 100%;
+}
+
+.normal {
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 0 var(--space-2);
+}
+
+.large {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.content-container {
+  width: 100%;
+  padding: 0;
 }
 
 .content {
+  padding: var(--space-2);
+  max-width: 800px;
   margin: 0 auto;
-  max-width: var(--content-width-normal);
-}
-
-.wide-content {
-  margin: 0 auto;
-  max-width: var(--content-width-large);
 }
 
 // Header
@@ -245,30 +256,49 @@ a {
 }
 
 .nav-home {
+  background-color: var(--accent-color);
+  width: 100%;
+  box-shadow: var(--elevation-1);
+  margin-bottom: var(--space-3);
+  
+  // ul
   .list {
     display: flex;
     justify-content: center;
     list-style: none;
+    list-style-type: none;
+    overflow: hidden;
     padding: 0;
     margin: 0;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
+  // li
   .item {
-    margin: 0 var(--space-1);
+    margin: 0;
+    float: left;
   }
   
+  // a
   .link {
-    color: var(--accent);
-    text-decoration: underline;
+    display: block;
+    color: var(--background); // Use background color for maximum contrast
+    text-align: center;
+    padding: var(--space-2) var(--space-3);
+    text-decoration: none;
     font-weight: var(--font-weight-normal);
+    transition: background-color 0.3s ease;
     
     &:hover,
     &:focus {
-      color: var(--accent-hover);
+      background-color: var(--accent-hover);
+      color: var(--background);
     }
     
     &.active {
-      color: var(--primary);
+      background-color: var(--accent-color);
+      color: var(--background);
       font-weight: var(--font-weight-bold);
     }
   }
