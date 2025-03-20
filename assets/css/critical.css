@@ -1,28 +1,46 @@
-/* Critical CSS for fast initial page rendering */
+/* Critical CSS for fast initial page rendering - Material Design Influenced */
 
 /* CSS Variables for theming */
 :root {
     /* Light Mode */
     --primary: #000000;     /* Primary text (black) */
-    --secondary: #444444;   /* Secondary text (dark gray) */
-    --accent: #0047AB;      /* Links (accessible blue) */
+    --secondary: #333333;   /* Secondary text (dark gray, better contrast) */
+    --accent: #0066cc;      /* Links (accessible blue with better contrast) */
     --text-main: #000000;   /* Main text color (black) */
-    --text-light: #444444;  /* Secondary text color (dark gray) */
+    --text-light: #333333;  /* Secondary text color (dark gray) */
     --background: #FFFFFF;  /* Main background (white) */
-    --background-alt: #F8F8F8; /* Secondary background (light gray) */
-    --border: #E0E0E0;      /* Border color (lighter gray) */
+    --background-alt: #F5F5F5; /* Secondary background (very light gray) */
+    --border: #DDDDDD;      /* Border color (light gray) */
+    --accent-color: #3D80B9; /* Blue for highlights */
+
+    /* Material Design variables */
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --elevation-2: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+    --border-radius: 4px;
+    --transition-speed: 0.2s;
+
+    /* Spacing grid (8px based) */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
 }
 
 /* Dark theme variables */
 .dark-theme {
     --primary: #FFFFFF;     /* Primary text (white) */
-    --secondary: #CCCCCC;   /* Secondary text (light gray) */
-    --accent: #6DB4F0;      /* Links (light blue) */
+    --secondary: #DDDDDD;   /* Secondary text (light gray - improved contrast) */
+    --accent: #82B7F0;      /* Links (bright light blue with 7:1 contrast ratio) */
     --text-main: #FFFFFF;   /* Main text color (white) */
-    --text-light: #CCCCCC;  /* Secondary text color (light gray) */
+    --text-light: #DDDDDD;  /* Secondary text color (light gray) */
     --background: #121212;  /* Main background (near black) */
-    --background-alt: #1E1E1E; /* Secondary background (dark gray) */
-    --border: #333333;      /* Border color (medium gray) */
+    --background-alt: #222222; /* Secondary background (dark gray) */
+    --border: #444444;      /* Border color (medium gray) */
+    --accent-color: #3D80B9; /* Blue for highlights */
+    
+    /* Darker shadows for dark mode */
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.36);
+    --elevation-2: 0 3px 6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.24);
 }
 
 /* Basic reset and typography */
@@ -30,7 +48,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-main);
     background-color: var(--background);
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -46,33 +64,56 @@ html {
 .wrapper {
     max-width: 810px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--space-2);
 }
 
 /* Header styles */
 .header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    margin: 5rem auto 3rem;
+    justify-content: space-between;
+    margin: var(--space-4) auto var(--space-3);
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* Navigation */
-.nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3rem;
+.nav-home {
+    margin: var(--space-2) 0;
 }
 
-.nav a {
-    margin: 0 1rem;
+.nav-home .list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-home .item {
+    margin: 0 var(--space-1);
+}
+
+.nav-home .link {
     color: var(--accent);
     font-size: 1.6rem;
     text-decoration: underline;
-    font-weight: 600;
+    font-weight: 400;
+    transition: color var(--transition-speed) ease;
 }
 
-.nav a[aria-current="page"] {
+.nav-home .link:hover,
+.nav-home .link:focus {
+    color: var(--primary);
+}
+
+.nav-home .link.active {
     color: var(--primary);
     font-weight: 700;
 }
@@ -81,24 +122,50 @@ html {
 a {
     color: var(--accent);
     text-decoration: underline;
-    transition: color 0.2s ease;
+    transition: color var(--transition-speed) ease;
 }
 
 a:hover,
 a:focus {
-    color: #003380; /* Darker blue for hover/focus */
+    color: var(--primary);
 }
 
 /* Basic typography */
 h1, h2, h3, h4, h5, h6 {
     color: var(--primary);
     font-weight: 700;
-    margin: 1.5rem 0 1rem;
+    margin: var(--space-3) 0 var(--space-2);
 }
 
 h1 { font-size: 3.2rem; }
 h2 { font-size: 2.6rem; }
+h3 { font-size: 2.0rem; }
 
-p {
-    margin: 0 0 1.5rem;
+/* Card styling */
+.card {
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    padding: var(--space-2);
+    margin-bottom: var(--space-3);
+    box-shadow: var(--elevation-1);
+    transition: box-shadow var(--transition-speed) ease;
+}
+
+.card:hover {
+    box-shadow: var(--elevation-2);
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .wrapper {
+        padding: 0 var(--space-1);
+    }
+    
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.2rem; }
+    
+    .nav-home .list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }

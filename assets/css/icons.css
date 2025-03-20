@@ -1,4 +1,4 @@
-/* Icon styling for minimalist black & white theme */
+/* Icon styling for minimalist black & white theme with Material Design influences */
 
 /* Simple Icons styling - used for brand icons */
 .simple-icon {
@@ -44,13 +44,13 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1.5rem 0;
+    gap: var(--space-2);
+    margin: var(--space-3) 0;
 }
 
 /* Individual social link */
-.social-links a {
-    display: flex;
+.social-links .link {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -58,46 +58,40 @@
     border-radius: 50%;
     color: var(--text-main);
     background-color: var(--background);
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover,
-.social-links a:focus {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.social-links .link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    transition: transform 0.2s ease;
-    border-radius: 50%;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: var(--elevation-1);
 }
 
 .social-links .link:hover,
 .social-links .link:focus {
     transform: translateY(-2px);
+    box-shadow: var(--elevation-2);
+    color: var(--accent-color);
 }
 
 .social-links .simple-icon {
     width: 24px;
     height: 24px;
     filter: invert(0%);
+    transition: all var(--transition-speed) ease;
 }
 
 .dark-theme .social-links .simple-icon {
     filter: invert(100%);
 }
 
+.social-links .link:hover .simple-icon,
+.social-links .link:focus .simple-icon {
+    transform: scale(1.1);
+}
+
 /* Social share buttons */
 .social-share {
-    margin: 2rem 0;
+    margin: var(--space-3) 0;
 }
 
 .social-share h4 {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-2);
     font-size: 1.6rem;
     color: var(--text-main);
 }
@@ -108,27 +102,58 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 0.5rem;
+    gap: var(--space-1);
 }
 
 .social-share .share-buttons li {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-1);
 }
 
 .social-share .share-buttons a {
     display: inline-flex;
     align-items: center;
-    padding: 0.5rem 0.75rem;
+    padding: var(--space-1) var(--space-2);
     color: var(--text-main);
     text-decoration: none;
-    transition: color 0.2s ease;
-    border-bottom: 1px solid transparent;
+    transition: all var(--transition-speed) ease;
+    border-radius: var(--border-radius);
+    background-color: var(--background-alt);
+    box-shadow: var(--elevation-1);
 }
 
 .social-share .share-buttons a:hover,
 .social-share .share-buttons a:focus {
-    color: var(--accent);
-    border-bottom: 1px solid var(--accent);
+    color: var(--accent-color);
+    box-shadow: var(--elevation-2);
+    transform: translateY(-1px);
+}
+
+.social-share .share-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--space-1);
+    font-weight: bold;
+}
+
+/* Accessibility improvements */
+.social-links .link:focus,
+.social-share .share-buttons a:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .social-share .share-buttons {
+        justify-content: center;
+    }
+    
+    .social-links {
+        gap: var(--space-1);
+    }
 }
 
 /* Author social links */

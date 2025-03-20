@@ -1,9 +1,9 @@
-/* Contrast fixes to meet WCAG 2 AA standards */
+/* Contrast fixes to meet WCAG 2.1 AA standards - Material Design influenced */
 
 /* Navigation links - overriding critical.css */
 :not(.dark-theme) .nav a,
 :not(.dark-theme) .nav-home .link {
-    color: #0d47a1; /* Darker blue with better contrast */
+    color: #0066cc; /* Accessible blue with 4.5:1 contrast ratio */
     font-weight: 600;
     text-decoration: underline;
 }
@@ -12,104 +12,147 @@
 :not(.dark-theme) .nav a:focus,
 :not(.dark-theme) .nav-home .link:hover,
 :not(.dark-theme) .nav-home .link:focus {
-    color: #0a3170; /* Even darker on hover/focus */
+    color: #004c99; /* Darker on hover/focus */
     text-decoration: underline;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
 }
 
 :not(.dark-theme) .nav a[aria-current="page"],
 :not(.dark-theme) .nav-home .link.active {
     color: #000000; /* Black for active link */
     font-weight: 700;
-}
-
-/* Fix for active navigation link background color */
-:not(.dark-theme) .nav-home .link.active {
-    background-color: #1a5a9e; /* Darker blue background for better contrast with white text */
-    color: #ffffff;
-    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 /* Footer links */
 footer.footer a {
-    color: #0d47a1;
+    color: #0066cc;
     text-decoration: underline;
     font-weight: 600;
+    transition: color var(--transition-speed) ease;
 }
 
 footer.footer a:hover,
 footer.footer a:focus {
-    color: #0a3170;
+    color: #004c99;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* See more links */
 .see-more-link {
-    color: #0d47a1;
+    color: #0066cc;
     font-weight: 600;
     text-decoration: underline;
+    transition: all var(--transition-speed) ease;
+    padding: var(--space-1);
+    border-radius: var(--border-radius);
 }
 
 .see-more-link:hover,
 .see-more-link:focus {
-    color: #0a3170;
+    color: #004c99;
+    background-color: rgba(0, 102, 204, 0.1);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
-/* Social media links in footer - overriding main.scss */
-.social-links a {
-    background-color: #0d47a1;
-    color: #ffffff;
+/* Social media links in footer */
+.social-links .link {
+    background-color: var(--background);
+    color: var(--text-main);
+    box-shadow: var(--elevation-1);
 }
 
-.social-links a:hover,
-.social-links a:focus {
-    background-color: #0a3170;
+.social-links .link:hover,
+.social-links .link:focus {
+    transform: translateY(-2px);
+    box-shadow: var(--elevation-2);
+    color: var(--accent-color);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* General links - overriding critical.css */
 a {
-    color: #0d47a1;
+    color: #0066cc;
     text-decoration: underline;
+    transition: color var(--transition-speed) ease;
 }
 
 a:hover,
 a:focus {
-    color: #0a3170;
+    color: #004c99;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-    a {
-        color: #5DA8E0;
-        text-decoration: underline;
-    }
-    
-    a:hover,
-    a:focus {
-        color: #7DB9E8;
-        text-decoration: underline;
-    }
-    
-    .nav a {
-        color: #5DA8E0;
-        text-decoration: underline;
-    }
-    
-    .nav a:hover,
-    .nav a:focus {
-        color: #7DB9E8;
-    }
-    
-    .nav a[aria-current="page"] {
-        color: #ffffff;
-        font-weight: 700;
-    }
-    
-    .social-links a {
-        background-color: #3D80B9;
-        color: #121212;
-    }
-    
-    .social-links a:hover,
-    .social-links a:focus {
-        background-color: #5DA8E0;
-    }
+.dark-theme a {
+    color: #82B7F0; /* Light blue with 7:1 contrast ratio against dark background */
+    text-decoration: underline;
+}
+
+.dark-theme a:hover,
+.dark-theme a:focus {
+    color: #a3cbf6;
+    text-decoration: underline;
+}
+
+.dark-theme .nav a,
+.dark-theme .nav-home .link {
+    color: #82B7F0;
+    text-decoration: underline;
+}
+
+.dark-theme .nav a:hover,
+.dark-theme .nav a:focus,
+.dark-theme .nav-home .link:hover,
+.dark-theme .nav-home .link:focus {
+    color: #a3cbf6;
+}
+
+.dark-theme .nav a[aria-current="page"],
+.dark-theme .nav-home .link.active {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration-thickness: 2px;
+}
+
+.dark-theme .social-links .link {
+    background-color: #222222;
+    color: #ffffff;
+    box-shadow: var(--elevation-1);
+}
+
+.dark-theme .social-links .link:hover,
+.dark-theme .social-links .link:focus {
+    background-color: #333333;
+    color: #82B7F0;
+    box-shadow: var(--elevation-2);
+}
+
+/* Focus styles for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Skip to content link - accessibility enhancement */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent);
+    color: white;
+    padding: var(--space-1) var(--space-2);
+    z-index: 100;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: none;
 }
