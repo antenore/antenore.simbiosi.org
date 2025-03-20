@@ -43,6 +43,7 @@
 - [x] Improve ARIA attributes in navigation and interactive elements
 - [x] Add proper roles and ARIA labels to components
 - [x] Create dedicated accessibility CSS file
+- [x] Fix color contrasts
 
 ## Immediate Focus
 
@@ -51,7 +52,6 @@
 - [ ] Implement preloading for critical images
 
 ### Accessibility Improvements
-- [ ] Fix color contrasts
 - [ ] Fix heading hierarchy
 
 ## Medium-Term Goals

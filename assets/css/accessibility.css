@@ -15,7 +15,7 @@
 
 /* Focus styles for better keyboard navigation */
 :focus {
-    outline: 2px solid #268BD2;
+    outline: 2px solid #0056b3;
     outline-offset: 2px;
 }
 
@@ -24,11 +24,13 @@
     position: absolute;
     top: -40px;
     left: 0;
-    background: #268BD2;
-    color: white;
+    background: #0056b3;
+    color: #ffffff;
     padding: 8px;
     z-index: 100;
     transition: top 0.3s ease;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .skip-to-content:focus {
@@ -41,7 +43,7 @@ button:focus,
 input:focus,
 textarea:focus,
 select:focus {
-    outline: 2px solid #268BD2;
+    outline: 2px solid #0056b3;
     outline-offset: 2px;
 }
 

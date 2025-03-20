@@ -15,6 +15,7 @@ This document outlines the accessibility improvements made to the blog to ensure
 - **Skip to Content Link**: Added a skip link that allows keyboard users to bypass navigation and jump directly to main content
 - **Focus Indicators**: Added visible focus styles for all interactive elements
 - **Proper Tab Order**: Ensured logical tab order through the page
+- **User Scalability**: Removed `user-scalable=no` from the viewport meta tag to allow users to zoom the page
 
 ### 3. ARIA Attributes
 
@@ -30,15 +31,22 @@ This document outlines the accessibility improvements made to the blog to ensure
 - **Decorative Elements**: Added `aria-hidden="true"` to purely decorative elements
 - **Semantic HTML**: Used appropriate semantic HTML elements like `<nav>`, `<main>`, `<header>`, `<footer>`, etc.
 
-### 5. CSS and Structure
+### 5. Color Contrast
+
+- **Navigation Links**: Improved contrast of navigation links to meet WCAG 2 AA standards (4.5:1 ratio)
+- **Button Colors**: Enhanced button colors in the cookie consent banner for better visibility
+- **Focus Indicators**: Added high-contrast focus indicators for keyboard navigation
+- **Link Styling**: Added underlines to links for better visibility and added stronger color contrast
+- **Social Media Icons**: Improved background colors of social media icons for better contrast
+
+### 6. CSS and Structure
 
 - **Dedicated Accessibility CSS**: Created a separate CSS file for accessibility-specific styles
-- **High Contrast Focus**: Implemented high-contrast focus indicators
+- **Contrast Fixes CSS**: Added a dedicated CSS file for color contrast improvements
 - **Touch Target Size**: Ensured all interactive elements are at least 44×44px for better touch accessibility
 
 ## Remaining Tasks
 
-- **Color Contrast**: Need to audit and fix any color contrast issues
 - **Heading Hierarchy**: Ensure proper heading hierarchy throughout the site
 - **Form Accessibility**: Review and improve form elements for better accessibility
 - **Comprehensive Testing**: Test with screen readers and other assistive technologies
