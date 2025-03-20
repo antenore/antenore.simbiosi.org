@@ -1,53 +1,51 @@
 <footer class="footer">
-    <!-- Social links section -->
-    <div class="social-links" aria-label="Social media links">
-        {% if site.twitter %}
-            <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Visit our Twitter/X page">
-                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="" aria-hidden="true" class="simple-icon" />
-            </a>
-        {% endif %}
-
-        {% if site.linkedin %}
-            <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Visit our LinkedIn profile">
-                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" class="simple-icon" />
-            </a>
-        {% endif %}
-
-        {% if site.github %}
-            <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="Visit our GitHub profile">
-                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="" aria-hidden="true" class="simple-icon" />
-            </a>
-        {% endif %}
-
-        {% if site.gitlab %}
-            <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="Visit our GitLab profile">
-                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/gitlab.svg" alt="" aria-hidden="true" class="simple-icon" />
-            </a>
-        {% endif %}
-
-        {% if site.email %}
-            <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Send us an email">
-                <i data-feather="mail" aria-hidden="true"></i>
-            </a>
-        {% endif %}
+    <div class="container">
+        <!-- Social links in the footer -->
+        <div class="social-links">
+            {% if site.facebook %}
+                <a href="https://facebook.com/{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Visit our Facebook page">
+                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/facebook.svg" alt="" aria-hidden="true" class="simple-icon" />
+                </a>
+            {% endif %}
+            
+            {% if site.twitter %}
+                <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Visit our Twitter/X page">
+                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="" aria-hidden="true" class="simple-icon" />
+                </a>
+            {% endif %}
+            
+            {% if site.linkedin %}
+                <a href="https://linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Visit our LinkedIn profile">
+                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" class="simple-icon" />
+                </a>
+            {% endif %}
+            
+            {% if site.github %}
+                <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="Visit our GitHub profile">
+                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="" aria-hidden="true" class="simple-icon" />
+                </a>
+            {% endif %}
+            
+            {% if site.gitlab %}
+                <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="Visit our GitLab profile">
+                    <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/gitlab.svg" alt="" aria-hidden="true" class="simple-icon" />
+                </a>
+            {% endif %}
+            
+            {% if site.email %}
+                <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Send us an email">
+                    <i data-feather="mail"></i>
+                </a>
+            {% endif %}
+        </div>
         
-        {% if site.rss %}
-            <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="Subscribe to our RSS feed">
-                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/rss.svg" alt="" aria-hidden="true" class="simple-icon" />
-            </a>
-        {% endif %}
-    </div>
-
-    <div class="copyright">
-        {{ site.name }} &copy; {{ site.time | date: '%Y' }}
-    </div>
-
-    <div class="extra">
-        <p>
-            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
-            | <a href="https://gitlab.com/antenore/antenore.simbiosi.org" target="_blank">SolarBlog</a> theme
-            | <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
-            | <a href="/privacy">Privacy Policy</a>
+        <!-- Copyright information -->
+        <p class="copyright">
+            &copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. All rights reserved.
+            <span class="separator">|</span>
+            <a href="{{ site.url }}/privacy-policy/" aria-label="View our privacy policy">Privacy Policy</a>
+            <span class="separator">|</span>
+            <a href="{{ site.url }}/accessibility/" aria-label="View our accessibility statement">Accessibility</a>
         </p>
     </div>
 </footer>

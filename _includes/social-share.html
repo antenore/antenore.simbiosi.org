@@ -8,7 +8,7 @@
                target="_blank" 
                rel="noopener" 
                aria-label="Share on Twitter/X">
-                <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="" aria-hidden="true" class="simple-icon" /> Share on X
+               <span class="share-icon">𝕏</span> Share on X
             </a>
         </li>
         
@@ -18,7 +18,7 @@
                target="_blank" 
                rel="noopener" 
                aria-label="Share on LinkedIn">
-                <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" class="simple-icon" /> Share on LinkedIn
+               <span class="share-icon">in</span> Share on LinkedIn
             </a>
         </li>
         
@@ -28,7 +28,7 @@
                target="_blank" 
                rel="noopener" 
                aria-label="Share on Facebook">
-                <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/facebook.svg" alt="" aria-hidden="true" class="simple-icon" /> Share on Facebook
+               <span class="share-icon">f</span> Share on Facebook
             </a>
         </li>
         
@@ -38,7 +38,7 @@
                target="_blank" 
                rel="noopener" 
                aria-label="Share on Reddit">
-                <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/reddit.svg" alt="" aria-hidden="true" class="simple-icon" /> Share on Reddit
+               <span class="share-icon">r</span> Share on Reddit
             </a>
         </li>
         
@@ -48,7 +48,7 @@
                target="_blank" 
                rel="noopener" 
                aria-label="Share on Hacker News">
-                <img height="16" width="16" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ycombinator.svg" alt="" aria-hidden="true" class="simple-icon" /> Share on Hacker News
+               <span class="share-icon">Y</span> Share on Hacker News
             </a>
         </li>
         
@@ -74,32 +74,45 @@
 <!-- Script to copy URL to clipboard -->
 <script>
 function copyToClipboard(text) {
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-                alert('Link copied to clipboard!');
-            })
-            .catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-    } else {
-        /* Fallback for older browsers */
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        
-        try {
-            const successful = document.execCommand('copy');
-            const msg = successful ? 'Link copied to clipboard!' : 'Unable to copy';
-            alert(msg);
-        } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
-        }
-        
-        document.body.removeChild(textArea);
-    }
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    
+    /* Show a temporary notification */
+    var notification = document.createElement("div");
+    notification.className = "copy-notification";
+    notification.textContent = "Link copied to clipboard!";
+    document.body.appendChild(notification);
+    
+    /* Remove notification after 2 seconds */
+    setTimeout(function() {
+        notification.style.opacity = "0";
+        setTimeout(function() {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 2000);
 }
 </script>
+
+<style>
+.copy-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.dark-theme .copy-notification {
+    background-color: #555;
+}
+</style>

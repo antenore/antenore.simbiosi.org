@@ -17,7 +17,7 @@
         var checkbox = document.querySelector('#checkbox');
         var savedTheme = localStorage.getItem('theme');
         
-        // Set initial state based on saved preference
+        /* Set initial state based on saved preference */
         if (savedTheme === 'dark') {
             checkbox.checked = true;
             document.documentElement.classList.add('dark-theme');
@@ -28,7 +28,7 @@
             document.documentElement.classList.add('light-theme');
         }
         
-        // Handle theme toggle
+        /* Handle theme toggle */
         checkbox.addEventListener('change', function() {
             if (this.checked) {
                 document.documentElement.classList.add('dark-theme');

@@ -2,16 +2,11 @@
 
 /* Simple Icons styling - used for brand icons */
 .simple-icon {
-    /* Invert icons in dark mode for better visibility */
-    filter: invert(0);
-    opacity: 0.8;
+    /* Always white in social links (footer) */
+    filter: invert(1);
+    opacity: 1;
     transition: opacity 0.3s ease;
     vertical-align: middle;
-}
-
-/* Make Simple Icons white in dark mode */
-.dark-theme .simple-icon {
-    filter: invert(1);
 }
 
 /* Feather icon styling - used for general purpose icons */
@@ -24,14 +19,18 @@
     stroke-linejoin: round;
     fill: none;
     vertical-align: middle;
-    opacity: 0.8;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
-/* Hover effects for both icon types */
-a:hover .simple-icon,
-a:hover [data-feather] {
-    opacity: 1;
+/* Text-based share icons */
+.share-icon {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    margin-right: 8px;
+    font-weight: bold;
+    color: #3498db;
 }
 
 /* Adjust icon size in different contexts */
@@ -47,37 +46,42 @@ a:hover [data-feather] {
 .subscribe-options [data-feather] {
     height: 16px;
     width: 16px;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 /* Ensure proper vertical alignment */
 .social-share a,
 .subscribe-options a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
-/* Ensure consistent spacing */
+/* Style for the social links to match the circular blue design */
 .social-links a {
+    background-color: #3498db; /* Blue background */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     margin: 0 5px;
-    padding: 8px;
-    border-radius: 50%;
     transition: background-color 0.3s ease;
 }
 
-/* Hover effect for social links */
 .social-links a:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.dark-theme .social-links a {
+    background-color: #3498db; /* Keep same blue for dark mode */
 }
 
 .dark-theme .social-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #2980b9; /* Darker blue on hover in dark mode */
 }
 
-/* Style social share buttons to match the design in the image */
+/* Style social share buttons to match the blue text links */
 .social-share ul.share-buttons {
     list-style: none;
     padding: 0;
@@ -85,7 +89,7 @@ a:hover [data-feather] {
 }
 
 .social-share ul.share-buttons li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .social-share ul.share-buttons a {
@@ -103,53 +107,26 @@ a:hover [data-feather] {
 }
 
 .dark-theme .social-share ul.share-buttons a {
-    color: #5dade2; /* Lighter blue for dark mode */
+    color: #3498db; /* Same blue for dark mode */
 }
 
 .dark-theme .social-share ul.share-buttons a:hover {
-    color: #7fb3d5; /* Even lighter blue on hover in dark mode */
+    color: #5dade2; /* Lighter blue on hover in dark mode */
 }
 
-/* Style for the footer social links to match the second image */
-.footer .social-links a {
-    background-color: #3498db; /* Blue background */
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
-    transition: background-color 0.3s ease;
+/* Make sure icons in share buttons are colored appropriately */
+.social-share [data-feather] {
+    color: #3498db;
 }
 
-.footer .social-links a:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-}
-
-.dark-theme .footer .social-links a {
-    background-color: #2980b9; /* Darker blue for dark mode */
-}
-
-.dark-theme .footer .social-links a:hover {
-    background-color: #1f618d; /* Even darker blue on hover in dark mode */
-}
-
-.footer .social-links .simple-icon {
-    filter: invert(1); /* Always white icons in footer */
+.dark-theme .social-share [data-feather] {
+    color: #3498db;
 }
 
 /* Ensure consistent color scheme support */
 @media (prefers-color-scheme: dark) {
-    .simple-icon:not(.dark-theme .simple-icon) {
-        filter: invert(1);
-    }
-    
-    [data-feather]:not(.dark-theme [data-feather]) {
-        color: #fff;
-    }
-    
-    .social-links a:hover:not(.dark-theme .social-links a:hover) {
-        background-color: rgba(255, 255, 255, 0.1);
+    .social-share [data-feather]:not(.dark-theme [data-feather]),
+    .social-share .share-icon:not(.dark-theme .share-icon) {
+        color: #3498db;
     }
 }
