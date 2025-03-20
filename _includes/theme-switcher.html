@@ -1,0 +1,44 @@
+<div class="theme-switcher-container">
+    <div class="theme-switcher">
+        <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
+        <span class="theme-label">Light</span>
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" aria-label="Switch between dark and light mode" />
+            <div class="slider" aria-hidden="true"></div>
+        </label>
+        <span class="theme-label">Dark</span>
+        <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
+    </div>
+</div>
+
+<script>
+    /* Theme switcher functionality */
+    document.addEventListener('DOMContentLoaded', function() {
+        var checkbox = document.querySelector('#checkbox');
+        var savedTheme = localStorage.getItem('theme');
+        
+        // Set initial state based on saved preference
+        if (savedTheme === 'dark') {
+            checkbox.checked = true;
+            document.documentElement.classList.add('dark-theme');
+            document.documentElement.classList.remove('light-theme');
+        } else {
+            checkbox.checked = false;
+            document.documentElement.classList.remove('dark-theme');
+            document.documentElement.classList.add('light-theme');
+        }
+        
+        // Handle theme toggle
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.classList.add('dark-theme');
+                document.documentElement.classList.remove('light-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark-theme');
+                document.documentElement.classList.add('light-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    });
+</script>

@@ -1,16 +1,19 @@
-<header class="header animated" role="banner">
-    {% if site.about %}
-        <a class="link" href="{{ site.url }}/about" aria-label="About {{ site.name }}">
-            <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
-        </a>
-    {% else %}
-        <span class="link">
-            <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
-        </span>
-    {% endif %}
+<div class="header-wrapper">
+    {% include theme-switcher.html %}
+    <header class="header animated" role="banner">
+        {% if site.about %}
+            <a class="link" href="{{ site.url }}/about" aria-label="About {{ site.name }}">
+                <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+            </a>
+        {% else %}
+            <span class="link">
+                <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+            </span>
+        {% endif %}
 
-    <div class="header-content">
-        <h1 class="title">{{ site.name }}</h1>
-        <h2 class="description">{{ site.bio }}</h2>
-    </div>
-</header>
+        <div class="header-content">
+            <h1 class="title">{{ site.name }}</h1>
+            <h2 class="description">{{ site.bio }}</h2>
+        </div>
+    </header>
+</div>

@@ -83,15 +83,15 @@ layout: compress
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
-    <!-- Preload FontAwesome for better performance -->
-    <link rel="preload" href="https://kit.fontawesome.com/d9b09040a7.js" as="script" crossorigin="anonymous">
+    <!-- Preload Feather icons for better performance -->
+    <link rel="preload" href="https://unpkg.com/feather-icons/dist/feather.min.js" as="script" crossorigin="anonymous">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Load FontAwesome with async to prevent render blocking -->
-    <script src="https://kit.fontawesome.com/d9b09040a7.js" crossorigin="anonymous" async defer></script>
+    <!-- Load Feather icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js" crossorigin="anonymous"></script>
 
     {% if site.data.critical %}
     <!-- Inline critical CSS for faster rendering -->
@@ -105,6 +105,8 @@ layout: compress
     <link rel="stylesheet" href="{{ "/assets/css/cookie-consent.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/accessibility.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/contrast-fixes.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/css/theme-switcher.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/css/simple-icons.css" | relative_url }}">
 </head>
 <body>
     <!-- Skip to content link for keyboard users -->

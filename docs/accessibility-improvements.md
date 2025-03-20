@@ -45,6 +45,21 @@ This document outlines the accessibility improvements made to the blog to ensure
 - **Contrast Fixes CSS**: Added a dedicated CSS file for color contrast improvements
 - **Touch Target Size**: Ensured all interactive elements are at least 44×44px for better touch accessibility
 
+### 7. Theme Switcher Improvements
+
+- **Better Positioning**: Moved the theme switcher to the top of the page for immediate visibility
+- **Clear Labeling**: Added "Light" and "Dark" labels with sun and moon icons for better understanding
+- **Visual Feedback**: Improved the switcher design with a pill-shaped container and better contrast
+- **Responsive Design**: Adapts to different screen sizes while maintaining accessibility
+
+### 8. Icon Accessibility Improvements
+
+- **Replaced FontAwesome**: Switched from FontAwesome (which had licensing issues) to Simple Icons for brand icons
+- **Proper Icon Labeling**: Added appropriate aria-label attributes to all icon links
+- **Icon Visibility**: Ensured icons are visible in both light and dark modes with proper contrast
+- **Semantic Markup**: Used aria-hidden="true" for decorative icons and alt="" for icon images
+- **Hover States**: Improved hover states for better interactive feedback
+
 ## Remaining Tasks
 
 - **Heading Hierarchy**: Ensure proper heading hierarchy throughout the site

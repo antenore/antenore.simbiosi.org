@@ -2,50 +2,40 @@
     <!-- Social links section -->
     <div class="social-links" aria-label="Social media links">
         {% if site.twitter %}
-            <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter">
-                <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+            <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Visit our Twitter/X page">
+                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="" aria-hidden="true" class="simple-icon" />
             </a>
         {% endif %}
 
         {% if site.linkedin %}
-            <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Visit our LinkedIn profile">
+                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true" class="simple-icon" />
             </a>
         {% endif %}
 
         {% if site.github %}
-            <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="GitHub">
-                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener" aria-label="Visit our GitHub profile">
+                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="" aria-hidden="true" class="simple-icon" />
             </a>
         {% endif %}
 
         {% if site.gitlab %}
-            <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="GitLab">
-                <i class="fa-brands fa-gitlab" aria-hidden="true"></i>
+            <a href="https://gitlab.com/{{ site.gitlab }}" target="_blank" rel="noopener" aria-label="Visit our GitLab profile">
+                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/gitlab.svg" alt="" aria-hidden="true" class="simple-icon" />
             </a>
         {% endif %}
 
         {% if site.email %}
-            <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Email">
-                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:{{ site.email }}" rel="noopener" aria-label="Send us an email">
+                <i data-feather="mail" aria-hidden="true"></i>
             </a>
         {% endif %}
         
         {% if site.rss %}
-            <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="RSS">
-                <i class="fa-solid fa-rss" aria-hidden="true"></i>
+            <a href="{{ site.url }}/{{ site.rss }}" target="_blank" rel="noopener" aria-label="Subscribe to our RSS feed">
+                <img height="24" width="24" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/rss.svg" alt="" aria-hidden="true" class="simple-icon" />
             </a>
         {% endif %}
-        
-        <!-- Theme toggle button -->
-        <label class="theme-toggle" title="Toggle dark/light mode">
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="checkbox">
-                    <input type="checkbox" id="checkbox" aria-label="Switch between dark and light mode" />
-                    <div class="slider" aria-hidden="true"></div>
-                </label>
-            </div>
-        </label>
     </div>
 
     <div class="copyright">
@@ -61,3 +51,8 @@
         </p>
     </div>
 </footer>
+
+<script>
+    /* Initialize Feather icons */
+    feather.replace();
+</script>
