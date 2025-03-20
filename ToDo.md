@@ -44,8 +44,9 @@
 - [x] Add proper roles and ARIA labels to components
 - [x] Create dedicated accessibility CSS file
 - [x] Fix color contrasts
-- [x] Replace FontAwesome with Simple Icons for brand icons and Feather for UI icons
+- [x] Replace FontAwesome with Simple Icons for brand icons and Feather for general purpose icons
 - [x] Improve theme switcher with better labels and positioning
+- [x] Style social share buttons and footer social links
 
 ## Immediate Focus
 

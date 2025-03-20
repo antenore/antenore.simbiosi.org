@@ -92,6 +92,12 @@ layout: compress
     
     <!-- Load Feather icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js" crossorigin="anonymous"></script>
+    <script>
+      /* Initialize Feather icons when the document is ready */
+      document.addEventListener('DOMContentLoaded', function() {
+        feather.replace();
+      });
+    </script>
 
     {% if site.data.critical %}
     <!-- Inline critical CSS for faster rendering -->
@@ -106,7 +112,7 @@ layout: compress
     <link rel="stylesheet" href="{{ "/assets/css/accessibility.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/contrast-fixes.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/css/theme-switcher.css" | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/simple-icons.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/css/icons.css" | relative_url }}">
 </head>
 <body>
     <!-- Skip to content link for keyboard users -->
