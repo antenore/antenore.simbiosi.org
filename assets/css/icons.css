@@ -44,8 +44,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 /* Individual social link */
@@ -55,7 +55,6 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: 1px solid var(--border);
     border-radius: 50%;
     color: var(--text-main);
     background-color: var(--background);
@@ -68,29 +67,68 @@
     color: var(--accent);
 }
 
+.social-links .link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: transform 0.2s ease;
+    border-radius: 50%;
+}
+
+.social-links .link:hover,
+.social-links .link:focus {
+    transform: translateY(-2px);
+}
+
+.social-links .simple-icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(0%);
+}
+
+.dark-theme .social-links .simple-icon {
+    filter: invert(100%);
+}
+
 /* Social share buttons */
 .social-share {
+    margin: 2rem 0;
+}
+
+.social-share h4 {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    color: var(--text-main);
+}
+
+.social-share .share-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
 }
 
-.social-share a {
-    display: flex;
+.social-share .share-buttons li {
+    margin-bottom: 0.5rem;
+}
+
+.social-share .share-buttons a {
+    display: inline-flex;
     align-items: center;
-    padding: 5px 10px;
-    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
     color: var(--text-main);
     text-decoration: none;
-    font-size: 14px;
-    transition: all 0.3s ease;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid transparent;
 }
 
-.social-share a:hover,
-.social-share a:focus {
-    border-color: var(--accent);
+.social-share .share-buttons a:hover,
+.social-share .share-buttons a:focus {
     color: var(--accent);
+    border-bottom: 1px solid var(--accent);
 }
 
 /* Author social links */
