@@ -1,14 +1,18 @@
-/* Icon styling for text-based icons */
+/* Icon styling for minimalist black & white theme */
 
 /* Simple Icons styling - used for brand icons */
 .simple-icon {
-    /* Always white in social links (footer) */
-    filter: invert(1);
-    opacity: 1;
+    /* Use filter to make icons match the theme */
+    filter: brightness(0); /* Black in light mode */
+    opacity: 0.9;
     transition: opacity 0.3s ease;
     vertical-align: middle;
     font-size: 20px;
     font-weight: bold;
+}
+
+.dark-theme .simple-icon {
+    filter: brightness(0) invert(1); /* White in dark mode */
 }
 
 /* Text-based share icons */
@@ -18,7 +22,7 @@
     text-align: center;
     margin-right: 8px;
     font-weight: bold;
-    color: #3498db;
+    color: var(--accent);
 }
 
 /* Adjust icon size in different contexts */
@@ -29,81 +33,79 @@
 }
 
 .social-share .simple-icon,
-.subscribe-options .simple-icon {
+.author-social .simple-icon {
     height: 16px;
     width: 16px;
-    margin-right: 8px;
     font-size: 16px;
 }
 
-/* Ensure proper vertical alignment */
-.social-share a,
-.subscribe-options a {
-    display: inline-flex;
-    align-items: center;
+/* Social links container */
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-/* Style for the social links to match the circular blue design */
+/* Individual social link */
 .social-links a {
-    background-color: #3498db; /* Blue background */
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 5px;
-    transition: background-color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-main);
+    background-color: var(--background);
+    transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+.social-links a:hover,
+.social-links a:focus {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-.dark-theme .social-links a {
-    background-color: #3498db; /* Keep same blue for dark mode */
+/* Social share buttons */
+.social-share {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-.dark-theme .social-links a:hover {
-    background-color: #2980b9; /* Darker blue on hover in dark mode */
-}
-
-/* Style social share buttons to match the blue text links */
-.social-share ul.share-buttons {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-.social-share ul.share-buttons li {
-    margin-bottom: 0.75rem;
-}
-
-.social-share ul.share-buttons a {
-    display: inline-flex;
+.social-share a {
+    display: flex;
     align-items: center;
-    color: #3498db; /* Blue color for links */
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    color: var(--text-main);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
-.social-share ul.share-buttons a:hover {
-    color: #2980b9; /* Darker blue on hover */
-    text-decoration: underline;
+.social-share a:hover,
+.social-share a:focus {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-.dark-theme .social-share ul.share-buttons a {
-    color: #3498db; /* Same blue for dark mode */
+/* Author social links */
+.author-social {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
 }
 
-.dark-theme .social-share ul.share-buttons a:hover {
-    color: #5dade2; /* Lighter blue on hover in dark mode */
+.author-social a {
+    color: var(--text-main);
+    transition: color 0.3s ease;
 }
 
-/* Ensure consistent color scheme support */
-@media (prefers-color-scheme: dark) {
-    .social-share .share-icon:not(.dark-theme .share-icon) {
-        color: #3498db;
-    }
+.author-social a:hover,
+.author-social a:focus {
+    color: var(--accent);
 }

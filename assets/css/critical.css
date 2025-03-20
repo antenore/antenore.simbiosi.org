@@ -1,13 +1,39 @@
 /* Critical CSS for fast initial page rendering */
 
+/* CSS Variables for theming */
+:root {
+    /* Light Mode */
+    --primary: #000000;     /* Primary text (black) */
+    --secondary: #444444;   /* Secondary text (dark gray) */
+    --accent: #0047AB;      /* Links (accessible blue) */
+    --text-main: #000000;   /* Main text color (black) */
+    --text-light: #444444;  /* Secondary text color (dark gray) */
+    --background: #FFFFFF;  /* Main background (white) */
+    --background-alt: #F8F8F8; /* Secondary background (light gray) */
+    --border: #E0E0E0;      /* Border color (lighter gray) */
+}
+
+/* Dark theme variables */
+.dark-theme {
+    --primary: #FFFFFF;     /* Primary text (white) */
+    --secondary: #CCCCCC;   /* Secondary text (light gray) */
+    --accent: #6DB4F0;      /* Links (light blue) */
+    --text-main: #FFFFFF;   /* Main text color (white) */
+    --text-light: #CCCCCC;  /* Secondary text color (light gray) */
+    --background: #121212;  /* Main background (near black) */
+    --background-alt: #1E1E1E; /* Secondary background (dark gray) */
+    --border: #333333;      /* Border color (medium gray) */
+}
+
 /* Basic reset and typography */
 body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    color: #2D2D2D;
-    background-color: #fff;
+    color: var(--text-main);
+    background-color: var(--background);
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 /* Ensure content doesn't shift when scrollbar appears */
@@ -40,49 +66,39 @@ html {
 
 .nav a {
     margin: 0 1rem;
-    color: #2B5B84;
+    color: var(--accent);
     font-size: 1.6rem;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.nav a[aria-current="page"] {
+    color: var(--primary);
+    font-weight: 700;
 }
 
 /* Basic link styling */
 a {
-    color: #268BD2;
-    text-decoration: none;
+    color: var(--accent);
+    text-decoration: underline;
     transition: color 0.2s ease;
 }
 
-a:hover {
-    color: #5DA8E0;
+a:hover,
+a:focus {
+    color: #003380; /* Darker blue for hover/focus */
 }
 
-/* Basic heading styles */
+/* Basic typography */
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.25;
-    color: #2B5B84;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 1.5rem 0 1rem;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: #DDDDDD;
-    }
-    
-    a {
-        color: #5DA8E0;
-    }
-    
-    a:hover {
-        color: #7DB9E8;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-        color: #3D80B9;
-    }
-    
-    .nav a {
-        color: #3D80B9;
-    }
+h1 { font-size: 3.2rem; }
+h2 { font-size: 2.6rem; }
+
+p {
+    margin: 0 0 1.5rem;
 }

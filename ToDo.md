@@ -23,7 +23,6 @@
 - [x] Improve theme switcher
 - [x] Implement cookie consent with options for "Accept All" and "Necessary Only"
 - [x] Remove unused CSS (social-share.css, subscribe.css, related-posts.css)
-- [x] Remove unused components from post layout
 - [x] Optimize font loading
 - [x] Organize assets by size/type
 - [x] Fix image display issues in blog posts
@@ -50,6 +49,15 @@
 - [x] Unify icon styles using text-based icons for consistency
 - [x] Remove unnecessary includes (related-posts.html, subscribe.html)
 - [x] Improve navigation link contrast for better accessibility
+- [x] Implement minimalist black & white theme
+- [x] Update critical CSS for essential styles
+- [x] Simplify theme switcher CSS
+- [x] Simplify icons CSS
+- [x] Update cookie consent CSS to match minimalist theme
+- [x] Unify redundant .scss files
+- [x] Implement CSS variables for theme
+- [x] Remove unused styles
+- [x] Use CSS variables approach for dark mode with smooth transitions
 
 ## Immediate Focus
 
@@ -59,13 +67,11 @@
 
 ### Accessibility Improvements
 - [ ] Fix heading hierarchy
+- [ ] Remove unused components from post layout
 
 ## Medium-Term Goals
 
 ### CSS and Design Improvements
-- [ ] Unify redundant .scss files
-- [ ] Implement CSS variables for theme
-- [ ] Remove unused styles
 - [ ] Fix outdated links in footer
 - [ ] Optimize mobile layout
 - [ ] Improve navigation on small screens
@@ -80,8 +86,6 @@
 ## Future Considerations
 
 ### Dark Mode Enhancement
-- [ ] Use CSS variables approach
-- [ ] Add smooth transitions
 - [ ] Fix rendering inconsistencies
 
 ### Multilingual Support (Optional)
