@@ -13,8 +13,16 @@
     text-decoration: underline;
 }
 
-.nav a[aria-current="page"] {
+.nav a[aria-current="page"],
+.nav-home .link.active {
     color: #000000; /* Black for active link */
+    font-weight: 700;
+}
+
+/* Fix for active navigation link background color */
+.nav-home .link.active {
+    background-color: #1a5a9e; /* Darker blue background for better contrast with white text */
+    color: #ffffff;
     font-weight: 700;
 }
 
