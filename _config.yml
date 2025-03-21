@@ -118,10 +118,7 @@ defaults:
 
 plugins:
   - jekyll-seo-tag
-  - jekyll-gist
   - jekyll-feed
-  - jemoji
-  - jekyll-spaceship
 
 # HTML Compression settings
 # See: https://jch.penibelst.de/ for documentation

@@ -79,6 +79,9 @@
 - [x] Modernize cookie consent banner with Material Design principles
 - [x] Improve social links hover effects and spacing
 - [x] Fix Sass compilation error with CSS variables and darken() function
+- [x] Remove jemoji dependency to avoid nokogiri installation issues on Windows
+- [x] Simplify Gemfile by removing unused gems (jekyll-gist, jekyll-spaceship)
+- [x] Add Ruby 3.4+ compatibility gems (csv, base64, bigdecimal, stringio)
 
 ## In Progress
 - [ ] Test accessibility improvements on various devices
