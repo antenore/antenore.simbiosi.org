@@ -70,6 +70,11 @@
 - [x] Fix avatar styling with proper clip-path and object-fit
 - [x] Simplify CSS structure by removing redundant critical CSS file
 - [x] Redesign navigation bar with modern animated underlines and better mobile layout
+- [x] Simplify navigation bar design for better cross-browser compatibility
+- [x] Fix SCSS lint error in main.scss
+
+## In Progress
+- [ ] Redesign navigation bar for better mobile experience
 
 ## Immediate Focus
 

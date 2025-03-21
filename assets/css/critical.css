@@ -88,100 +88,48 @@ h1, h2, h3 {
     display: block;
 }
 
-/* Navigation styles - Modern, responsive design */
+/* Basic navigation styles - temporary simple horizontal bar */
 .nav-home {
     width: 100%;
-    background-color: var(--accent);
-    box-shadow: var(--elevation-1);
-    margin-bottom: var(--space-3);
-    position: relative;
-    z-index: 10;
+    margin-bottom: 20px;
 }
 
 .nav-home .list {
     display: flex;
-    justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    max-width: var(--content-width);
+    max-width: 800px;
+    background-color: #f0f0f0;
 }
 
 .nav-home .item {
     margin: 0;
-    flex: 1;
-    text-align: center;
-    position: relative;
 }
 
 .nav-home .link {
     display: block;
-    color: white;
-    text-align: center;
-    padding: var(--space-2) var(--space-1);
+    color: #333;
+    padding: 10px 15px;
     text-decoration: none;
-    font-weight: var(--font-weight-normal);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-home .link:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: white;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.nav-home .link:hover:after,
-.nav-home .link:focus:after,
-.nav-home .link.active:after {
-    width: 100%;
-}
-
-.nav-home .link:hover,
-.nav-home .link:focus {
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-home .link.active {
-    font-weight: var(--font-weight-bold);
+    font-weight: bold;
 }
 
-/* Dark theme navigation adjustments */
-.dark-theme .nav-home {
-    background-color: var(--accent);
+/* Dark theme basic navigation */
+.dark-theme .nav-home .list {
+    background-color: #333;
 }
 
 .dark-theme .nav-home .link {
-    color: white;
+    color: #fff;
 }
 
-.dark-theme .nav-home .link:after {
-    background-color: white;
-}
-
-.dark-theme .nav-home .link:hover,
-.dark-theme .nav-home .link:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Responsive navigation for mobile */
+/* Basic responsive adjustments */
 @media (max-width: 480px) {
     .nav-home .list {
         flex-wrap: wrap;
-    }
-    
-    .nav-home .item {
-        flex: 0 0 50%;
-    }
-    
-    .nav-home .link {
-        padding: var(--space-2) var(--space-1);
     }
 }

@@ -1,4 +1,5 @@
 ---
+layout: null
 ---
 /*
  * SolarBlog - Minimalist Black & White Theme with Material Design Touches
@@ -98,18 +99,16 @@
 
 // Dark theme via class - overrides prefers-color-scheme
 .dark-theme {
-  --primary: #FFFFFF;     // Primary text (white)
-  --secondary: #DDDDDD;   // Secondary text (light gray - improved contrast)
-  --accent: #82B7F0;      // Links (bright light blue with 7:1 contrast ratio)
-  --accent-hover: #a9d1ff; // Lighter accent for hover states in dark mode (pre-calculated)
-  --text-main: #FFFFFF;   // Main text color (white)
-  --text-light: #DDDDDD;  // Secondary text color (light gray)
-  --background: #121212;  // Main background (near black)
-  --background-alt: #222222; // Secondary background (dark gray)
-  --border: #444444;      // Border color (medium gray)
-  --accent-color: #3D80B9; // Blue for highlights
+  --primary: #ffffff;     // Primary text (white)
+  --secondary: #cccccc;   // Secondary text (light gray)
+  --accent: #4d94ff;      // Links (lighter blue for dark mode)
+  --accent-hover: #80b3ff; // Lighter accent for hover states (pre-calculated)
+  --background: #121212;  // Background (dark gray, not pure black for better readability)
+  --code-bg: #1e1e1e;     // Code block background
+  --border: #333333;      // Border color
+  --selection: rgba(77, 148, 255, 0.3); // Selection color (based on accent)
   
-  // Darker shadows for dark mode
+  // Elevation shadows are more subtle in dark mode
   --elevation-1: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.36);
   --elevation-2: 0 3px 6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.24);
   --elevation-3: 0 10px 20px rgba(0,0,0,0.30), 0 3px 6px rgba(0,0,0,0.20);
@@ -272,88 +271,62 @@ a {
   }
 }
 
+// Basic navigation styles - temporary simple horizontal bar
 .nav-home {
   width: 100%;
-  background-color: var(--accent);
-  box-shadow: var(--elevation-1);
-  margin-bottom: var(--space-3);
-  position: relative;
-  z-index: 10;
+  margin-bottom: 20px;
   
   // ul
   .list {
     display: flex;
-    justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    max-width: var(--content-width);
+    max-width: 800px;
+    background-color: #f0f0f0;
   }
   
   // li
   .item {
     margin: 0;
-    flex: 1;
-    text-align: center;
-    position: relative;
   }
   
   // a
   .link {
     display: block;
-    color: white;
-    text-align: center;
-    padding: var(--space-2) var(--space-1);
+    color: #333;
+    padding: 10px 15px;
     text-decoration: none;
-    font-weight: var(--font-weight-normal);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background-color: white;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
     
     &:hover,
     &:focus {
-      background-color: rgba(255, 255, 255, 0.1);
-      
-      &:after {
-        width: 100%;
-      }
+      text-decoration: underline;
     }
     
     &.active {
-      font-weight: var(--font-weight-bold);
-      
-      &:after {
-        width: 100%;
-      }
+      font-weight: bold;
     }
   }
 }
 
-// Responsive navigation for mobile
+// Dark theme basic navigation
+.dark-theme {
+  .nav-home {
+    .list {
+      background-color: #333;
+    }
+    
+    .link {
+      color: #fff;
+    }
+  }
+}
+
+// Basic responsive adjustments
 @media (max-width: 480px) {
   .nav-home {
     .list {
       flex-wrap: wrap;
-    }
-    
-    .item {
-      flex: 0 0 50%;
-    }
-    
-    .link {
-      padding: var(--space-2) var(--space-1);
     }
   }
 }
