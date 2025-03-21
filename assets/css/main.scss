@@ -6,8 +6,8 @@
  */
 
 // Import normalize first for consistent cross-browser rendering
-@use "normalize" as *;
-@use "highlight" as *;
+@use 'normalize' as *;
+@use 'highlight' as *;
 
 // Font optimization
 @font-face {
@@ -113,6 +113,23 @@
   --elevation-1: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.36);
   --elevation-2: 0 3px 6px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.24);
   --elevation-3: 0 10px 20px rgba(0,0,0,0.30), 0 3px 6px rgba(0,0,0,0.20);
+  
+  .nav-home {
+    background-color: var(--accent);
+    
+    .link {
+      color: white;
+      
+      &:after {
+        background-color: white;
+      }
+      
+      &:hover,
+      &:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
 }
 
 // Light theme via class - overrides prefers-color-scheme
@@ -256,50 +273,87 @@ a {
 }
 
 .nav-home {
-  background-color: var(--primary);
   width: 100%;
+  background-color: var(--accent);
   box-shadow: var(--elevation-1);
   margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 10;
   
   // ul
   .list {
     display: flex;
     justify-content: center;
     list-style: none;
-    list-style-type: none;
-    overflow: hidden;
     padding: 0;
-    margin: 0;
-    max-width: 800px;
     margin: 0 auto;
+    max-width: var(--content-width);
   }
   
   // li
   .item {
     margin: 0;
-    float: left;
+    flex: 1;
+    text-align: center;
+    position: relative;
   }
   
   // a
   .link {
     display: block;
-    color: var(--background); // Use background color for maximum contrast
+    color: white;
     text-align: center;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-1);
     text-decoration: none;
     font-weight: var(--font-weight-normal);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background-color: white;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
     
     &:hover,
     &:focus {
-      background-color: var(--accent);
-      color: var(--background);
+      background-color: rgba(255, 255, 255, 0.1);
+      
+      &:after {
+        width: 100%;
+      }
     }
     
     &.active {
-      background-color: var(--accent);
-      color: var(--background);
       font-weight: var(--font-weight-bold);
+      
+      &:after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Responsive navigation for mobile
+@media (max-width: 480px) {
+  .nav-home {
+    .list {
+      flex-wrap: wrap;
+    }
+    
+    .item {
+      flex: 0 0 50%;
+    }
+    
+    .link {
+      padding: var(--space-2) var(--space-1);
     }
   }
 }
