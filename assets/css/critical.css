@@ -6,6 +6,7 @@
     --primary: #000000;     /* Primary text (black) */
     --secondary: #333333;   /* Secondary text (dark gray, better contrast) */
     --accent: #0066cc;      /* Links (accessible blue with better contrast) */
+    --accent-hover: #0055aa; /* Darker blue for hover states */
     --text-main: #000000;   /* Main text color (black) */
     --text-light: #333333;  /* Secondary text color (dark gray) */
     --background: #FFFFFF;  /* Main background (white) */
@@ -42,6 +43,7 @@
     --primary: #FFFFFF;     /* Primary text (white) */
     --secondary: #CCCCCC;   /* Secondary text (light gray) */
     --accent: #4D9FFF;      /* Links (lighter blue for dark mode) */
+    --accent-hover: #599FFF; /* Lighter blue for hover states in dark mode */
     --text-main: #FFFFFF;   /* Main text color (white) */
     --text-light: #CCCCCC;  /* Secondary text color (light gray) */
     --background: #121212;  /* Main background (dark gray) */
@@ -165,7 +167,7 @@ body {
 .nav-home .link:hover,
 .nav-home .link:focus {
     background-color: rgba(0, 0, 0, 0.05);
-    color: var(--accent);
+    color: var(--accent-hover);
 }
 
 .nav-home .link.active {
@@ -193,6 +195,7 @@ body {
 .dark-theme .nav-home .link:hover,
 .dark-theme .nav-home .link:focus {
     background-color: rgba(255, 255, 255, 0.05);
+    color: var(--accent-hover);
 }
 
 .dark-theme .selfie {
